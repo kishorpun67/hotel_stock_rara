@@ -11,7 +11,7 @@
            style="opacity: .8"> --}}
       {{-- <span class="brand-text font-weight-light">Admin | Dashboard</span> --}}
 
-      <span class="logo-mini">RH</span>
+      <span class="logo-text">RH</span>
 
 
       <span class="logo-img">

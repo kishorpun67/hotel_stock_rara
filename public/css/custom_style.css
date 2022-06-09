@@ -178,10 +178,36 @@ table#categories tbody tr td form {
 	font-weight: 700;
 color: #777;
 }
+.layout-fixed .brand-link .logo-text{
+	font-size: 30px;
+	color: #23527c;
+font-weight: bold;
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+}
 
 
 
+.layout-fixed .brand-link .logo-img{
+position: relative;
+left: -100%;
+z-index: 0;
+transition: 0.5s ease-in-out;
+}
 
+
+.layout-fixed .main-sidebar:hover .logo-text{
+	display:none;
+}
+
+.layout-fixed .main-sidebar:hover .logo-img{
+	display: block;
+transform: translateX(-50%);
+left: 50%;
+text-align: center;
+transition: 0.5s ease-in-out;
+}
 
  @media (min-width: 768px) {
 body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-footer, body:not(.sidebar-mini-md) .main-header {
