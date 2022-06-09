@@ -11,7 +11,7 @@
            style="opacity: .8"> --}}
       {{-- <span class="brand-text font-weight-light">Admin | Dashboard</span> --}}
       <div class="image">
-        <img src="{{asset(Auth::guard('admin')->user()->image)}}" class="img-circle elevation-2" alt="User Image">
+        <img src="{{asset(Auth::guard('admin')->user()->image)}}" class=" elevation-2" alt="User Image">
       </div>
     </a>
 
