@@ -103,30 +103,7 @@ $taxt = TaxVat::first();
       <li> <span>Total Payable</span> <strong id="total_amount">{{$total_amount}}</strong> </li>
     </ul>
   </div>
-  <div class="cart-overview flex-1 my-3">
-<input type="hidden" name="subtotal" id="sub_total"  value="{{$total_amount}}">
-  
-<input type="hidden" name="total" id="grand_total"   value="{{$total_amount}}">
-    <!--<h5>Payment Method</h5>-->
-    <!--  <label>-->
-    <!--<input type="radio" value="Bank transfer" name="payment" checked>-->
-    <!--<p>Direct Bank Transfer</p>-->
-    <!--</label>-->
-    
-    <!--<label>-->
-    
-    <!--<input type="radio" value="Cash Payment" name="payment">-->
-    <!--<p>Cash Payment</p>-->
-    <!--</label>-->
-    
-    <!--<label>-->
-    <!--<input type="radio" value="paypal" name="payment">-->
-    <!--<p>Paypal</p>-->
-    <!--<fieldset class="paymenttypes">-->
-    <!--  <a href="#"><img src="images/esewa.jpg" alt="" class=""></a>-->
-    <!--</fieldset>-->
-    <!--</label>-->
-  </div>
+ 
 </div>
 <!--<input type="submit" value="Place Oder" class="btn btn-primary">-->
 <input type="submit" class="btn place_btn btn-danger" value="Place Order">
