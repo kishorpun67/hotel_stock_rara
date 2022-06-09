@@ -57,7 +57,7 @@
                 <i class="fa fa-desktop" aria-hidden="true"></i>
                 <p>
                   All Screen
-                  <i class="fas fa-angle-left right"></i>
+                  <i class="fas fa-angle-right right"></i>
                   <span class="right badge badge-danger"></span>
                 </p>
               </a>
@@ -276,7 +276,7 @@
                     <i class="fas fa-file"></i>                
                     <p>
                       Master
-                      <i class="fas fa-angle-left right"></i>
+                      <i class="fas fa-angle-right right"></i>
                       <span class="right badge badge-danger"></span>
                     </p>
                   </a>
@@ -533,7 +533,7 @@
              <a href="#" class="nav-link {{$active}}">
               <i class="fas fa-user-plus"></i><p>
                 Employe Management
-                 <i class="fas fa-angle-left right"></i>
+                 <i class="fas fa-angle-right right"></i>
                  <span class="right badge badge-danger"></span>
                </p>
              </a>
@@ -652,7 +652,7 @@
               <i class="fas fa-user-circle"></i>           
               <p>
                 Accounts
-                 <i class="fas fa-angle-left right"></i>
+                 <i class="fas fa-angle-right right"></i>
                  <span class="right badge badge-danger"></span>
                </p>
              </a>
@@ -783,7 +783,7 @@
               <i class="fa fa-file" aria-hidden="true"></i>
                <p>
                 Reports
-                 <i class="fas fa-angle-left right"></i>
+                 <i class="fas fa-angle-right right"></i>
                  <span class="right badge badge-danger"></span>
                </p>
              </a>
@@ -981,7 +981,7 @@
               <i class="nav-icon fas fa-th"></i>          
               <p>
                Miscellaneous
-                <i class="fas fa-angle-left right"></i>
+                <i class="fas fa-angle-right right"></i>
                 <span class="right badge badge-danger"></span>
               </p>
             </a>
@@ -1051,7 +1051,7 @@
               <i class="fas fa-cogs"></i>
               <p>
                 Settings
-                <i class="fas fa-angle-left right"></i>
+                <i class="fas fa-angle-right right"></i>
                 <span class="right badge badge-danger"></span>
               </p>
             </a>

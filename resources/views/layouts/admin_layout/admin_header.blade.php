@@ -37,17 +37,19 @@
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
-      {{-- <li class="nav-item">
+      {{-- <li class="nav-item">gitgit 
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li> --}}
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('admin.add.edit.sale')}}" class="nav-link">POS</a>
+        <a href="{{route('admin.add.edit.sale')}}" class="nav-link"><i class="fa fa-coffee" aria-hidden="true"></i>
+          POS</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{route('admin.add.edit.purchase')}}" class="nav-link">Add Purchase</a>
+        <a href="{{route('admin.add.edit.purchase')}}" class="nav-link"><i class="fa fa-truck" aria-hidden="true"></i> Add Purchase</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link" data-toggle="modal" data-target="#today_summary">Today Summary</a>
+        <a href="#" class="nav-link" data-toggle="modal" data-target="#today_summary"><i class="fa fa-list-alt" aria-hidden="true"></i>
+          Today Summary</a>
       </li>
     </ul>
 
