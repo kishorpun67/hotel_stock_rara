@@ -127,6 +127,8 @@ table#categories tbody tr td form {
 }
 .nav-sidebar > .nav-item .nav-icon {
 	font-size: 12px !important;
+	margin-right: 0;
+	padding-right: 0;
 }
 .layout-fixed .main-sidebar:hover {
 	width: 250px;
@@ -147,6 +149,17 @@ table#categories tbody tr td form {
 .nav-sidebar > .nav-item.menu-open > .nav-link {
 	background: #ddd !important;
 }
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active i,
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active p
+{
+	color:#fff;
+}
+
+
+
+
+
 .nav-sidebar > .nav-item > .nav-link p i {
 	position: absolute;
 	top: 50%;
