@@ -94,6 +94,12 @@ figcaption {
 	font-weight: 400;
 	color: #000;
 }
+
+.form-control:focus{
+	box-shadow:none;
+	border:none;
+}
+
  .form-control::placeholder {
  color: #9A9A9A;
  font-size:14px;
@@ -647,8 +653,8 @@ font-size: 14px;
 .cart_table thead th,
 .cart-wrapper thead th
 {
-background-color: #4caa5b;
-color: #fff;
+background-color: #ecf0f1;
+color: #495057;
 font-weight: 600;
 
 }

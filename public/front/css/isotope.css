@@ -9,8 +9,13 @@
 #isotope-container {
 /*	float: left;
 	width: 100%;*/
-	display: flex;
+ 
+
+display: flex;
 flex-wrap: wrap;
+background: #dddddd8a;
+padding: 1rem;
+box-shadow: 0 0 5px 0px rgba(0,0,0,.25);
 }
 #isotope-container .filter {
 	overflow: hidden;
@@ -26,13 +31,14 @@ flex-wrap: wrap;
 }
 #isotope-container .filter a {
 display: block;
-background: #ddd;
-margin: 0 5px 5px;
+background: #fff;
+color: #777;
+margin: 0 20px 5px;
 padding: 5px 5px;
 font-size: 16px;
-border-radius: 10px;
+/*border-radius: 10px;*/
 text-align: center;
-font-weight: 600;
+font-weight: 400;
 }
 
 #isotope-container .filter a:after{
@@ -43,7 +49,7 @@ font-weight: 600;
  #isotope-container .filter a:hover,
 #isotope-container .filter .active {
 color: #fff;
-background: #4caa5b;
+background: #0f111124;
 }
 #isotope-container .filter span {
 	color: #94af01;

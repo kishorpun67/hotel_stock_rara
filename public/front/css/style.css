@@ -84,9 +84,10 @@ border-radius: 0;
 
 
 .order-wrapper .operation_button_50 {
-	padding: 0.5rem 1rem;
-width: 100px;
-	background-color: #ddd;
+padding: 0.3rem 0rem;
+width: 48%;
+background-color: #ddd;
+font-size: 12px;
 }
 .order-wrapper .operation_button_50:hover {
 	color: #333;
@@ -397,7 +398,7 @@ justify-content: center;*/
 	background: hsl( 324, 100%, 50%);
 }
 .order-wrapper {
-flex: 4;
+flex: 2;
 margin-right: 1rem;
 background: #ecf0f1;
 padding: 0 0.5rem;
@@ -566,6 +567,12 @@ padding-left: 22px;
 .checkout_wrapper .waiter_customer .select_dropdown {
 	/*flex: 4;*/
 }
+
+
+.checkout_wrapper .waiter_customer .select_dropdown{
+width: 48% !important;
+}
+
 
 
 .checkout_wrapper .waiter_customer .edit_flex{
@@ -799,8 +806,9 @@ font-size: 24px;
 
 .checkout_wrapper .add_btn{
 color: #fff;
-background: #4caa5b;
+background: #212529c7;
 border: none;
+text-align: center;
     
 }
 

@@ -57,7 +57,7 @@
 
 </head>
 <body>
-  <div class="container">
+  <div class="container-fluid">
     <figure class="logo_holder"><a href="index.html"> <img src="images/istockphoto-1156053620-612x612.jpg" alt="This is web logo"> </a> </figure>
     <div class="title_bar mt-3 mb-4">
       <ul>
@@ -432,6 +432,13 @@
         
         
       </div>
+      
+      
+      
+      
+      
+      
+      
       <div id="filter-big" class="filter"> 
         <!--<strong>Filter by category :</strong> -->
         <a href="javascript:" category_id="all"  class="categories">Show All</a> 
