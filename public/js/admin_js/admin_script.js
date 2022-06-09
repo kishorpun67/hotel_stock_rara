@@ -6,7 +6,7 @@ $(document).ready(function() {
     $(".delete_form").click(function() {
         var id = $(this).attr('rel');
         var record = $(this).attr('record');
-        // alert(id);
+        // alert(id);addCustomer
         swal({
                 title: "Are you sure?",
                 text: "You will not able to recover this record again!",
@@ -221,38 +221,54 @@ function deleteOrderDetail(cart_id) {
         }
     });
 }
-``
 
 function addCustomer(table_id) {
     var no_customer = $(`#no_of_customer-${table_id}`).val()
+    var type = $(`#type-${table_id}`).val()
+
     // alert(no_customer)
-        // console.log(table_id, no_customer)
+    // console.log(table_id, no_customer)
     $.ajax({
         type: 'post',
         url: '/admin/ajax-add-customer',
         data: {
             table_id: table_id,
             no_customer: no_customer,
+            type: type,
         },
         success: function(response) {
             // console.log(response)
-            if(response.count ==1){
-                 $(`#data-${response.table_ids}`).empty();
+            if (response.count == 1) {
+                $(`#data-${response.table_ids}`).empty();
                 $(`#table_id`).val(response.table_ids);
+                $(`#total-customer-${response.table_ids}`).text(response.no_customer);
+
+                if (response.available_seat >= 1) {
+                    $(`#no_of_customer-${response.table_ids}`).css("display", "flex");
+                    $(`#type-${response.table_ids}`).css("display", "flex");
+                    $(`#display-btn-${response.table_ids}`).css("display", "flex");
+                    $(`#display-${response.table_ids}`).css("display", "none");
+                } else {
+                    $(`#display-${response.table_ids}`).css("display", "block");
+                    $(`#no_of_customer-${response.table_ids}`).css("display", "none");
+                    $(`#type-${response.table_ids}`).css("display", "none");
+                    $(`#display-btn-${response.table_ids}`).css("display", "none");
+                }
                 response.data.forEach(element => {
                     $(`#data-${response.table_ids}`).append(
                         `<tr> <td>${element.no_customer}</td>
+                         <td>${element.type}</td>
                         <td><a href="javascript:" onclick="deleteCustomerTable(${element.id}, ${response.table_ids})"  ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                         </tr>`
                     )
                 });
                 $(`#available_seat-${response.table_ids}`).text(`Avaliable : ${response.available_seat}`)
-                    
-            }else{
+
+            } else {
                 alert('Seat is no available !')
             }
 
-           
+
         },
         error: function() {
             alert("Error");
@@ -272,12 +288,27 @@ function deleteCustomerTable(customer_id, table_id) {
             table_id: table_id,
         },
         success: function(response) {
+            console.log(response)
+                // alert(response.no_customer)
             $(`#data-${response.table_ids}`).empty();
             $(`#table_id`).val(response.table_ids);
+            $(`#total-customer-${response.table_ids}`).text(response.no_customer);
+            if (response.available_seat >= 1) {
+                $(`#no_of_customer-${response.table_ids}`).css("display", "flex");
+                $(`#type-${response.table_ids}`).css("display", "flex");
+                $(`#display-btn-${response.table_ids}`).css("display", "flex");
+                $(`#display-${response.table_ids}`).css("display", "none");
+            } else {
+                $(`#display-${response.table_ids}`).css("display", "block");
+                $(`#no_of_customer-${response.table_ids}`).css("display", "none");
+                $(`#type-${response.table_ids}`).css("display", "none");
+                $(`#display-btn-${response.table_ids}`).css("display", "none");
+            }
 
             response.data.forEach(element => {
                 $(`#data-${response.table_ids}`).append(
                     `<tr> <td>${element.no_customer}</td>
+                    <td>${element.type}</td>
                     <td><a href="javascript:" onclick="deleteCustomerTable(${element.id}, ${response.table_ids})"  ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                     </tr>`
                 )

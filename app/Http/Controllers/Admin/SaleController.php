@@ -124,10 +124,12 @@ class SaleController extends Controller
         $addCustomerNumber->admin_id = auth('admin')->user()->id;
         $addCustomerNumber->table_id = request('table_id');
         $addCustomerNumber->no_customer = request('no_customer');
+        $addCustomerNumber->type = request('type');
         $addCustomerNumber->save();
 
         // get avilable seat 
         $seat_capacity = Table::where('id', request('table_id'))->first();
+
         $no_customer = CustomerTable::where([ 'table_id'=>request('table_id')])->sum('no_customer');
         $available_seat = $seat_capacity->seat_capacity - $no_customer;
         if($available_seat < 0){
@@ -136,7 +138,7 @@ class SaleController extends Controller
             $count =1;
         }
         $data = CustomerTable::where(['table_id'=>request('table_id')])->get();
-        return response()->json(['data'=>$data, 'table_ids'=>request('table_id'), 'available_seat'=>$available_seat , 'count'=>$count], 200);
+        return response()->json(['data'=>$data, 'table_ids'=>request('table_id'), 'available_seat'=>$available_seat , 'count'=>$count, 'no_customer'=>$no_customer], 200);
     }
     public function deleteCusomter()
     {
@@ -146,7 +148,7 @@ class SaleController extends Controller
         $seat_capacity = Table::where('id', request('table_id'))->first();
         $no_customer = CustomerTable::where(['table_id'=>request('table_id')])->sum('no_customer');
         $available_seat = $seat_capacity->seat_capacity - $no_customer;
-        return response()->json(['data'=>$data, 'table_ids'=>request('table_id'), 'available_seat'=>$available_seat], 200); 
+        return response()->json(['data'=>$data, 'table_ids'=>request('table_id'), 'available_seat'=>$available_seat, 'no_customer'=> $no_customer], 200); 
     }
     public function addTable()
     {

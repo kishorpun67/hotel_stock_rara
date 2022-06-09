@@ -16,9 +16,6 @@ use Illuminate\Support\Arr;
 
 class ChartsController extends Controller
 {
-   
-   
-
     public function monthlyReport()
     {
         
