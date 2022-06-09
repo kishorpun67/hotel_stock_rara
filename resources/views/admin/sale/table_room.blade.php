@@ -91,11 +91,12 @@ use App\CustomerTable;
   <div class="button-bar center">
     <h2 class="sub-title">Select</h2>
     <ul>
-      <li><a href="#" class="btn room-btn">Room</a></li>
+      <li><a href="#" data-toggle="modal" data-target="#room" class="btn room-btn">Room</a></li>
       <li><a href="#" data-toggle="modal" data-target="#table" class="btn table-btn">Table</a></li>
     </ul>
   </div>
 </div>
+
 <div class="modal fade" id="table" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -157,7 +158,7 @@ use App\CustomerTable;
                           @else
                           <?php $dispaly ="none"; $dispaly1 ="block"  ?>
                           @endif
-                            <input style="display:{{$dispaly}}" type="text" id="no_of_customer-{{$item->id}}" value="1" class="form-control">
+                            <input style="display:{{$dispaly}}" type="number" min="1" id="no_of_customer-{{$item->id}}" value="1" class="form-control">
                             <select style="display:{{$dispaly}}" name="type" id="type-{{$item->id}}" class="form-control">
                               <option value="Sigle">Single</option>
                               <option value="Group">Group</option>

@@ -102,7 +102,10 @@
         <form action="{{route('admin.cancel.order')}}" method="POST">
           <input type="hidden" name="order_id" id="order_id" value=""  >
           @csrf
-        <input type="submit" value="Cancel Order" class="btn order_btn operation_button">
+          
+          <button class="btn order_btn operation_button"><i class="fa fa-ban" aria-hidden="true"></i>Cancel Order</button>
+
+        {{-- <input type="submit" value="Cancel Order" class="btn order_btn operation_button"> --}}
         </form>
         <button type="button" class="btn order_btn operation_button kitchen_status" data-toggle="modal" data-target="#exampleModal8"> <i class="fas fa-spinner"></i> Kitchen Status</button>
         <div class="modal fade" id="modify_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

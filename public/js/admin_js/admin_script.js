@@ -223,6 +223,8 @@ function deleteOrderDetail(cart_id) {
 }
 
 function addCustomer(table_id) {
+    // alert('test')
+
     var no_customer = $(`#no_of_customer-${table_id}`).val()
     var type = $(`#type-${table_id}`).val()
 
