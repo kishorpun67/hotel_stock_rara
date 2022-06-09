@@ -289,6 +289,7 @@ if(auth('admin')->user()->parent_id > 0){
                 <span class="info-box-text"></span>
 
                 <span class="info-box-number">
+                  <i class="fa fa-coffee" aria-hidden="true"></i>
                  POS
                 </span>
               </a>

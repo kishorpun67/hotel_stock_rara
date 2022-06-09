@@ -36,7 +36,7 @@
           @endif
           <li class="nav-item">
             <a href="{{route('admin.dashboard')}}" class="nav-link {{$active}}">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class=" fas fa-tachometer-alt"></i>
               <p>
                 Dashboard 
               </p>
