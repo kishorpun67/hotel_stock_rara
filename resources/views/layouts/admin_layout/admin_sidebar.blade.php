@@ -10,9 +10,14 @@
       {{-- <img src="{{asset('image/admin_image/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8"> --}}
       {{-- <span class="brand-text font-weight-light">Admin | Dashboard</span> --}}
-      <div class="image">
+
+      <span class="logo-mini">RH</span>
+
+
+      <span class="logo-img">
         <img src="{{asset(Auth::guard('admin')->user()->image)}}" class=" elevation-2" alt="User Image">
-      </div>
+  </span>
+    
     </a>
 
     <!-- Sidebar -->
@@ -57,7 +62,7 @@
                 <i class="fa fa-desktop" aria-hidden="true"></i>
                 <p>
                   All Screen
-                  <i class="fas fa-angle-right right"></i>
+                  <i class="fas fa-angle-right"></i>
                   <span class="right badge badge-danger"></span>
                 </p>
               </a>
@@ -276,7 +281,7 @@
                     <i class="fas fa-file"></i>                
                     <p>
                       Master
-                      <i class="fas fa-angle-right right"></i>
+                      <i class="fas fa-angle-right"></i>
                       <span class="right badge badge-danger"></span>
                     </p>
                   </a>
@@ -533,7 +538,7 @@
              <a href="#" class="nav-link {{$active}}">
               <i class="fas fa-user-plus"></i><p>
                 Employe Management
-                 <i class="fas fa-angle-right right"></i>
+                 <i class="fas fa-angle-right"></i>
                  <span class="right badge badge-danger"></span>
                </p>
              </a>
@@ -652,7 +657,7 @@
               <i class="fas fa-user-circle"></i>           
               <p>
                 Accounts
-                 <i class="fas fa-angle-right right"></i>
+                 <i class="fas fa-angle-right"></i>
                  <span class="right badge badge-danger"></span>
                </p>
              </a>
@@ -783,7 +788,7 @@
               <i class="fa fa-file" aria-hidden="true"></i>
                <p>
                 Reports
-                 <i class="fas fa-angle-right right"></i>
+                 <i class="fas fa-angle-right"></i>
                  <span class="right badge badge-danger"></span>
                </p>
              </a>
@@ -981,7 +986,7 @@
               <i class="nav-icon fas fa-th"></i>          
               <p>
                Miscellaneous
-                <i class="fas fa-angle-right right"></i>
+                <i class="fas fa-angle-right"></i>
                 <span class="right badge badge-danger"></span>
               </p>
             </a>
@@ -1051,7 +1056,7 @@
               <i class="fas fa-cogs"></i>
               <p>
                 Settings
-                <i class="fas fa-angle-right right"></i>
+                <i class="fas fa-angle-right"></i>
                 <span class="right badge badge-danger"></span>
               </p>
             </a>
