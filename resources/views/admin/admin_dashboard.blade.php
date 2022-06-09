@@ -55,7 +55,8 @@ if(auth('admin')->user()->parent_id > 0){
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-          @endif          </div><!-- /.col -->
+          @endif          
+        </div><!-- /.col -->
          
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -66,93 +67,88 @@ if(auth('admin')->user()->parent_id > 0){
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-3 col-6">
-            {{-- <iframe src="https://www.hamropatro.com/widgets/calender-small.php" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; overflow:hidden; width:200px; height:290px;" allowtransparency="true"></iframe> --}}
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{ $foodMenuCount }}</h3>
-                <p>foodMenus</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pizza"></i>              
-              </div>
-              <a href="{{route('admin.foodMenu')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
+        
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="ion ion-pizza"></i></span>
 
-          {{-- ingredient_items  --}}
-          <div class="col-lg-3 col-6">
-            {{-- <iframe src="https://www.hamropatro.com/widgets/calender-small.php" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; overflow:hidden; width:200px; height:290px;" allowtransparency="true"></iframe> --}}
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{ $IngredientItemCount }}</h3>
-                <p>Ingredient</p>
+              <div class="info-box-content">
+                <span class="info-box-text">Food Menu</span>
+                <span class="info-box-number">
+                  {{ $foodMenuCount }}
+                </span>
               </div>
-              <div class="icon">
-                <i class="fa fa-leaf"></i>              
-              </div>
-              <a href="{{route('admin.ingredientItem')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <!-- /.info-box-content -->
             </div>
+            <!-- /.info-box -->
           </div>
-          {{-- customer  --}}
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{ $customerCount }}</h3>
-                <p>Customer</p>
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="fa fa-leaf"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Ingredient</span>
+                <span class="info-box-number">
+                  {{ $IngredientItemCount }}
+                </span>
               </div>
-              <div class="icon">
-                <i class="fa fa-users"></i>              
-              </div>
-              <a href="{{route('admin.customer')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <!-- /.info-box-content -->
             </div>
+            <!-- /.info-box -->
+          </div> 
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="fa fa-users"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Customer</span>
+                <span class="info-box-number">
+                  {{ $customerCount }}
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div> 
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="ion ion-bag"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Purchase</span>
+                <span class="info-box-number">
+                  {{ $purchase }}
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
           </div>
-          {{-- purchase --}}
-          <div class="col-lg-3 col-6">
-            {{-- <iframe src="https://www.hamropatro.com/widgets/calender-small.php" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; overflow:hidden; width:200px; height:290px;" allowtransparency="true"></iframe> --}}
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{ number_format($purchase) }}</h3>
-                <p>Purchase</p>
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="ion ion-bag"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Sale</span>
+                <span class="info-box-number">
+                  {{ number_format($salesSum) }}
+                </span>
               </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="{{route('admin.purchase')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <!-- /.info-box-content -->
             </div>
+            <!-- /.info-box -->
           </div>
-               {{-- sales --}}
-          <div class="col-lg-3 col-6">
-            {{-- <iframe src="https://www.hamropatro.com/widgets/calender-small.php" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; overflow:hidden; width:200px; height:290px;" allowtransparency="true"></iframe> --}}
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{ number_format($salesSum) }}</h3>
-                <p>Sale</p>
+          <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-dollar-sign"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Purchase</span>
+                <span class="info-box-number">
+                  {{ number_format($expense) }}
+                </span>
               </div>
-              <div class="icon">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-              </div>
-              <a href="{{route('admin.sale')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <!-- /.info-box-content -->
             </div>
-          </div>
-          {{-- expense --}}
-          <div class="col-lg-3 col-6">
-            {{-- <iframe src="https://www.hamropatro.com/widgets/calender-small.php" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; overflow:hidden; width:200px; height:290px;" allowtransparency="true"></iframe> --}}
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>{{ number_format($expense) }}</h3>
-                <p>Expense</p>
-              </div>
-              <div class="icon">
-                <i class="fas fa-dollar-sign"></i>              
-              </div>
-              <a href="{{route('admin.expense')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+            <!-- /.info-box -->
           </div>
         </div>
       </div>
