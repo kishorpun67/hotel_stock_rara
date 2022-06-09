@@ -1,0 +1,240 @@
+/* ======================================= ISOTOPE SETTINGS =================================== */
+
+
+
+
+
+
+
+#isotope-container {
+/*	float: left;
+	width: 100%;*/
+	display: flex;
+flex-wrap: wrap;
+}
+#isotope-container .filter {
+	overflow: hidden;
+/*	padding: 25px;*/
+	font-size: 17px;
+	font-weight: 600;
+	color: #4D4D4D;
+/*	text-align: center;*/
+	flex: 2;
+}
+#isotope-container .filter strong {
+	margin: 0 20px 0 0;
+}
+#isotope-container .filter a {
+display: block;
+background: #ddd;
+margin: 0 5px 5px;
+padding: 5px 5px;
+font-size: 16px;
+border-radius: 10px;
+text-align: center;
+font-weight: 600;
+}
+
+#isotope-container .filter a:after{
+/*	content: '/';
+	padding: 0 5px;
+	color: #4D4D4D;*/
+}
+ #isotope-container .filter a:hover,
+#isotope-container .filter .active {
+color: #fff;
+background: #4caa5b;
+}
+#isotope-container .filter span {
+	color: #94af01;
+	padding: 0 10px;
+}
+#isotope-container .image-content {
+	width: 100%;
+	max-width: none;
+	flex: 6;
+	
+}
+
+
+
+#isotope-container .image-content figure{
+}
+
+
+
+#isotope-container .image-content figcaption{
+margin-bottom: 30px;
+border: 1px solid #dddddda1;
+padding: 7px 0.1rem;
+text-align: center;
+background: #dddddd3d;
+}
+
+#isotope-container .image-content figcaption h4{
+margin-top: 0;
+font-size: 14px;
+overflow: hidden;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 1;
+display: -webkit-box;
+line-height: inherit;
+}
+#isotope-container .image-content figcaption span{
+	font-size: 14px;
+font-weight: 600;
+}
+
+
+
+#isotope-container .image-content ul li h5 {
+
+	color: #282828;
+	font-size: 13px;
+	text-align: center;
+	margin: 10px 0;
+}
+#isotope-container .image-content ul li h5 span {
+	color: #8a8a8a;
+	font-size: 11px;
+	display: block;
+}
+#isotope-container .image-content ul li a {
+	display: block;
+/*	height: 254px;
+	width: 208px;*/
+	position: relative;
+	overflow: hidden;
+		margin-bottom: 10px;
+}
+#isotope-container .image-content ul li a .overlay {
+	background: url(../images/transparent-black-dot.png) 0 0 repeat;
+	width: 208px;
+	height: 0px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+#isotope-container .image-content ul li a .green-eye-ball {
+	left: 70px;
+	position: absolute;
+	top: -66px;
+	z-index: 1;
+}
+
+#isotope-container .image-content ul li figure {
+/*	max-width: 444px;
+	max-height: 273px;*/
+	margin: 0 auto;
+	overflow: hidden;
+	
+}
+#isotope-container .image-content ul li a img {
+/*	float: left;*/
+height: 150px;
+width: 100%;
+}
+
+#isotope-container .image-content ul li figcaption{
+/*margin: 5px 0 1rem;*/
+margin: 0 0 1rem;
+background: #f7f7f7;
+padding: 5px;
+box-shadow: 0 1px 3px 0px rgba(0,0,0,0.1);
+
+
+
+}
+
+
+#isotope-container .image-content ul li figcaption h4{
+	margin:0;
+	font-weight:600;
+}
+
+
+#filter-big {
+	display: block;
+}
+#filter-small {
+	display: none;
+}
+
+
+ 
+ 
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+	  z-index: 2;
+
+ 
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+
+
+
+
+
+.isotope .isotope-item figure img{
+	transition: all 0.6s ease 0s;
+-moz-transition: all 0.6s ease 0s;
+-webkit-transition: all 0.6s ease 0s;
+-ms-transition: all 0.6s ease 0s;
+-o-transition: all 0.6s ease 0s;
+}
+
+
+.isotope .isotope-item figure:hover img{
+/*transform: scale(1.14) rotate(10deg);*/
+transition: all 0.6s ease 0s;
+-moz-transition: all 0.6s ease 0s;
+-webkit-transition: all 0.6s ease 0s;
+-ms-transition: all 0.6s ease 0s;
+-o-transition: all 0.6s ease 0s;
+}
+.isotope .isotope-item figcaption h4{
+	font-weight:600;
+	margin-bottom: 0;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+/* ======================================= /ISOTOPE SETTINGS =================================== */

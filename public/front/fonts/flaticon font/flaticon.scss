@@ -1,0 +1,41 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?02c2d0363620bc01907663a19d02f596") format("truetype"),
+url("./flaticon.woff?02c2d0363620bc01907663a19d02f596") format("woff"),
+url("./flaticon.woff2?02c2d0363620bc01907663a19d02f596") format("woff2"),
+url("./flaticon.eot?02c2d0363620bc01907663a19d02f596#iefix") format("embedded-opentype"),
+url("./flaticon.svg?02c2d0363620bc01907663a19d02f596#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "star": "\f101",
+    "star-1": "\f102",
+    "search": "\f103",
+    "next": "\f104",
+);
+
+.flaticon-star:before {
+    content: map-get($flaticon-map, "star");
+}
+.flaticon-star-1:before {
+    content: map-get($flaticon-map, "star-1");
+}
+.flaticon-search:before {
+    content: map-get($flaticon-map, "search");
+}
+.flaticon-next:before {
+    content: map-get($flaticon-map, "next");
+}

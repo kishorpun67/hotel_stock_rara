@@ -1,0 +1,197 @@
+table.dataTable thead > tr > th{
+    border-bottom: 0;
+    border-top: 0;
+    background-color: #4caa5b;
+color: #fff;
+font-weight: 500;
+font-size: 17px;
+text-align: center;
+}
+
+
+
+table#test thead > tr > th{
+       border-bottom: 0;
+    border-top: 0;
+    background-color: #4caa5b;
+color: #fff;
+font-weight: 500;
+font-size: 17px;
+text-align: center;
+    
+}
+
+table.dataTable thead .sorting_asc::before,
+table.dataTable thead .sorting::before
+{
+    opacity: 1;
+     right: 0.7em;
+}
+
+table.dataTable thead .sorting_asc::after,
+table.dataTable thead .sorting::after
+{
+     opacity: 0.7;
+     right: 0.1em;
+}
+
+
+.card-footer {
+    background: #dddddda3;
+  display: flex;
+  align-items: center;
+}
+
+.products-list .product-description{
+    padding: 5px;
+    display: inline list-item;
+}
+
+
+/*.card-footer select{*/
+/*    flex: 1;*/
+
+/*}*/
+
+
+/*.card-footer .btn {*/
+/*margin-right: 0 !important;*/
+/*flex: 1;*/
+    
+/*}*/
+
+
+table.table-bordered.dataTable tbody th,
+table.table-bordered.dataTable tbody td{
+    text-align: center;
+    
+}
+
+
+
+table.dataTable thead > tr > td.sorting{
+    border-bottom: 0;
+border-top: 0;
+background-color: #4caa5b;
+color: #fff;
+font-weight: 500;
+font-size: 19px;
+
+     
+ }
+ 
+ 
+ 
+ .table.text-center td{
+       text-align: left;
+}
+ 
+ table.table-bordered.dataTable td img{
+     
+height: auto;
+width: 100px;
+ }
+ 
+ 
+ table#categories tbody tr td{
+     text-align: left;
+ }
+ 
+  table#categories tbody tr td form{
+      margin-top: 5px;
+  
+  }
+ 
+ 
+ 
+ 
+ #ajaxPurchase .table-responsive{
+     overflow-x: inherit;
+     
+ }
+ 
+ 
+ 
+  #ajaxPurchase .table thead th{
+      
+   
+      border-bottom: 0;
+      border: 1px solid #dee2e6;
+  }
+  
+  
+   #ajaxPurchase .table tbody th{
+      
+       
+   }
+  
+  
+    .card-body .form-group input#image{
+    border: none;
+    padding: 0;
+    }
+  
+  
+  .card-body .form-group label{
+      
+     
+  }
+ 
+ .card-header,
+ .card-primary:not(.card-outline) > .card-header
+ {
+     background-color: #343a40;
+     
+ }
+ 
+ 
+ .card-header .card-title{
+     color:#fff;
+ 
+ }
+ 
+ 
+ 
+ .add_user .form-group label{
+      font-weight: 500;
+      
+  }
+ 
+ 
+ 
+ .card-header .card-tools .btn-tool i{
+     color:#fff;
+ }
+ 
+ 
+ 
+ .content .card-header{
+     display: flex;
+align-items: center;
+flex-wrap: wrap;
+     
+ }
+ 
+ 
+ 
+ .content .card-header .card-title{
+    margin-right: auto;
+ background: #7079824f;
+padding: 10px 50px;
+font-weight: 600;
+ }
+ 
+ 
+  .content .card-header .btn{
+    max-width: none !important;
+    width: auto;
+    margin-left: auto;
+    float: none !important;
+    font-weight: 600;
+    border-radius: 0;
+      
+  }
+  
+  
+ 
+ 

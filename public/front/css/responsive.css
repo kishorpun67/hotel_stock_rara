@@ -1,0 +1,297 @@
+ 
+/* Custom, iPhone Retina */ 
+
+@media (min-width : 300px) {
+}
+
+@media (min-width : 321px) {
+}
+
+@media (min-width : 361px) {
+}
+@media (min-width : 401px) {
+}
+
+/* Extra Small Devices, Phones */ 
+@media (min-width : 481px) {
+}
+
+
+/* Small Devices, Tablets */
+
+@media (min-width : 500px) {
+}
+
+
+@media (min-width : 576px) {
+}
+
+@media (min-width : 601px) {
+}
+
+@media (min-width : 641px) {
+}
+
+@media (min-width : 768px) {
+}
+
+/* Medium Devices, Desktops */
+@media (min-width : 992px) {
+}
+
+/* Large Devices, Wide Screens */
+@media (min-width : 1200px) {
+}
+
+ @media (min-width: 1350px) {
+.owl-item .item figure {
+/*	max-height:none;
+	overflow:visible;
+	max-width: none;*/
+}
+}
+ @media (min-width: 1601px) {
+.carousel-inner .item img {
+/*	width:100%;
+	height:auto;*/
+
+}
+.modal-dialog {
+ width: auto;
+ max-width: none;
+}
+}
+ @media (max-width: 1600px) {
+}
+ @media (max-width: 1349px) {
+}
+ @media (max-width: 1349px) and (min-width: 1200px) {
+}
+ 
+/* Large Devices, Wide Screens */
+
+
+@media (max-width: 1280px) {
+}
+ @media (max-width: 1199px) {
+.container {
+	padding: 0 15px;
+}
+.carousel-inner .item {
+/*height:auto;*/
+}
+.five_equal .col, .six_equal .col {
+	width: 24%;
+}
+h1 {
+	font-size: 30px !important;
+}
+h2 {
+	font-size: 26px !important;
+}
+h3 {
+	font-size: 22px !important;
+}
+}
+ @media (max-width: 1199px) and (min-width: 768px) {
+}
+ @media (max-width: 1199px) and (min-width: 992px) {
+}
+ @media (max-width: 1199px) and (min-width: 1025px) {
+}
+ @media (max-width: 1080px) {
+}
+ @media (max-width: 1024px) {
+}
+
+
+/*========== Medium Devices, Desktops =========*/
+
+@media (max-width: 991px) {
+/*h1 {
+	font-size:26px !important;
+}
+h2 {
+	font-size:23px !important;
+}
+h3 {
+	font-size:20px !important;
+}
+ */
+ 
+.four_equal .col {
+	display: inline-block;
+	vertical-align: top;
+	width: 33%;
+}
+.five_equal .col, .six_equal .col {
+	width: 24%;
+}
+}
+ @media (max-width: 991px) and (min-width: 768px) {
+}
+
+
+ /* Small Devices, Tablets */
+ 
+@media (max-width: 767px) {
+/*h1 {
+	font-size:23px !important;
+}
+h2 {
+	font-size:21px !important;
+}
+h3 {
+	font-size:19px !important;
+}
+h4 {
+	font-size:17px !important;
+}
+*/
+
+.thumbnail_lft, .thumbnail_rht {
+	float: none;
+	max-width: none;
+	margin: 0 0 20px;
+}
+.col-img-50.flt_lft, .col-img-50.flt_rht, .flt_lft, .flt_rht {
+	float: none;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 20px;
+}
+.flt_lft img, .flt_rht img {
+	width: 100%;
+}
+.fig_responsive, .img_responsive, .fig_responsive img, .img_responsive img {
+	width: 100%;
+}
+.header {
+/*position:static;*/
+}
+.header .logo_holder {
+	max-width: 156px;
+}
+.logo_holder img {
+	width: 60%;
+}
+.fixNav .logo_holder img {
+	width: 50%;
+}
+.welcome_img {
+/*   max-width: none;
+    padding: 0;
+    max-height: 400px;
+    overflow: hidden;*/
+}
+.inner_welcome_img {
+/*	max-width:none;
+	max-height:210px;
+	overflow:hidden;*/
+}
+.sub_page-banner .full_banner {
+/* max-height:100px;*/
+}
+.sub_page-banner .full_banner img {
+/*   max-width: none;
+    width: auto;*/
+}
+.breadCrumbNav {
+/*position:static;*/
+}
+#back-top a {
+	height: 30px;
+	width: 30px;
+	line-height: 30px;
+}
+.two_equal .col, .three_equal .col, .four_equal .col {
+	padding: 0;
+}
+.three_equal .col, .four_equal .col {
+	width: 49%;
+}
+.five_equal .col, .six_equal .col {
+	width: 32%;
+}
+.three_equal .clear_tp, .four_equal .clear_tp {
+	margin-bottom: 0;
+}
+.col-img-50 {
+	max-width: 100%;
+}
+
+
+.burger-table tr{
+	
+		display:flex;
+	flex-wrap: wrap;
+}
+
+.burger-table tr th,.burger-table tr td{
+	flex: 1 1 33.33%;
+	
+}
+
+
+#isotope-container{
+	display:block;
+}
+
+
+
+}
+ @media (max-width: 767px) and (min-width:576px) {
+}
+ @media (max-width: 640px) {
+}
+
+
+ @media (max-width: 600px) {
+}
+
+
+
+ @media (max-width: 575px) {
+.col {
+	width:100%;
+}
+}
+
+ @media (max-width: 499px) {
+ 
+}
+
+
+
+ @media (max-width: 480px) {
+.five_equal .col, .six_equal .col {
+	width: 49%;
+}
+ 
+}
+ @media (max-width: 400px) {
+}
+ @media (max-width: 360px) {
+.two_equal .col, .three_equal .col, .four_equal .col {
+	width: 100%;
+}
+.five_equal .col, .six_equal .col {
+	width: 100%;
+}
+}
+ @media  (max-width: 320px) {
+.contact_form .col {
+/*  width: 100%;*/
+}
+.footer .col {
+	width: 100%;
+}
+}
+ @media  (max-width: 299px) {
+.contact_form .col {
+/*  width: 100%;*/
+}
+.footer .col {
+	width: 100%;
+}
+}
