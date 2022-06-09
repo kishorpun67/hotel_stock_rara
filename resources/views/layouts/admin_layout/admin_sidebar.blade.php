@@ -9,16 +9,17 @@
   <a href="{{route('admin.dashboard')}}" class="brand-link">
       {{-- <img src="{{asset('image/admin_image/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8"> --}}
-      <span class="brand-text font-weight-light">Admin | Dashboard</span>
+      {{-- <span class="brand-text font-weight-light">Admin | Dashboard</span> --}}
+      <div class="image">
+        <img src="{{asset(Auth::guard('admin')->user()->image)}}" class="img-circle elevation-2" alt="User Image">
+      </div>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{asset(Auth::guard('admin')->user()->image)}}" class="img-circle elevation-2" alt="User Image">
-        </div>
+       
         <div class="info">
           <a href="#" class="d-block">{{Auth::guard('admin')->user()->name}}</a>
         </div>
