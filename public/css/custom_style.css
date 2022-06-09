@@ -198,7 +198,7 @@ font-weight: 600;
  /*------Side bar css starts--------*/
  
  .layout-fixed .main-sidebar{
-width: 70px;
+width: 62px;
 transition: 0.5s ease-in-out;
 background-color: #fff;
 text-align: match-parent;
@@ -217,6 +217,7 @@ margin: 0;
 	font-size: 19px;
 	padding-right: 20px;
 	color: #6e6b7b;
+	width: 30px;
 	 
  }
  
@@ -230,4 +231,13 @@ margin: 0;
  
  .nav-sidebar > .nav-item p:hover{
 	 color: #6e6b7b;
+ }
+ 
+ 
+ 
+ @media (min-width: 768px){
+	body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-footer, body:not(.sidebar-mini-md) .main-header{
+		 margin-left: 62px;
+	 }
+	 
  }
