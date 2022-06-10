@@ -50,7 +50,7 @@
           @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(26)|| auth('admin')->user()->hasPermission(27) 
           || auth('admin')->user()->hasPermission(28) || auth('admin')->user()->hasPermission(29) || auth('admin')->user()->hasPermission(32))
 
-            @if(Session::get('page')=="dfd" || Session::get('page')=="kitchen" || Session::get('page')=="caffe" || Session::get('page')=="bar" || Session::get('page')=="waiter" )
+            @if(Session::get('page')=="kitchen" || Session::get('page')=="caffe" || Session::get('page')=="bar" || Session::get('page')=="waiter" )
             <?php $active = "active";
             $menuOpen="menu-open"; ?>
               @else
@@ -58,7 +58,7 @@
               $menuOpen=""; ?>
             @endif
             <li class="nav-item has-treeview {{$menuOpen ??''}} ">
-              <a href="#" class="nav-link {{$active}}">
+              <a href="#" class="nav-link {{$active}}  ">
                 <i class="fa fa-desktop" aria-hidden="true"></i>
                 <p>
                   All Screen

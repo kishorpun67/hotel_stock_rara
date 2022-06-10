@@ -105,10 +105,7 @@ use App\CustomerTable;
                    
                    <figcaption class="room_caption"> 
                       <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
+                      <h5 style="text-align: center;">	Room No : 1 </h5>
                    </figcaption>
                    
                    </figure>
@@ -119,10 +116,7 @@ use App\CustomerTable;
                    
                    <figcaption class="room_caption"> 
                       <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
+                      <h5 style="text-align: center;">	Room No : 1 </h5>
                    </figcaption>
                    
                    </figure>
@@ -133,10 +127,7 @@ use App\CustomerTable;
                    
                    <figcaption class="room_caption"> 
                       <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
+                      <h5 style="text-align: center;">	Room No : 1 </h5>
                    </figcaption>
                    
                    </figure>
@@ -147,12 +138,8 @@ use App\CustomerTable;
                    
                    <figcaption class="room_caption"> 
                       <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
+                      <h5 style="text-align: center;">	Room No : 1 </h5>
                    </figcaption>
-                   
                    </figure>
                 </div>
                 <div class="item">
@@ -161,26 +148,8 @@ use App\CustomerTable;
                    
                    <figcaption class="room_caption"> 
                       <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
+                      <h5 style="text-align: center;">	Room No : 1 </h5>
                    </figcaption>
-                   
-                   </figure>
-                </div>
-                <div class="item">
-                  <figure class="room_image zoomIn animated">
-                   <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
-                   
-                   <figcaption class="room_caption"> 
-                      <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
-                   </figcaption>
-                   
                    </figure>
                 </div>
               </div>
@@ -189,7 +158,6 @@ use App\CustomerTable;
             <?php
                 $customer_table = CustomerTable::where('table_id',$item->id)->get();
                 $total_customer = CustomerTable::where('table_id',$item->id)->sum('no_customer');
-        
               ?>
             <div class="table-inner mt-3">
 
