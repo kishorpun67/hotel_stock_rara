@@ -466,9 +466,7 @@
           <div class="clear"></div>
         </div>
         <div class="row" id="ajaxItem">
-          {{-- <span id="ajaxItem"> --}}
             @include('admin.sale.ajaxItem')
-          {{-- </span> --}}
          
         </div>
       </div>
