@@ -57,15 +57,42 @@
 
 </head>
 <body>
-  <div class="container-fluid">
-    <figure class="logo_holder"><a href="index.html"> <img src="images/istockphoto-1156053620-612x612.jpg" alt="This is web logo"> </a> </figure>
-    <div class="title_bar mt-3 mb-4">
+
+  <div class="top_bar">
+  <div id="pav-mainnav">
+  <div class="logo-bar navigation-bar">
+       <div class="container-fluid">
+       <div class="row align-items-center">
+       <div class="col-4">
+       <div class="top_icon__menu topbar-icons">
+        <ul>
+        
+         
+        
+          <li><a href="javascript:void(0)" data-tippy-content="Main Menu" class="" title=""><i class="far fa-user"></i></a></li>
+          <li><a href="#" title=""><i class="fas fa-globe"></i> </a></li>
+          <li><a href="#" title=""><i class="fas fa-print"></i> </a></li>
+        </ul>
+      </div>
+      </div>
+  <div class="col-4"> <figure class="logo_holder"><a href="index.html"> 
+    <img src="{{asset('front/images/istockphoto-1156053620-612x612.jpg')}}" alt="This is web logo">  </a> </figure>
+    </div>
+    
+       <div class="col-4"></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!-- <div class="title_bar mt-3 mb-4">
       <ul>
         <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
         <li><a href="{{route('admin.add.edit.sale')}}">Home</a></li>
         <li><a href="#">Services</a></li>
       </ul>
-    </div>
+    </div> -->
+      <div class="container-fluid">
     <div id="isotope-container">
       <div class="order-wrapper">
         <h4> Running Orders</h4>
@@ -501,7 +528,7 @@
 <script type="text/javascript" src="{{asset('front/js/bootstrap.js')}}"></script> 
 <script type="text/javascript" src="{{asset('front/js/Push_up_jquery.js')}}"></script> 
 <script type="text/javascript" src="{{asset('front/js/annimatable_jquery.js')}}"></script> 
-<script type='text/javascript' src='{{asset('front/js/isotope.min.js')}}'></script> 
+<script type='text/javascript' src="{{asset('front/js/isotope.min.js')}}"></script> 
 <script type="text/javascript">
 	var $container = $('#isotope-container .image-content ul');
 	// Isotope initialize-

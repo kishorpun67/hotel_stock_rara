@@ -94,10 +94,11 @@ use App\CustomerTable;
         ">Room and Table</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
       </div>
-      <div class="modal-body backInDown animatable">
+      <div class="modal-body">
         <div class="cart-wrapper checkout_wrapper">
           <div class="table-outer">
-            <div class="carousel-wrap room-slider bounce animatable">
+                  <h3 class="room-title mb-0">Room</h3>
+            <div class="carousel-wrap room-slider backInDown animatable mt-3">
               <div class="owl-carousel owl-theme">
                 <div class="item">
                   <figure class="room_image zoomIn animated">
@@ -106,9 +107,7 @@ use App\CustomerTable;
                    <figcaption class="room_caption"> 
                       <h5 style="text-align: center;">	Room Name : ABC </h5>
                              <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
+     
                    </figcaption>
                    
                    </figure>
@@ -117,12 +116,21 @@ use App\CustomerTable;
                   <figure class="room_image zoomIn animated">
                    <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
                    
-                   <figcaption class="room_caption"> 
+<figcaption class="room_caption"> 
                       <h5 style="text-align: center;">	Room Name : ABC </h5>
                              <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
+     
+                   </figcaption>
+                   
+                   </figure>
+                </div>
+                <div class="item">
+                  <figure class="room_image zoomIn animated">
+                   <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
+<figcaption class="room_caption"> 
+                      <h5 style="text-align: center;">	Room Name : ABC </h5>
+                             <h5 style="text-align: center;">	Room No : 1 </h5>
+     
                    </figcaption>
                    
                    </figure>
@@ -131,12 +139,10 @@ use App\CustomerTable;
                   <figure class="room_image zoomIn animated">
                    <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
                    
-                   <figcaption class="room_caption"> 
+<figcaption class="room_caption"> 
                       <h5 style="text-align: center;">	Room Name : ABC </h5>
                              <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
+     
                    </figcaption>
                    
                    </figure>
@@ -145,12 +151,10 @@ use App\CustomerTable;
                   <figure class="room_image zoomIn animated">
                    <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
                    
-                   <figcaption class="room_caption"> 
+<figcaption class="room_caption"> 
                       <h5 style="text-align: center;">	Room Name : ABC </h5>
                              <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
+     
                    </figcaption>
                    
                    </figure>
@@ -159,41 +163,89 @@ use App\CustomerTable;
                   <figure class="room_image zoomIn animated">
                    <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
                    
-                   <figcaption class="room_caption"> 
+<figcaption class="room_caption"> 
                       <h5 style="text-align: center;">	Room Name : ABC </h5>
                              <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
-                   </figcaption>
-                   
-                   </figure>
-                </div>
-                <div class="item">
-                  <figure class="room_image zoomIn animated">
-                   <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
-                   
-                   <figcaption class="room_caption"> 
-                      <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-              <h5 style="text-align: center;">Room Capacity : 5 </h5>
-              <h5 style="text-align: center;">Total Customer : <span id="total-customer-6">3</span> </h5>
-              <h5 style="text-align: center;" id="available_seat-6">Avaliable : 2 </h5>
+     
                    </figcaption>
                    
                    </figure>
                 </div>
               </div>
             </div>
+            
+            
+            
+            
+            
+            
+            
+            <table class="burger-table mt-3">
+          <thead>
+            <tr>
+              <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
+                  <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
+                <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
+               <th class="marked"><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
+                <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
+                              <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
+                  <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
+                <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
+               <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
+                
+            </tr>
+          </thead>
+          <tbody>
+             
+                   <tr>
+              <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
+              <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
+            <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
+             <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
+           <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
+                         <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
+              <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
+            <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
+             <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
+  
+           </tr>      
+             
+             
+          </tbody>
+        </table>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             @foreach ($tables as $item)
             <?php
                 $customer_table = CustomerTable::where('table_id',$item->id)->get();
                 $total_customer = CustomerTable::where('table_id',$item->id)->sum('no_customer');
         
               ?>
+              
+              
+              
+              
             <div class="table-inner mt-3">
+            
+          
 
-              <figure class="table_image zoomIn animated"> <img src="{{asset('front/images/table-dinner.png')}}" alt="">
+              <figure class="table_image zoomIn animated"> <img src="{{asset('front/images/table-dinner.png')}}" alt="This is Table image">
               
                   <figcaption class="table_caption"> 
               
@@ -268,7 +320,7 @@ use App\CustomerTable;
         ">Table</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
       </div>
-      <div class="modal-body backInDown animatable">
+      <div class="modal-body">
         <div class="cart-wrapper checkout_wrapper">
           <div class="table-outer"> @foreach ($tables as $item)
             <?php
@@ -277,11 +329,22 @@ use App\CustomerTable;
         
               ?>
             <div class="table-inner mb-3">
-              <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
+<!--              <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
+              <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
+              <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
+              <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>-->
+              <figure class="table_image flipInY animatable"> <img src="{{asset('front/images/table-dinner.png')}}" alt=""> 
+              
+              <figcaption class="table_caption"> 
+              
+ <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
               <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
               <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
               <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>
-              <figure class="table_image flipInY animatable"> <img src="{{asset('front/images/table-dinner.png')}}" alt=""> </figure>
+              </figcaption>
+              
+              
+              </figure>
               <table class="cart_table">
                 <thead>
                   <tr>
@@ -377,16 +440,21 @@ $('.room-slider .owl-carousel').owlCarousel({
       items: 1
     },
 	
-   480: {
+   400: {
 	items: 2
   },
 	
     600: {
       items: 3
     },
+ 
+	
     1000: {
       items: 4
-    }
+    },
+	
+ 
+	
   }
   
 })
