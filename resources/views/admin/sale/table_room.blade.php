@@ -35,9 +35,13 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 <?php  
-use App\Table;
-use App\CustomerTable;
- $tables = Table::get();
+  use App\Table;
+  use App\CustomerTable;
+  use App\Admin\Room;
+  $tables = Table::get();
+  $roomBig = Room::where('room_size','Big')->get();
+  $roomSmall = Room::where('room_size','Small')->get();
+
 ?>
 </head>
 <body>
@@ -92,170 +96,51 @@ use App\CustomerTable;
       <div class="modal-body">
         <div class="cart-wrapper checkout_wrapper">
           <div class="table-outer">
-                  <h3 class="room-title mb-0">Room</h3>
+            <h3 class="room-title mb-0">Room</h3>
             <div class="carousel-wrap room-slider backInDown animatable mt-3">
               <div class="owl-carousel owl-theme">
-                <div class="item">
-                  <figure class="room_image zoomIn animated">
-                   <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
-                   
-                   <figcaption class="room_caption"> 
-                      <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-     
-                   </figcaption>
-                   
-                   </figure>
-                </div>
-                <div class="item">
-                  <figure class="room_image zoomIn animated">
-                   <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
-                   
-<figcaption class="room_caption"> 
-                      <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-     
-                   </figcaption>
-                   
-                   </figure>
-                </div>
-                <div class="item">
-                  <figure class="room_image zoomIn animated">
-                   <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
-<figcaption class="room_caption"> 
-                      <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-     
-                   </figcaption>
-                   
-                   </figure>
-                </div>
-                <div class="item">
-                  <figure class="room_image zoomIn animated">
-                   <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
-                   
-<figcaption class="room_caption"> 
-                      <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-     
-                   </figcaption>
-                   
-                   </figure>
-                </div>
-                <div class="item">
-                  <figure class="room_image zoomIn animated">
-                   <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
-                   
-<figcaption class="room_caption"> 
-                      <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-     
-                   </figcaption>
-                   
-                   </figure>
-                </div>
-                <div class="item">
-                  <figure class="room_image zoomIn animated">
-                   <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
-                   
-<figcaption class="room_caption"> 
-                      <h5 style="text-align: center;">	Room Name : ABC </h5>
-                             <h5 style="text-align: center;">	Room No : 1 </h5>
-     
-                   </figcaption>
-                   
-                   </figure>
-                </div>
+                 @foreach ($roomBig as $item)
+                  <div class="item">
+                    <figure class="room_image zoomIn animated">
+                      <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
+                      <figcaption class="room_caption"> 
+                          <h5 style="text-align: center;">	{{$item->name}}</h5>
+                          <h5 style="text-align: center;">	Room No : {{$item->room_no}} </h5>
+                      </figcaption>
+                    </figure>
+                  </div>
+                @endforeach
+
               </div>
             </div>
-            
-            
-            
-            
-            
-            
-            
+            <h3 class="room-title mb-0">Room</h3>
             <table class="burger-table mt-3">
-          <thead>
-            <tr>
-              <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
-                  <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
-                <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
-               <th class="marked"><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
-                <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
-                              <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
-                  <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
-                <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
-               <th><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></th>
-                
-            </tr>
-          </thead>
-          <tbody>
-             
-                   <tr>
-              <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
-              <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
-            <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
-             <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
-           <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
-                         <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
-              <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
-            <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
-             <td><a href="dashboard.html"><i class="fa-brands fa-figma"></i></a></td>
-  
-           </tr>      
-             
-             
-          </tbody>
-        </table>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+              @foreach ($roomSmall->chunk(10) as $item)
+              <tbody>
+              <tr>
+              @foreach ($item as $room)
+
+                <td class="marked"><a href=""><i class="fa-brands fa-figma"></i></a></td>
+              @endforeach
+
+              </tr>
+              <tbody>
+            @endforeach
+            </table>
             @foreach ($tables as $item)
             <?php
                 $customer_table = CustomerTable::where('table_id',$item->id)->get();
                 $total_customer = CustomerTable::where('table_id',$item->id)->sum('no_customer');
-        
               ?>
-              
-              
-              
-              
             <div class="table-inner mt-3">
-            
-          
-
               <figure class="table_image zoomIn animated"> <img src="{{asset('front/images/table-dinner.png')}}" alt="This is Table image">
-              
-                  <figcaption class="table_caption"> 
-              
-                            <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
-              <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
-              <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
-              <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>
-              </figcaption>
-              
-               </figure>
-              
-              
-              
-              
-              
+                <figcaption class="table_caption"> 
+                  <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
+                  <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
+                  <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
+                  <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>
+                </figcaption>
+              </figure>
               <table class="cart_table">
                 <thead>
                   <tr>

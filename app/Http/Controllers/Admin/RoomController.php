@@ -54,8 +54,7 @@ class RoomController extends Controller
                 'room_no' =>'required|numeric',
                 'price' =>'required|numeric',
                 'room_type_id' =>'required',
-
-
+                'room_size' =>'required',
             ];
 
             $customMessages = [
@@ -65,6 +64,8 @@ class RoomController extends Controller
                 'price.required' => 'Price is required',
                 'price.numeric' => 'Price is invalid ',
                 'room_type_id.required' => 'Room Type is required',
+                'room_size.required' => 'Room Size is required',
+
             ];
             $this->validate($request, $rules, $customMessages);
            
@@ -73,6 +74,7 @@ class RoomController extends Controller
             $room->room_no = $data['room_no'];
             $room->price = $data['price'];
             $room->room_type_id = $data['room_type_id'];
+            $room->room_size = $data['room_size'];
             $room->save();
             Session::flash('success_message', $message);
             return redirect()->route('admin.room');

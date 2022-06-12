@@ -17,39 +17,6 @@
         </button>
       </div>
     @endif
-    <!-- Main content -->
-      @error('category_id')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror  
-      @error('name')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror 
-      @error('price')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror 
-      @error('url')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror   
       <section class="content">
       <div class="row">
         <div class="col-12">
@@ -67,6 +34,7 @@
                   <th>Room Type</th>
                   <th>Room No</th>
                   <th>Price</th>
+                  <th>Room Size</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -84,6 +52,7 @@
                     </td>
                     <td>{{$room->room_no}}</td>
                     <td>{{$room->price}}</td>
+                    <td>{{$room->room_size}}</td>
                     </td>
                     <td>
                     <a href="{{route('admin.add.edit.room', $room->id)}}" > <i class="fa fa-edit"></i></a>&nbsp;&nbsp;

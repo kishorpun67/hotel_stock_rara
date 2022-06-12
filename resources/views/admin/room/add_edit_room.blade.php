@@ -58,6 +58,19 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
+                  <label for="name">Room Name *</label>
+                  <input type="text" class="form-control" name="name" id="name" placeholder="Room Name"
+                  @if(!empty($roomData['name']))
+                  value= "{{$roomData['name']}}"
+                  @else value="{{old('name')}}"
+                  @endif>
+                  <p style="color:red">
+                    @error('name')
+                    {{$message}}
+                    @enderror
+                  </p>
+                </div>
+                <div class="form-group">
                     <label for="address">Room No *</label>
                     <input type="text" class="form-control" name="room_no" id="room_no" placeholder="Enter Room No."
                     @if(!empty($roomData['room_no']))
@@ -99,6 +112,31 @@
                     </select>
                     <p style="color:red">
                       @error('room_type_id')
+                      {{$message}}
+                      @enderror
+                    </p>
+                </div>
+                <div class="form-group">
+                  <label for="">Room Size *</label>
+                  <select name="room_size" id="" class="form-control">
+                    <option  value="">Select</option>
+                    <option value="Small" 
+                      @if(!empty($roomData['room_size']) && $roomData['room_size']== "Small")
+                      selected=""
+                      @else {{ old('room_size') ==  "Small"? 'selected' : '' }} 
+                      @endif
+                      >Small
+                    </option>
+                    <option value="Big" 
+                    @if(!empty($roomData['room_size']) && $roomData['room_size']== "Big")
+                    selected=""
+                    @else {{ old('room_size') ==  "Big"? 'selected' : '' }} 
+                    @endif
+                    >Big
+                  </option>
+                  </select>
+                   <p style="color:red">
+                      @error('room_size')
                       {{$message}}
                       @enderror
                     </p>
