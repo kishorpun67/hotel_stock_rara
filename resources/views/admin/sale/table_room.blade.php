@@ -119,8 +119,9 @@
               <tbody>
               <tr>
               @foreach ($item as $room)
-
+		<td><a href=""><i class="fa-brands fa-figma"></i></a></td>
                 <td class="marked"><a href=""><i class="fa-brands fa-figma"></i></a></td>
+                   <td class="active"><a href=""><i class="fa-brands fa-figma"></i></a></td>
               @endforeach
 
               </tr>

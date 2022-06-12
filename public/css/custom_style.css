@@ -86,7 +86,7 @@ table#categories tbody tr td form {
 .card-body .form-group label {
 }
 .card-header,  .card-primary:not(.card-outline) > .card-header {
-	background-color: #343a40;
+	background-color: #3f8fd7;
 }
 .card-header .card-title {
 	color:#fff;

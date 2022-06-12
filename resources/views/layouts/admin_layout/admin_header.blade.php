@@ -91,7 +91,7 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link"  href="{{route('admin.logout')}}">
-          <i class="fa fa-sign-out" ></i>logout
+         <i class="fas fa-sign-out-alt"></i>logout
         </a>
       </li>
     </ul>
