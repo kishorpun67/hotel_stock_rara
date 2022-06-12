@@ -58,7 +58,7 @@
               $menuOpen=""; ?>
             @endif
             <li class="nav-item has-treeview {{$menuOpen ??''}} ">
-              <a href="#" class="nav-link {{$active}}  ">
+              <a href="#" class="nav-link {{$active}} ">
                 <i class="fa fa-desktop" aria-hidden="true"></i>
                 <p>
                   All Screen

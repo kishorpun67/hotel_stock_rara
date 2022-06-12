@@ -229,6 +229,9 @@ h4 {
 
 .burger-table tr th,.burger-table tr td{
 	flex: 1 1 33.33%;
+	display: flex;
+align-items: center;
+justify-content: center;
 	
 }
 

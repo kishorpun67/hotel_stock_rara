@@ -917,3 +917,15 @@ color: #495057;
 	width:150px;
 	margin:0 auto;
 }
+
+.top_icon__menu li {
+  display: inline-block;
+  margin-right: 15px;
+ 
+}
+
+
+.top_icon__menu li i{
+	color:#737272;
+	font-size: 19px;
+}
