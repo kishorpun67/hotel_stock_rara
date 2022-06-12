@@ -66,12 +66,10 @@
        <div class="col-4">
        <div class="top_icon__menu topbar-icons">
         <ul>
-        
-         
-        
-          <li><a href="javascript:void(0)" data-tippy-content="Main Menu" class="" title=""><i class="far fa-user"></i></a></li>
-          <li><a href="#" title=""><i class="fas fa-globe"></i> </a></li>
-          <li><a href="#" title=""><i class="fas fa-print"></i> </a></li>
+          <li><a href="{{route('admin.dashboard')}}" ><i class="fas fa-tachometer-alt"></i></i></i></a></li>
+          <li><a href="{{route('admin.add.edit.sale')}}" ><i class="fa fa-home" aria-hidden="true"></i></i></a></li>
+          <li><a href="{{route('admin.sale')}}" title=""><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          </a></li>
         </ul>
       </div>
       </div>

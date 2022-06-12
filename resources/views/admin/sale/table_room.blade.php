@@ -72,12 +72,7 @@ use App\CustomerTable;
     </address>
   </div>-->
   
-  <div class="contact_info">
-    <address>
-    <div class="details"> <span>Burger House <br>
-      Bhaktapur</span> </div>
-    </address>
-  </div>
+
   <div class="button-bar center">
     <h2 class="sub-title">Select</h2>
     <ul>
