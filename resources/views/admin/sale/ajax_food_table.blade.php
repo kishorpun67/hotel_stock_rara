@@ -31,6 +31,14 @@ $taxt = TaxVat::first();
       
       
          <button type="button" class="btn operation_button add_btn" data-toggle="modal" data-target="#exampleModal10"><i class="fa-solid fa-plus"></i>Add</button>
+         
+         
+         
+         <ul class="number__list">
+         <li><a href="#">Room no:</a></li>
+         <li><a href="#">Table no:</a></li>
+         </ul>
+         
       
     </div>
         {{-- <div class="quantity-bar"> <span class="input-group-btn">

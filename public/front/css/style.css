@@ -577,6 +577,7 @@ width: 48% !important;
 
 .checkout_wrapper .waiter_customer .edit_flex{
 	flex: 1;
+	align-items: center;
 }
 
 
@@ -769,7 +770,7 @@ font-weight: 600;
 	background: #f0f0f0;
 	padding: 5px 25px;
 	color: #777;
-	margin-bottom: 10px;
+/*	margin-bottom: 10px;*/
 	display: flex;
 align-items: center;
 }
@@ -928,4 +929,21 @@ color: #495057;
 .top_icon__menu li i{
 	color:#737272;
 	font-size: 19px;
+}
+
+
+
+.number__list{
+	display: -ms-flexbox;
+display: flex;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+align-items: center;
+flex: 1;
+
+}
+
+
+.number__list li{
+	margin: auto;
 }
