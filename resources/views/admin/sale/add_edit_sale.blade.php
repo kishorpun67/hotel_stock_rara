@@ -81,14 +81,13 @@
        
        
        <div class="topbar_menu_item">
-       <ul class="menu__list">
-  <li> <a href="#" class="btn btn btn-primary">All</a> </li>
-  <li><a href="#" class="btn btn btn-success">Kitchen Items</a></li>
-  <li><a href="#" class="btn btn btn-warning">Caffe Items</a></li>
-  <li><a href="#" class="btn btn-info">Bar Items</a></li>
-</ul>
-</div>
-       
+          <ul class="menu__list">
+            <li> <a href="#" class="btn btn btn-primary">All</a> </li>
+            <li><a href="#" class="btn btn btn-success">Kitchen Items</a></li>
+            <li><a href="#" class="btn btn btn-warning">Caffe Items</a></li>
+            <li><a href="#" class="btn btn-info">Bar Items</a></li>
+          </ul>
+        </div>
        </div>
     </div>
     </div>
@@ -417,46 +416,7 @@
       </div>
     </div>
   </div>   
-  <!--  <div class="modal fade" id="exampleModal10" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">-->
-  <!--  <div class="modal-dialog" role="document">-->
-  <!--    <div class="modal-content">-->
-      <!--   <form-->
-      <!--action="{{route('admin.add.edit.customer')}}"-->
-      <!--method="post" enctype="multipart/form-data">-->
-  <!--        @csrf-->
-  <!--        <div class="modal-header">-->
-  <!--        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-  <!--        </div>-->
-  <!--        <div class="modal-body">-->
-  <!--            <div class="form-group">-->
-  <!--                <label for="name">Name*</label>-->
-  <!--                <input  class="form-control" id="name "name="customer_name" placeholder="Enter name">-->
-  <!--                <label for="address"> Address *</label>-->
-  <!--                <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">-->
-  <!--                <label for="phone"> Phone *</label>-->
-  <!--                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number">-->
-  <!--                <label for="address"> Email</label>-->
-  <!--              <input type="email" class="form-control" name="email" id="email" placeholder="Enter email"-->
-
-  <!--            </div>-->
-  <!--        </div>-->
-          <!-- Modal footer -->
-  <!--        <div class="modal-footer">-->
-  <!--            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>-->
-  <!--            <input type="submit" class="btn btn-success" value="Submit">-->
-  <!--        </div>-->
-      <!--</form>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->
-        
-        
-        
-        
-        
-        
-        
-                     <div class="modal fade" id="exampleModal15" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal fade" id="exampleModal15" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -469,28 +429,7 @@
           ...
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>    
-        
-        
-        
-        
-        
-        
-        
-        
-      </div>
-      
-      
-      
-      
-      
-      
-      
+ 
       <div id="filter-big" class="filter"> 
         <!--<strong>Filter by category :</strong> -->
         <a href="javascript:" category_id="all"  class="categories">Show All</a> 
@@ -498,14 +437,6 @@
           <a href="javascript" class="categories" category_id="{{$item->id}}">{{$item->category_name}}</a> 
         @endforeach
       </div>
-      <!--<div id="filter-small" class="filter"> <strong>Filter by category :</strong>
-        <ul>
-          <li><a href="#" data-filter="*">Show All</a></li>
-          <li><a href="#" data-filter=".momo">Momo</a></li>
-          <li><a href="#" data-filter=".chowmein">Chowmin</a></li>
-          <li><a href="#" data-filter=".pizza">Pizza</a></li>
-        </ul>
-      </div>-->
       <div class="image-content">
         <div class="form_search mb-3">
           <form role="form">
@@ -516,7 +447,6 @@
         </div>
         <div class="row" id="ajaxItem">
             @include('admin.sale.ajaxItem')
-         
         </div>
       </div>
     </div>
