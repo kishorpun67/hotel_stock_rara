@@ -76,10 +76,7 @@
   <div class="col-2"> <figure class="logo_holder"><a href="index.html"> 
     <img src="{{asset('front/images/istockphoto-1156053620-612x612.jpg')}}" alt="This is web logo">  </a> </figure>
     </div>
-    
        <div class="col-5">
-       
-       
        <div class="topbar_menu_item">
           <ul class="menu__list">
             <li> <a href="#" class="btn btn btn-primary">All</a> </li>
@@ -94,13 +91,6 @@
     </div>
     </div>
     </div>
-    <!-- <div class="title_bar mt-3 mb-4">
-      <ul>
-        <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-        <li><a href="{{route('admin.add.edit.sale')}}">Home</a></li>
-        <li><a href="#">Services</a></li>
-      </ul>
-    </div> -->
       <div class="container-fluid">
     <div id="isotope-container">
       <div class="order-wrapper">
@@ -120,8 +110,6 @@
               None
             @endif</span> <i class="fa-solid fa-chevron-right"></i></a></li>
           @endforeach
-          
-          
         </ul>
         <button type="button" class="btn  modify_btn operation_button modify_order" data-toggle="modal" data-target="#modify_order"> <i class="fas fa-edit"></i>Modify Order</button>
         <button type="button" class="btn order_btn operation_button test_order_details" data-toggle="modal" data-target="#exampleModal2"> <i class="fas fa-info-circle"></i>Order Details</button>
@@ -138,10 +126,7 @@
         <form action="{{route('admin.cancel.order')}}" method="POST">
           <input type="hidden" name="order_id" id="order_id" value=""  >
           @csrf
-          
           <button class="btn order_btn operation_button"><i class="fa fa-ban" aria-hidden="true"></i>Cancel Order</button>
-
-        {{-- <input type="submit" value="Cancel Order" class="btn order_btn operation_button"> --}}
         </form>
         <button type="button" class="btn order_btn operation_button kitchen_status" data-toggle="modal" data-target="#exampleModal8"> <i class="fas fa-spinner"></i> Kitchen Status</button>
         <div class="modal fade" id="modify_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -163,7 +148,6 @@
             </div>
           </div>
         </div>
-        
         <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -184,8 +168,6 @@
             </div>
           </div>
         </div>
-        
-        
         <div class="modal fade" id="order-kot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -205,7 +187,6 @@
             </div>
           </div>
         </div>
-        
         <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -223,7 +204,6 @@
             </div>
           </div>
         </div>
-        
         <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -242,7 +222,6 @@
             </div>
           </div>
         </div>
-        
         <div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -260,32 +239,12 @@
                   @csrf
                   <input type="hidden" name="order_id" id="orders_id" value=""  >
                   <input type="submit" value="Print" class="btn btn-primary"> 
-
                 </form> 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
         </div>
-        
-        <div class="modal fade" id="exampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Alert!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-              </div>
-              <div class="modal-body">
-                <p>Are you sure to cancel this order?</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yes</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        
         <div class="modal fade" id="exampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -325,111 +284,7 @@
       <div class="cart-wrapper checkout_wrapper" id="add_item_table">
         @include('admin.sale.ajax_food_table')
       </form>
-
-        
-        
-        
-        
-        <!-- Modal -->
-  <div class="modal fade" id="exampleModal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-        
-        
-        
-        
-        
-    <div class="modal fade" id="exampleModal12" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>     
-          <div class="modal fade" id="exampleModal13" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>   
-        
-        
-        
-        
-               <div class="modal fade" id="exampleModal14" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>   
-  <div class="modal fade" id="exampleModal15" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
- 
+</div>
       <div id="filter-big" class="filter"> 
         <!--<strong>Filter by category :</strong> -->
         <a href="javascript:" category_id="all"  class="categories">Show All</a> 
