@@ -95,45 +95,75 @@
       </div>
       <div class="modal-body">
         <div class="cart-wrapper checkout_wrapper">
-          <div class="table-outer">
-            <h3 class="room-title mb-0">Room</h3>
-            <div class="carousel-wrap room-slider backInDown animatable mt-3">
-              <div class="owl-carousel owl-theme">
-                 @foreach ($roomBig as $item)
-                  <div class="item">
-                    <figure class="room_image zoomIn animated">
-                      <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
-                      <figcaption class="room_caption"> 
-                          <h5 style="text-align: center;">	{{$item->name}}</h5>
-                          <h5 style="text-align: center;">	Room No : {{$item->room_no}} </h5>
-                      </figcaption>
-                    </figure>
-                  </div>
-                @endforeach
-
-              </div>
-            </div>
-            <h3 class="room-title mb-0">Room</h3>
-            <table class="burger-table mt-3">
-              @foreach ($roomSmall->chunk(10) as $item)
-              <tbody>
-              <tr>
-              @foreach ($item as $room)
-
-                <td class="marked"><a href=""><i class="fa-brands fa-figma"></i></a></td>
+          <div class="carousel-wrap room-slider backInDown animatable mt-3">
+            <div class="owl-carousel owl-theme">
+               @foreach ($roomBig as $item)
+                  <href="" onclick="getRoom(this.getAttribute('room_id'))" room_id={{$item->id}}>
+                    <div class="item active">
+                      <figure class="room_image zoomIn animated">
+                        <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
+                        <figcaption class="room_caption"> 
+                            <h5 style="text-align: center;">	{{$item->name}}</h5>
+                            <h5 style="text-align: center;">	Room No : {{$item->room_no}} </h5>
+                        </figcaption>
+                      </figure>
+                    </div>
+                  </a>
               @endforeach
-
-              </tr>
-              <tbody>
+            </div>
+          </div>
+          <table class="burger-table mt-3">
+            @foreach ($roomSmall->chunk(10) as $item)
+            <tbody>
+            <tr>
+            @foreach ($item as $room)
+              <td  class="room-class" id="room-{{$room->id}}">
+                <a href="javascript:"  onclick="getRoom(this.getAttribute('room_id'))" room_id={{$room->id}}><i class="fa-brands fa-figma"></i></a>
+              </td>
             @endforeach
-            </table>
-            @foreach ($tables as $item)
+            </tr>
+            <tbody>
+          @endforeach
+          </table>
+          <div class="table-outer" id="ajaxTableRoom">
+            @include('admin.sale.ajax_table_room')
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="{{route('admin.add.table')}}" method="get">
+          @csrf
+          <input type="hidden" name="table_id" id="table_id">
+          <input type="hidden" name="room_id" id="room_ids">
+          <button class="btn btn-danger"> Proceed With Table</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="table" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-aligin-center " id="exampleModalLongTitle" style="text-align: center;
+        ">Table</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+      </div>
+      <div class="modal-body">
+        <div class="cart-wrapper checkout_wrapper">
+          <div class="table-outer"> @foreach ($tables as $item)
             <?php
                 $customer_table = CustomerTable::where('table_id',$item->id)->get();
                 $total_customer = CustomerTable::where('table_id',$item->id)->sum('no_customer');
+        
               ?>
-            <div class="table-inner mt-3">
-              <figure class="table_image zoomIn animated"> <img src="{{asset('front/images/table-dinner.png')}}" alt="This is Table image">
+            <div class="table-inner mb-3">
+<!--              <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
+              <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
+              <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
+              <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>-->
+              <figure class="table_image flipInY animatable"> <img src="{{asset('front/images/table-dinner.png')}}" alt=""> 
                 <figcaption class="table_caption"> 
                   <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
                   <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
@@ -185,91 +215,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <form action="{{route('admin.add.table')}}" method="get">
           @csrf
-          <input type="hidden" name="table_id" id="table_id">
-          <button class="btn btn-danger"> Proceed With Table</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="table" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-aligin-center " id="exampleModalLongTitle" style="text-align: center;
-        ">Table</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-      </div>
-      <div class="modal-body">
-        <div class="cart-wrapper checkout_wrapper">
-          <div class="table-outer"> @foreach ($tables as $item)
-            <?php
-                $customer_table = CustomerTable::where('table_id',$item->id)->get();
-                $total_customer = CustomerTable::where('table_id',$item->id)->sum('no_customer');
-        
-              ?>
-            <div class="table-inner mb-3">
-<!--              <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
-              <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
-              <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
-              <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>-->
-              <figure class="table_image flipInY animatable"> <img src="{{asset('front/images/table-dinner.png')}}" alt=""> 
-              
-              <figcaption class="table_caption"> 
-              
- <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
-              <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
-              <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
-              <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>
-              </figcaption>
-              
-              
-              </figure>
-              <table class="cart_table">
-                <thead>
-                  <tr>
-                    <th>Person</th>
-                    <th>Type</th>
-                    <th>Del</th>
-                  </tr>
-                </thead>
-                <tbody id="data-{{$item->id}}">
-                <div > @foreach ($customer_table as $data)
-                  <tr>
-                    <td>{{$data->no_customer}}</td>
-                    <td>{{$data->type}}</td>
-                    <td><a href="javascript:" onclick="deleteCustomerTable(this.getAttribute('customer_id'), this.getAttribute('table_id'))" table_id={{$item->id}}  customer_id ={{$data->id}} ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                  </tr>
-                  @endforeach </div>
-                <div class="row">
-                  <div class="col-md-12 d-flex">
-                    <?php $avaliable_seat = $item->seat_capacity-$total_customer;?>
-                    @if ($avaliable_seat >= 1)
-                    <?php $dispaly ="flex"; $dispaly1 ="none"  ?>
-                    @else
-                    <?php $dispaly ="none"; $dispaly1 ="block"  ?>
-                    @endif
-                    <input style="display:{{$dispaly}}" type="number" min="1" id="no_of_customer-{{$item->id}}" value="1" class="form-control">
-                    <select style="display:{{$dispaly}}" name="type" id="type-{{$item->id}}" class="form-control">
-                      <option value="Sigle">Single</option>
-                      <option value="Group">Group</option>
-                    </select>
-                    <button id="display-btn-{{$item->id}}" style="display:{{$dispaly}}" onclick="addCustomer(this.getAttribute('table_id'))" table_id={{$item->id}} class="btn btn-primary add_btn"><i class="fa-solid fa-plus"></i>Add</button>
-                    <button id="display-{{$item->id}}" style="color: red; display:{{$dispaly1}}"  class="btn btn-danger">Booked</button>
-                  </div>
-                </div>
-                  </tbody>
-                
-              </table>
-            </div>
-            @endforeach </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <form action="{{route('admin.add.table')}}" method="get">
-          @csrf
-          <input type="hidden" name="table_id" id="table_id">
+          <input type="hidden" name="table_id" id="table_ids">
           <button class="btn btn-danger"> Proceed With Table</button>
         </form>
       </div>
@@ -305,7 +251,7 @@
 
 
 $('.room-slider .owl-carousel').owlCarousel({
-  loop: true,
+  loop: false,
   margin: 10,
   dots:true,
   nav: true,

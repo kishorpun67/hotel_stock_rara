@@ -22,6 +22,7 @@ use App\Admin\Admin;
 use View;
 use App\CustomerTable;
 use Facade\Ignition\Tabs\Tab;
+use App\Admin\Room;
 
 class SaleController extends Controller
 {
@@ -40,8 +41,9 @@ class SaleController extends Controller
         $foodMenus = FoodMenu::get();
         $waiter = Admin::where('role_id',6)->get();
         $customer = Customer::get();
+        $table =array();
         Session::flash('page', 'sale');
-        return view('admin.sale.table_room', compact('foodCategories','foodMenus','carts','waiter','customer'));
+        return view('admin.sale.table_room', compact('foodCategories','foodMenus','carts','waiter','table'));
     }
 
     public function ajaxGetItem()
@@ -50,15 +52,10 @@ class SaleController extends Controller
         if($category_id =="all")
         {
             $foodMenus = FoodMenu::get();
-
         }else{
             $foodMenus = FoodMenu::where('category_id', $category_id)->get();
-
         }
-
        return view('admin.sale.ajaxItem', compact('foodMenus'));
-        // return $foodMenus;
-
     }
 
     public function ajaxFoodTable(Request $request)
@@ -99,17 +96,17 @@ class SaleController extends Controller
 
     public function deleteCart()
     {
-      Cart::where('id', request('cart_id'))->delete();
-      $carts = Cart::orderBy('id', 'DESC')->where(['admin_id' => auth('admin')->user()->id])->get();
-      $waiter = Admin::where('role_id',6)->get();
-      $customer = Customer::get();
-      return response()->json(['view'=>(String)View::make('admin.sale.ajax_food_table')->with(compact('carts', 'waiter', 'customer'))]);
+        Cart::where('id', request('cart_id'))->delete();
+        $carts = Cart::orderBy('id', 'DESC')->where(['admin_id' => auth('admin')->user()->id])->get();
+        $waiter = Admin::where('role_id',6)->get();
+        $customer = Customer::get();
+        return response()->json(['view'=>(String)View::make('admin.sale.ajax_food_table')->with(compact('carts', 'waiter', 'customer'))]);
      }
 
     public function deleteSale($id)
     {
-      $id =Order::where('id', $id)->delete();
-      return redirect()->back()->with('success_message', 'sale has been deleted successfully!');
+        $id =Order::where('id', $id)->delete();
+        return redirect()->back()->with('success_message', 'sale has been deleted successfully!');
     }
 
     public function table($url=null)
@@ -117,6 +114,11 @@ class SaleController extends Controller
         // return $url;
         // return CustomerTable::get();
         return view('admin.sale.table',compact('url'));
+    }
+    public function ajaxGetRoomTable()
+    {
+        $table = Table::where('room_id', request('room_id'))->get();
+        return view('admin.sale.ajax_table_room', compact('table'));
     }
     public function addCusomter()
     {
@@ -152,10 +154,18 @@ class SaleController extends Controller
     }
     public function addTable()
     {
-        if(empty(request('table_id'))){
+        request()->all();
+        if(empty(request('table_id')) && empty(request('room_id'))){
             return redirect()->back();
         }
-        $table = Table::where('id',request('table_id'))->first();
+        if(!empty(request('table_id')) && !empty(request('room_id'))){
+            // return "first";
+            $table = Table::with('room')->where(['id'=>request('table_id'), 'room_id'=>request('room_id')])->first();
+        } else if (!empty(request('room_id'))) {   
+            $table = Room::where('id',request('room_id'))->first();
+        } else{
+            $table = Table::where('id',request('table_id'))->first();
+        }
         $foodCategories = FoodCategory::get();
         $carts = Cart::orderBy('id', 'DESC')->where('admin_id', auth('admin')->user()->id)->get();
         $foodMenus = FoodMenu::with('foodCategory')->get();

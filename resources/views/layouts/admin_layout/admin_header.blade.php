@@ -26,13 +26,6 @@
     $totalPurchase = Purchase::whereDay('created_at', Carbon::now()->day)->sum('total');
 
    $total = $totalSale + $totalPurchase + $expanse;
-
-
-
-
-    
-
-
   ?>
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -91,7 +84,7 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link"  href="{{route('admin.logout')}}">
-          <i class="fa fa-sign-out" ></i>logout
+          <i class="fa fa-sign-out-alt" alt="true"></i> 
         </a>
       </li>
     </ul>

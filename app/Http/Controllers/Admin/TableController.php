@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Table;
 use Session;
+use App\Admin\Room;
 
 class TableController extends Controller
 {
@@ -48,10 +49,10 @@ class TableController extends Controller
                 $data['table_no'] = "";
             }
 
-            // if(empty($data['user_id']))
-            // {
-            //     $data['user_id'] = "";
-            // }
+            if(empty($data['room_id']))
+            {
+                $data['room_id'] =0;
+            }
             // if(empty($data['parent_id']))
             // {
             //     $data['parent_id'] = "";
@@ -60,12 +61,14 @@ class TableController extends Controller
             $table->table_name = $data['table_name'];
             $table->seat_capacity = $data['seat_capacity'];
             $table->table_no = $data['table_no'];
+            $table->room_id = $data['room_id'];
             $table->save();
             Session::flash('success_message', $message);
             return redirect('admin/table');
         }
         Session::flash('page', 'table');
-        return view('admin.table.add_edit_table', compact('title','button','tabledata'));
+        $rooms = Room::where('room_size', 'Big')->get();
+        return view('admin.table.add_edit_table', compact('title','button','tabledata', 'rooms'));
     }
 
     public function deletetable($id)

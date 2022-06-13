@@ -83,10 +83,30 @@
                       value= "{{$tabledata['seat_capacity']}}"
                       @else value="{{old('seat_capacity')}}"
                       @endif>
-                    </div>  
+                </div>  
     
       
-
+                <div class="form-group">
+                  <label for="room_id">Room No *</label>
+                  <select name="room_id" id=""  class="form-control select2">
+                      <option value="">Select</option>
+                      @foreach($rooms as $room)
+                          <option value="{{$room->id}}" 
+                            @if (!empty($bookRoomData['room_id']) &&  $bookRoomData['room_id'] == $room->id)
+                            selected=""
+                              @else 
+                              {{ old('room_id') == $room->id ? 'selected' : '' }}
+                            @endif
+                              >{{$room->name}}
+                          </option>
+                      @endforeach
+                  </select>
+                  <p style="color:red">
+                    @error('room_id')
+                    {{$message}}
+                    @enderror
+                  </p>
+              </div>
                 {{-- <div class="form-group">
                     <label for="description">Description</label>
                     <textarea name="description" id="description" cols="20" class="form-control" rows="4"> @if(!empty($tabledata['description']))

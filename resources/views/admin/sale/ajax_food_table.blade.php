@@ -35,8 +35,18 @@ $taxt = TaxVat::first();
          
          
          <ul class="number__list">
-         <li><a href="#">Room no:</a></li>
-         <li><a href="#">Table no:</a></li>
+         <li><a href="#">Room no: @if (!empty($table->room->room_no))
+             {{$table->room->room_no}}
+         @elseif(!empty($table->room_no))
+          {{$table->room_no}}
+         @else
+          None
+         @endif </a></li>
+         <li><a href="#">Table no:</a> @if (!empty($table->table_no))
+          {{$table->table_no}}
+         @else
+            None
+         @endif</</li>
          </ul>
          
       

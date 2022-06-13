@@ -148,6 +148,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
       Route::group(['middleware'=>['ChekcRole:POS']], function(){
          Route::match(['get', 'post'], 'sale-food/{id?}', 'SaleController@addEditSale')->name('add.edit.sale');
          Route::get('food/{url}', 'SaleController@table')->name('food');
+         Route::get('ajax-get-room-table', 'SaleController@ajaxGetRoomTable');
          Route::post('ajax-add-customer', 'SaleController@addCusomter');
          Route::post('ajax-delete-customer-table', 'SaleController@deleteCusomter');
          Route::post('ajax-search-food', 'SaleController@ajaxSearchFood');

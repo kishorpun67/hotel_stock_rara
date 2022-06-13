@@ -5,6 +5,7 @@ $(document).ready(function() {
 
     $(".delete_form").click(function() {
         var id = $(this).attr('rel');
+
         var record = $(this).attr('record');
         // alert(id);addCustomer
         swal({
@@ -45,6 +46,31 @@ $(document).ready(function() {
     });
 
 });
+
+
+function getRoom(room_id) {
+    // alert(room_id)
+    $("#room_ids").val(room_id)
+    $("#table_id").val("")
+    $(".room-class").removeClass("marked");
+    $(`#room-${room_id}`).addClass("room-class marked");
+
+    $.ajax({
+        type: 'get',
+        url: '/admin/ajax-get-room-table',
+        data: {
+            room_id: room_id
+        },
+        success: function(response) {
+            // console.log(response)
+            $("#ajaxTableRoom").empty();
+            $("#ajaxTableRoom").html(response);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
 
 function addFood(item_id, price, name, is_bar, is_caffe, is_kitchen) {
     // console.log(item_id, price, name, is_bar, is_caffe, is_kitchen)
@@ -243,8 +269,8 @@ function addCustomer(table_id) {
             if (response.count == 1) {
                 $(`#data-${response.table_ids}`).empty();
                 $(`#table_id`).val(response.table_ids);
+                $(`#table_ids`).val(response.table_ids);
                 $(`#total-customer-${response.table_ids}`).text(response.no_customer);
-
                 if (response.available_seat >= 1) {
                     $(`#no_of_customer-${response.table_ids}`).css("display", "flex");
                     $(`#type-${response.table_ids}`).css("display", "flex");
