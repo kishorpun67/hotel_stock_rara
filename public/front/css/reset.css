@@ -817,6 +817,7 @@ table tbody td {
     height: 50px;
     text-align: center;
     line-height: 50px;
+    padding: 0;
 }
 
 .burger-table tr th.marked,
@@ -825,9 +826,16 @@ table tbody td {
     color: #fff;
 }
 
+.burger-table tr th.active,
+.burger-table tr td.active {
+    background-color: green;
+    color: #fff;
+}
+
 .burger-table tr a {
     /*	background: red;*/
     display: block;
+    width: 100%;
 }
 
 table thead th i,

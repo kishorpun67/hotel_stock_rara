@@ -98,7 +98,7 @@
           <div class="carousel-wrap room-slider backInDown animatable mt-3">
             <div class="owl-carousel owl-theme">
                @foreach ($roomBig as $item)
-                  <href="" onclick="getRoom(this.getAttribute('room_id'))" room_id={{$item->id}}>
+                  <a href="javascript:" onclick="getRoom(this.getAttribute('room_id'))" room_id={{$item->id}}>
                     <div class="item active">
                       <figure class="room_image zoomIn animated">
                         <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
@@ -164,12 +164,16 @@
               <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
               <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>-->
               <figure class="table_image flipInY animatable"> <img src="{{asset('front/images/table-dinner.png')}}" alt=""> 
-                <figcaption class="table_caption"> 
-                  <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
-                  <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
-                  <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
-                  <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>
-                </figcaption>
+              
+              <figcaption class="table_caption"> 
+              
+              <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
+              <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
+              <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
+              <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>
+              </figcaption>
+              
+              
               </figure>
               <table class="cart_table">
                 <thead>

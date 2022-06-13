@@ -1,7 +1,8 @@
 table.dataTable thead > tr > th {
 	border-bottom: 0;
 	border-top: 0;
-	background-color: #4caa5b;
+	/*background-color: #4caa5b;*/
+	background-color: #5f94c4;
 	color: #fff;
 	font-weight: 500;
 	font-size: 17px;
@@ -48,6 +49,7 @@ table.dataTable thead .sorting_asc::after, table.dataTable thead .sorting::after
 
 table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
 	text-align: center;
+	vertical-align: middle;
 }
 table.dataTable thead > tr > td.sorting {
 	border-bottom: 0;
@@ -86,7 +88,7 @@ table#categories tbody tr td form {
 .card-body .form-group label {
 }
 .card-header,  .card-primary:not(.card-outline) > .card-header {
-	background-color: #343a40;
+	background-color: #3f8fd7;
 }
 .card-header .card-title {
 	color:#fff;
@@ -104,9 +106,13 @@ table#categories tbody tr td form {
 }
 .content .card-header .card-title {
 	margin-right: auto;
-	background: #7079824f;
+/*	background: #7079824f;
 	padding: 10px 50px;
-	font-weight: 600;
+	font-weight: 600;*/
+	
+	
+	font-weight: 500;
+font-size: 16px;
 }
 .content .card-header .btn {
 	max-width: none !important;
