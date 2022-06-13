@@ -83,8 +83,8 @@
        <div class="topbar_menu_item">
        <ul class="menu__list">
   <li> <a href="#" class="btn btn btn-primary">All</a> </li>
-  <li><a href="#" class="btn btn btn-success">Vegetarian Items</a></li>
-  <li><a href="#" class="btn btn btn-warning">Beverage Items</a></li>
+  <li><a href="#" class="btn btn btn-success">Kitchen Items</a></li>
+  <li><a href="#" class="btn btn btn-warning">Caffe Items</a></li>
   <li><a href="#" class="btn btn-info">Bar Items</a></li>
 </ul>
 </div>

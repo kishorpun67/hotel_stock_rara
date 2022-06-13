@@ -8,7 +8,7 @@ $taxt = TaxVat::first();
 <div class="cart-top">
   <div class="d-flex justify-content-between flex-wrap align-items-center mb-3 waiter_customer">
     <div class="select_dropdown w-50">
-        <select class="form-control" name="waiter_id">
+        <select class="form-control select2" name="waiter_id">
           <option value="0" selected>Waiter</option>
           @foreach ($waiter as $waiter)
           <option value="{{$waiter->id}}">{{$waiter->name}}</option>
@@ -17,8 +17,8 @@ $taxt = TaxVat::first();
         </select>
     </div>
     <div class="select_dropdown w-50">
-      <select class="form-control" name="customer_id">
-        <option value="">Walk-in Customer  <strong></strong> </option>
+      <select class="form-control select2" name="customer_id">
+        <option value="">Walk-in Customer   </option>
         @foreach ($customer as $item)
           <option value="{{$item->id}}">{{$item->customer_name}}</option>
             

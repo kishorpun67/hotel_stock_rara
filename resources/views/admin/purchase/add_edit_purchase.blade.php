@@ -34,14 +34,6 @@
         </button>
       </div>
     @endif
-    @error('url')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror 
     <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -71,14 +63,14 @@
                 <div class="form-group">
  
                   <label for="supplier_id">Supplier Name</label>
-                  <select name="supplier_id" id="supplier_id" class="form-control" >
+                  <select name="supplier_id" id="supplier_id" class="form-control select2" >
                       <option value="" >Select</option>
                       @forelse($supplier as $data)
                               <option value="{{$data->id}}"
                                 @if (!empty($purchasedata['supplier_id']) && $purchasedata['supplier_id'] == $data->id)
                                     selected=""
                                 @endif
-                                  >&nbsp;&raquo;&nbsp; {{$data->name}}
+                                  > {{$data->name}}
                               </option>
                               
                       @empty
