@@ -135,7 +135,7 @@
         <form action="{{route('admin.add.table')}}" method="get">
           @csrf
           <input type="hidden" name="table_id" id="table_id">
-          <input type="hidden" name="room_id" id="room_ids">
+          <input type="hidden" name="room_id" id="room_id">
           <button class="btn btn-danger"> Proceed With Table</button>
         </form>
       </div>

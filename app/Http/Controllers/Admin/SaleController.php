@@ -178,7 +178,7 @@ class SaleController extends Controller
     
     public function placeOrder()
     {
-      $data = request()->all();
+      return$data = request()->all();
         if(empty($data['waiter_id']) ){
             $data['waiter_id'] = 0;
         }

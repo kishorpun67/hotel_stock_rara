@@ -297,7 +297,19 @@
    
         <form action="{{route('admin.place.order')}}" method="post">
           @csrf
-          <input type="hidden" name="table_id" value="{{$table->id}}">
+          @if (!empty($table->room->room_no))
+            <input type="hidden" name="room_id" value="{{$table->room->id}}">
+          @elseif(!empty($table->room_no))
+            <input type="hidden" name="room_id" value="{{$table->id}}">
+          @else
+            <input type="hidden" name="room_id" value="0">
+          @endif 
+          @if (!empty($table->table_no))
+            <input type="hidden" name="table_id" value="{{$table->id}}">
+          @else
+            <input type="hidden" name="table_id" value="0">
+          @endif
+
 
       <div class="cart-wrapper checkout_wrapper" id="add_item_table">
         @include('admin.sale.ajax_food_table')
