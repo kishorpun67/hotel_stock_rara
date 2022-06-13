@@ -23,7 +23,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('front/css/reset.css')}}"/>
 <link rel="stylesheet" type="text/css" href="{{asset('front/css/style.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('front/css/side_nav.css')}}" />
-<link rel="stylesheet" type="text/css" href="{{asset('front/  css/navbar.css')}}"/>
+<link rel="stylesheet" type="text/css" href="{{asset('front/css/navbar.css')}}"/>
 <link rel="stylesheet" type="text/css" href="{{asset('front/css/isotope.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{asset('front/css/responsive.css')}}" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
@@ -79,10 +79,10 @@
        <div class="col-5">
        <div class="topbar_menu_item">
           <ul class="menu__list">
-            <li> <a href="#" class="btn btn btn-primary">All</a> </li>
-            <li><a href="#" class="btn btn btn-success">Kitchen Items</a></li>
-            <li><a href="#" class="btn btn btn-warning">Caffe Items</a></li>
-            <li><a href="#" class="btn btn-info">Bar Items</a></li>
+            <li> <a href="#" class="btn btn btn-primary" onclick="getFoodType('All')">All</a> </li>
+            <li><a href="#" class="btn btn btn-success" onclick="getFoodType('Kitchen')">Kitchen Items</a></li>
+            <li><a href="#" class="btn btn btn-warning" onclick="getFoodType('Caffe')">Caffe Items</a></li>
+            <li><a href="#" class="btn btn-info" onclick="getFoodType('Bar')">Bar Items</a></li>
           </ul>
         </div>
        </div>
@@ -104,11 +104,14 @@
                 Walk-in Customer
               @endif
           <br>
-            Table: @if (!empty($item->table->table_no))
-                {{$item->table->table_no}}
-            @else
-              None
-            @endif</span> <i class="fa-solid fa-chevron-right"></i></a></li>
+          @if (!empty($item->table->table_no))
+            Table:{{$item->table->table_no}}
+          @endif
+          <br>
+          @if(!empty($item->room->room_no))
+            Room:{{$item->room->room_no}}
+          @endif
+          </span> <i class="fa-solid fa-chevron-right"></i></a></li>
           @endforeach
         </ul>
         <button type="button" class="btn  modify_btn operation_button modify_order" data-toggle="modal" data-target="#modify_order"> <i class="fas fa-edit"></i>Modify Order</button>
@@ -279,8 +282,6 @@
           @else
             <input type="hidden" name="table_id" value="0">
           @endif
-
-
       <div class="cart-wrapper checkout_wrapper" id="add_item_table">
         @include('admin.sale.ajax_food_table')
       </form>

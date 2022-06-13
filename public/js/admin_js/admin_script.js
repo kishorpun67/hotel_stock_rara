@@ -36,7 +36,7 @@ $(document).ready(function() {
                 category_id: category_id
             },
             success: function(response) {
-                console.log(response)
+                // console.log(response)
                 $("#ajaxItem").html(response);
             },
             error: function() {
@@ -65,6 +65,24 @@ function getRoom(room_id) {
             // console.log(response)
             $("#ajaxTableRoom").empty();
             $("#ajaxTableRoom").html(response);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+}
+
+function getFoodType(item_type) {
+    // console.log(item_type)
+    $.ajax({
+        type: 'get',
+        url: '/admin/ajax-get-item-type',
+        data: {
+            item_type: item_type
+        },
+        success: function(response) {
+            // console.log(response)
+            $("#ajaxItem").html(response);
         },
         error: function() {
             alert("Error");

@@ -12,7 +12,6 @@ $taxt = TaxVat::first();
           <option value="0" selected>Waiter</option>
           @foreach ($waiter as $waiter)
           <option value="{{$waiter->id}}">{{$waiter->name}}</option>
-              
           @endforeach
         </select>
     </div>
@@ -142,12 +141,12 @@ $taxt = TaxVat::first();
         <div class="modal-body">
             <form method="post" action="{{route('admin.add.edit.customer')}}">
                 @csrf
-              <label for="name">Name*</label>
-              <input  class="form-control" id="name "name="customer_name" placeholder="Enter name">
-              <label for="address"> Address *</label>
+              <label for="name">Name *</label>
+              <input  class="form-control" id="name "name="customer_name" placeholder="Enter name" required>
+              <label for="address"> Address </label>
               <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
               <label for="phone"> Phone *</label>
-              <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+              <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number" required>
               <label for="address"> Email</label>
               <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
               <br>

@@ -58,6 +58,28 @@ class SaleController extends Controller
        return view('admin.sale.ajaxItem', compact('foodMenus'));
     }
 
+    public function ajaxGetItemType()
+    {
+        if( request('item_type') =="All")
+        {
+            $foodMenus = FoodMenu::get();
+        }
+        if( request('item_type') =="Kitchen")
+        {
+            $foodMenus = FoodMenu::where('is_kitchen','Yes')->get();
+        }
+        if( request('item_type') =="Bar")
+        {
+            $foodMenus = FoodMenu::where('is_bar', 'Yes')->get();
+        }
+        if( request('item_type') =="Caffe")
+        {
+            $foodMenus = FoodMenu::where('is_caffe', 'Yes')->get();
+        }
+        return view('admin.sale.ajaxItem', compact('foodMenus'));
+
+    }
+
     public function ajaxFoodTable(Request $request)
     {
         $data = $request->all();
@@ -171,7 +193,7 @@ class SaleController extends Controller
         $foodMenus = FoodMenu::with('foodCategory')->get();
         $waiter = Admin::where('role_id',6)->get();
         $customer = Customer::get();
-        $order = Order::with('table', 'customer')->orderBy('id','Desc')->where('status', '!=', 'Cancel')->get();
+        $order = Order::with('table', 'customer', 'room')->orderBy('id','Desc')->where('status', '!=', 'Cancel')->get();
         Session::flash('page', 'sale');
         return view('admin.sale.add_edit_sale', compact('order','foodCategories','foodMenus','carts','waiter','customer', 'table'));
     }

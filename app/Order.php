@@ -39,6 +39,10 @@ class Order extends Model
     {
         return $this->belongsTo('App\Admin\Admin', 'waiter_id');
     }
+    public function room()
+    {
+        return $this->belongsTo('App\Admin\Room', 'room_id');
+    }
     
 
 }

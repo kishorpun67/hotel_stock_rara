@@ -156,6 +156,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
          Route::get('delete-sale/{id?}', 'SaleController@deleteSale')->name('delete.sale');
          Route::post('update-cart-item-quantity', 'SaleController@updateCart');
          Route::get('ajax-get-item', 'SaleController@ajaxGetItem');
+         Route::get('ajax-get-item-type', 'SaleController@ajaxGetItemType');
          Route::post('ajax-food-table', 'SaleController@ajaxFoodTable');
          Route::post('/delete-cart-item','SaleController@deleteCart')->name('delete.cart');
          Route::post('place-order', 'SaleController@placeOrder')->name('place.order');

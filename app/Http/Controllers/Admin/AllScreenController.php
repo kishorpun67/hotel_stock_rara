@@ -16,19 +16,19 @@ class AllScreenController extends Controller
 {
     public function kitchen()
     {
-        $food =  Order::with('kitchen')->get();
+        $food =  Order::with('kitchen','table','room')->get();
         Session::flash('page', 'kitchen');
         return view('admin.allScreen.kitchen', compact('food'));
     }
     public function caffe()
     {
-        $food =  Order::with('caffe')->get();
+        $food =  Order::with('caffe','table','room')->get();
         Session::flash('page', 'caffe');
         return view('admin.allScreen.caffe', compact('food'));
     }
     public function bar()
     {
-        $food =  Order::with('bar')->get();
+        $food =  Order::with('bar','table','room')->get();
         Session::flash('page', 'bar');
         return view('admin.allScreen.bar', compact('food'));
     }

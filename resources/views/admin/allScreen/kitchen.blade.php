@@ -17,10 +17,11 @@
                             @csrf
                             <input type="hidden" name="order_id" value="{{$food->id}}">
                             <div class="card-header">
-                                <h3 class="card-title">Table No : @if (!empty($food->table_id))
-                                    {{$food->table_id}}
-                                @else
-                                None
+                                <h3 class="card-title">@if (!empty($food->table->id))Table No : 
+                                    {{$food->table->table_no}}
+                                @endif </h3>
+                                <h3 class="card-title">@if (!empty($food->room->id))Room No : 
+                                    {{$food->room->room_no}}
                                 @endif </h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -40,7 +41,7 @@
                                         <a href="javascript:void(0)" class="product-title">{{$item->item}}
                                         <span class="badge badge-warning float-right">{{$item->status}}</span></a>
                                         <span class="product-description">
-                                        ({{$item->quantity}})
+                                        Qty({{$item->quantity}})
                                         </span>
                                     </div>
                                     </li>
