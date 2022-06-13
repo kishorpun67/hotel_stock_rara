@@ -11,11 +11,13 @@ table.dataTable thead > tr > th {
 table#test thead > tr > th {
 	border-bottom: 0;
 	border-top: 0;
-	background-color: #4caa5b;
 	color: #fff;
 	font-weight: 500;
 	font-size: 17px;
 	text-align: center;
+	
+	color: #fff;
+background: #395db0d6;
 }
 table.dataTable thead .sorting_asc::before, table.dataTable thead .sorting::before {
 	opacity: 1;
@@ -54,7 +56,7 @@ table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td
 table.dataTable thead > tr > td.sorting {
 	border-bottom: 0;
 	border-top: 0;
-	background-color: #4caa5b;
+	background-color: #5877bc;
 	color: #fff;
 	font-weight: 500;
 	font-size: 19px;
@@ -66,9 +68,24 @@ table.table-bordered.dataTable td img {
 	height: auto;
 	width: 100px;
 }
+
 table#categories tbody tr td {
 	text-align: left;
 }
+
+
+
+table#categories tbody tr td .btn,
+.btn.btn-block.btn-success
+{
+	color: #fff;
+background: #395db0d6;
+border: none;
+}
+
+
+
+
 table#categories tbody tr td form {
 	margin-top: 5px;
 }
@@ -109,10 +126,9 @@ table#categories tbody tr td form {
 /*	background: #7079824f;
 	padding: 10px 50px;
 	font-weight: 600;*/
-	
-	
-	font-weight: 500;
-font-size: 16px;
+
+font-weight: 700;
+font-size: 18px;
 }
 .content .card-header .btn {
 	max-width: none !important;
@@ -122,6 +138,13 @@ font-size: 16px;
 	font-weight: 600;
 	border-radius: 0;
 }
+
+ 
+
+
+
+
+
 /*------Side bar css starts--------*/
  
  .layout-fixed .main-sidebar {
@@ -229,8 +252,7 @@ transition: 0.5s ease-in-out;
 }
 
 
-
-
+ 
 
 
 
