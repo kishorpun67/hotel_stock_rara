@@ -925,6 +925,11 @@ color: #495057;
  
 }
 
+.top_icon__menu li a:hover{
+	opacity:0.7;
+}
+
+
 
 .top_icon__menu li i{
 	color:#737272;
@@ -949,3 +954,141 @@ flex: 1;
 	color: #777;
 }
 
+
+
+.top_icon__menu.topbar-icons {
+	
+		display: -ms-flexbox;
+display: flex;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+	
+
+  justify-content: start;
+  align-items: center;
+ 
+}
+
+
+
+.topbar_menu_item{
+	
+	
+	display: -ms-flexbox;
+display: flex;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+justify-content: end;
+align-items: center;
+ 
+}
+
+
+
+.topbar_menu_item li{
+display: inline-block;
+margin-right: 0;
+vertical-align: middle;
+}
+
+
+.topbar_menu_item li a{
+color: #fff;
+font-weight: 600;
+line-height: 1.5;
+text-align: center;
+border: none;
+display: block;
+text-decoration: none;
+cursor: pointer;
+user-select: none;
+padding: 6px 10px;
+font-size: 14px;
+border-radius: 0.25rem;
+transition: all 0.3s;
+
+border: 1px solid transparent;
+}
+
+
+
+.topbar_menu_item li a:hover{
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	color:#fff;
+}
+
+
+ 
+
+/*.bg__blue {
+  background-color: #2196f3;
+
+}
+
+.bg__purple {
+  background-color: #9c27b0;
+
+}
+
+.bg__green {
+  background-color: #8bc34a;
+
+}
+
+
+.bg__grey {
+  background-color: #607d8b;
+}
+
+.bg__khoyre {
+  background-color: #d6b614;
+}*/
+
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-warning {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-light {
+  color: #212529;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
+.btn-dark {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+}

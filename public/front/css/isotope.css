@@ -48,8 +48,8 @@ font-weight: 400;
 }
  #isotope-container .filter a:hover,
 #isotope-container .filter .active {
-color: #777;
-background: #0f11110f;
+color: #fff;
+background: #395db0d6;
 
 }
 #isotope-container .filter span {

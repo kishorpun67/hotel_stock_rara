@@ -63,7 +63,7 @@
   <div class="logo-bar navigation-bar">
        <div class="container-fluid">
        <div class="row align-items-center">
-       <div class="col-4">
+       <div class="col-5">
        <div class="top_icon__menu topbar-icons">
         <ul>
           <li><a href="{{route('admin.dashboard')}}" ><i class="fas fa-tachometer-alt"></i></i></i></a></li>
@@ -73,11 +73,23 @@
         </ul>
       </div>
       </div>
-  <div class="col-4"> <figure class="logo_holder"><a href="index.html"> 
+  <div class="col-2"> <figure class="logo_holder"><a href="index.html"> 
     <img src="{{asset('front/images/istockphoto-1156053620-612x612.jpg')}}" alt="This is web logo">  </a> </figure>
     </div>
     
-       <div class="col-4"></div>
+       <div class="col-5">
+       
+       
+       <div class="topbar_menu_item">
+       <ul class="menu__list">
+  <li> <a href="#" class="btn btn btn-primary">All</a> </li>
+  <li><a href="#" class="btn btn btn-success">Vegetarian Items</a></li>
+  <li><a href="#" class="btn btn btn-warning">Beverage Items</a></li>
+  <li><a href="#" class="btn btn-info">Bar Items</a></li>
+</ul>
+</div>
+       
+       </div>
     </div>
     </div>
     </div>
