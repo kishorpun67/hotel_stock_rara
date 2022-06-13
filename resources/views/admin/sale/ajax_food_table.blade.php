@@ -124,6 +124,8 @@ $taxt = TaxVat::first();
  
 </div>
 <!--<input type="submit" value="Place Oder" class="btn btn-primary">-->
+<input type="hidden" name="total" value="{{$total_amount}}">
+
 <input type="submit" class="btn place_btn btn-danger" value="Place Order">
 
 

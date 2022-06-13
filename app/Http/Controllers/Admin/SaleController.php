@@ -178,7 +178,7 @@ class SaleController extends Controller
     
     public function placeOrder()
     {
-      return$data = request()->all();
+        $data = request()->all();
         if(empty($data['waiter_id']) ){
             $data['waiter_id'] = 0;
         }
@@ -201,7 +201,7 @@ class SaleController extends Controller
             $new->admin_id = auth('admin')->user()->id;
             $new->customer_id = $data['customer_id'];
             $new->table_id = $data['table_id'];
-            // $new->payment = $data['payment'];
+            $new->room_id = $data['room_id'];
             // $new->discount = $data['discount'];
             $new->tax = $data['tax'];
             $new->total = $data['total'];
