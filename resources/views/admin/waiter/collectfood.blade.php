@@ -1,5 +1,12 @@
 @extends('layouts.admin_layout.admin_layout')
 @section('content')
+<?php 
+use App\Order;
+use App\Table;
+use App\Admin\Room;
+
+?>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -40,11 +47,15 @@
                 </thead>
                 <tbody>
                @forelse($collectfood as $data)
-                  <td>Table:@if (!empty($data->order->table_id))
-                    {{$data->order->table_id}}
-                  @else
-                      None
-                  @endif, Item: {{$data->item}} is ready to serve &nbsp;&nbsp; 
+                  <td>@if (!empty($data->order->table_id) || !empty($data->order->room_id))
+                    <?php $orders = Order::with('table','room')->where('id',$data->order->id)->first();  ?>
+                    @if (!empty($orders->table->table_no) )
+                     Table no: {{$orders->table->table_no}},
+                    @endif
+                    @if (!empty($orders->room->room_no) )
+                      Room no: {{$orders->room->room_no}},
+                    @endif
+                  @endif Item: {{$data->item}} is ready to serve &nbsp;&nbsp; 
                   <form action="{{route('admin.collect.food')}}" method="post">
                     @csrf <input type="hidden" name="food_id" value="{{$data->id}}">
                   <button  class="btn btn-success">Collect</button>
