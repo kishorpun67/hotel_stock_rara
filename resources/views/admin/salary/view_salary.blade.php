@@ -48,15 +48,29 @@
                  @forelse($attendance as $data)
                     <td>{{$data->id}}</td>
                     <td><?php 
-                        $intime = (int)$data->out_time -(int)$data->in_time;
-                        $string = abs($intime);
-                        echo strval($string);
-                   ?>: hour</td>
+                      // $totalDuration = $data->updated_at->diffForHumans($data->created_at);
+                      $totalDuration =  $data->created_at->diff($data->updated_at)->format('%H:%I')." Minutes";
+                      echo($totalDuration);
+                 ?></td>
                        <td><?php 
-                            $intime = (int)$data->out_time -(int)$data->in_time;
-                            $string = abs($intime) * 500;
-                            echo strval($string);
-                       ?> /-Rs</td>
+                       if(!empty($data->staff->price))
+                       {
+                        $hrs =$data->staff->price;
+                        $perMinute = $data->staff->price/60;
+
+                       }else{
+                        $hrs = 500;
+                        $perMinute = 500/60;
+
+                       }
+
+                        // $totalDuration = $data->updated_at->diffForHumans($data->created_at);
+                        $totalDuration =  $data->created_at->diff($data->updated_at)->format('%H:%I');
+                        $test = (explode(":",$totalDuration));
+                        $hoursPrice = ($test[0] *$hrs) + ($test[1] *$perMinute);
+                        // var_dump($totalDuration);
+                        echo round($hoursPrice,2);
+                   ?>/-Rs</td>
                   
                   </tr>
                   @empty

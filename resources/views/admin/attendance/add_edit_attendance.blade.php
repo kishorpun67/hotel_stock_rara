@@ -34,14 +34,6 @@
         </button>
       </div>
     @endif
-    @error('url')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror 
     <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -60,6 +52,17 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Select Staff</label>
+                  <select name="staff_id" id="" class="form-control select2">
+                    <option value="">Select</option>
+                    @foreach ($staff as $item)
+                      <option value="{{$item->id}}" @if (!empty($attendanceData['staff_id']) && $attendanceData['staff_id'] == $item->id)
+                          selected=""
+                      @endif>{{$item->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
                 <div class="form-group">
                   <label for="in_date">In Date</label>
                     <input type="" class="form-control" name="in_date" id="in_date" placeholder=""

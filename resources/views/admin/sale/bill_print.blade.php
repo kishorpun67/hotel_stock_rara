@@ -1,5 +1,7 @@
 <?php 
   use App\Admin\Admin;
+  use App\TaxVat;
+  $taxt = TaxVat::first();
   $admin = Admin::first();
 ?>
 <!DOCTYPE html>
@@ -123,27 +125,23 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-6">
-
                     <div class="table-responsive">
                         <table class="table">
                             <tr>
-                                <th style="width:50%">Subtotal:</th>
+                                <td style="width:69%"><strong>SubTotal:</strong></td>
                                 <td>{{$total}}</td>
                             </tr>
                             <tr>
-                                <th>Tax (0%)</th>
-                                <td> {{$orderbill->tax}}%</td>
+                                <?php
+                                $tax = $taxt->tax;
+                                $grand_total = ($total+($total*$tax/100))- $orderbill->discount;
+                                ?>
+                                <td class="thick-line text-left"  ><strong>Tax:</strong></td>
+                                <td class="thick-line text-left">{{$tax}}%</td>
                             </tr>
-                            <tr>
-                                <th>Discount:</th>
-                                <td>Rs.{{$orderbill->discount}}.00</td>
-                            </tr>
-                            <tr>
-                                <?php $tax = $total*10/100; 
-									$grand_total = $total + $tax- $orderbill->discount;
-									?>
-                                <th>Total:</th>
-                                <td>{{$grand_total}}</td>
+                            <tr>  
+                                <td class=" text-left" ><strong>Total:</strong></td>
+                                <td class=" text-left">{{$grand_total}}</td>
                             </tr>
                         </table>
                     </div>

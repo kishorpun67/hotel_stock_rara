@@ -154,6 +154,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
          Route::post('ajax-search-food', 'SaleController@ajaxSearchFood');
          Route::get('add-table}', 'SaleController@addTable')->name('add.table');
          Route::get('delete-sale/{id?}', 'SaleController@deleteSale')->name('delete.sale');
+         Route::post('add-customer', 'SaleController@addCustomer')->name('add.customer');
          Route::post('update-cart-item-quantity', 'SaleController@updateCart');
          Route::get('ajax-get-item', 'SaleController@ajaxGetItem');
          Route::get('ajax-get-item-type', 'SaleController@ajaxGetItemType');

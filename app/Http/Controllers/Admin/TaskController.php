@@ -75,18 +75,7 @@ class TaskController extends Controller
             {
                 $data['description'] = "";
             }
-
-
-            // if(empty($data['user_id']))
-            // {
-            //     $data['user_id'] = "";
-            // }
-            // if(empty($data['parent_id']))
-            // {
-            //     $data['parent_id'] = "";
-            // }
             $task->admin_id = auth('admin')->user()->id;
-
             $task->task = $data['task'];
             $task->start_date = $data['start_date'];
             $task->end_date = $data['end_date'];

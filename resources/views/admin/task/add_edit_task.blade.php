@@ -68,19 +68,16 @@
                   @else value="{{old('task')}}"
                   @endif>
                 </div>
-                <div class="fomr-group">
+                <div class="form-group">
                   <label for="">Select Staff</label>
                   <select name="staff_id" id="" class="form-control select2">
                     <option value="">Select</option>
-
                     @foreach ($staff as $item)
                       <option value="{{$item->id}}" @if (!empty($taskdata['staff_id']) && $taskdata['id'] == $item->id)
                           selected=""
                       @endif>{{$item->name}}</option>
                     @endforeach
-
                   </select>
-                
                 </div>
                 <div class="form-group">
                   <label for="started">Start Date</label>

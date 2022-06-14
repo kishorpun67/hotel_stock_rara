@@ -40,6 +40,7 @@
                 <thead>
                 <tr>
                   <th>ID</th>
+                  <th>Staff</th>
                   <th>In Date</th>
                   <th>In Time</th>
                   <th>Out Date</th>
@@ -51,15 +52,18 @@
                 <tbody>
                @forelse($attendance as $data)
                   <td>{{$data->id}}</td>
+                  <td>@if(!empty($data->staff->name))
+                    {{$data->staff->name}}
+                  @endif</td>
                   <td>{{$data->in_date}}</td>
                    <td>{{$data->in_time}}</td>
                     <td>{{$data->out_date}}</td>
                      <td>{{$data->out_time}}</td>
                      <td><?php 
-                          $intime = (int)$data->out_time -(int)$data->in_time;
-                          $string = abs($intime);
-                          echo strval($string);
-                     ?>: hour</td>
+                          // $totalDuration = $data->updated_at->diffForHumans($data->created_at);
+                          $totalDuration =  $data->created_at->diff($data->updated_at)->format('%H:%I')." Minutes";
+                          echo($totalDuration);
+                     ?></td>
                    <td>
                     <a href="{{route('admin.add.edit.attendance', $data->id)}}"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
                     <a href="javascript:" class="delete_form" record="attendance"  rel="{{$data->id}}" style="display:inline;">

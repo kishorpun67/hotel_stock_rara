@@ -197,6 +197,24 @@ class SaleController extends Controller
         Session::flash('page', 'sale');
         return view('admin.sale.add_edit_sale', compact('order','foodCategories','foodMenus','carts','waiter','customer', 'table'));
     }
+
+    public function addCustomer()
+    {
+        $data = request()->all();
+        if(empty($data['address']) ){
+            $data['address'] = "";
+        }
+        if( empty($data['email'])){
+            $data['email'] = "";
+        }
+        $customer = new Customer;
+        $customer->customer_name = $data['customer_name'];
+        $customer->phone = $data['phone'];
+        $customer->email = $data['email'];
+        $customer->address = $data['address'];    
+        $customer->save();
+        return redirect()->back()->with('success_message', 'Customer Added successfully');
+    }
     
     public function placeOrder()
     {

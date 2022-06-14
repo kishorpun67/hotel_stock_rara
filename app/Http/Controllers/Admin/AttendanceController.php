@@ -12,7 +12,7 @@ class AttendanceController extends Controller
 {
     public function attendance()
     {
-        $attendance = Attendance::get();
+        $attendance = Attendance::with('staff')->get();
         Session::flash('page', 'attendance');
         return view('admin.attendance.view_attendance', compact('attendance'));
     }
@@ -39,11 +39,6 @@ class AttendanceController extends Controller
             
            
             $data = $request->all();
-        //dd($data);
-            // if(empty($data['admin_id'])){
-            //     return redirect()->back()->with('error_message', 'admin id is required !');
-            // }
-            
             if(empty($data['in_date']))
             {
                 $data['in_date'] = "";
@@ -61,27 +56,25 @@ class AttendanceController extends Controller
             {
                 $data['out_time'] = "";
             }
-           
             $attendance->admin_id = auth('admin')->user()->id;
+            $attendance->staff_id = $data['staff_id'];
             $attendance->in_date = $data['in_date'];
             $attendance->in_time = $data['in_time'];
             $attendance->out_date = $data['out_date'];
             $attendance->out_time = $data['out_time'];
-            //$attendance->work_hour = $data['work_hour'];
-            // $attendance->salary = $data['salary'];
             $attendance->save();
             Session::flash('success_message', $message);
             return redirect('admin/attendance');
         }
         Session::flash('page', 'attendance');
-        return view('admin.attendance.add_edit_attendance', compact('title','button','attendanceData'));
+        $staff = Admin::where('role_id','>',2)->get();
+        return view('admin.attendance.add_edit_attendance', compact('title','button','attendanceData', 'staff'));
     }
 
     public function viewSalary()
     {
-        $attendance = Attendance::get();
+        $attendance = Attendance::with('staff')->where('out_date', "!=",'')->where('out_time', "!=",'')->get();
         Session::flash('page', 'salary');
-
         return view('admin.salary.view_salary',compact('attendance'));
     }
 

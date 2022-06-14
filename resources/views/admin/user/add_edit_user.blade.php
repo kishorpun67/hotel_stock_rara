@@ -4,7 +4,6 @@
 use App\Admin\Permission;
 use App\Admin\AdminPermission;
   $permissinsCount = Permission::count();
-
 ?>
 
 <div class="content-wrapper">
@@ -68,7 +67,7 @@ use App\Admin\AdminPermission;
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="class"> Name</label>
+                        <label for="class"> Name *</label>
                         <input class="form-control" name="name" placeholder="Name" @if(!empty($adminData['name']))
                         value= "{{$adminData['name']}}"
                         @else value="{{old('name')}}"
@@ -91,8 +90,15 @@ use App\Admin\AdminPermission;
                     </div>
                 </div>
                 <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="class"> Per hr rate  *</label>
+                    <input class="form-control" name="price" placeholder="Price" @if(!empty($adminData['price']))
+                    value= "{{$adminData['price']}}"
+                    @else value="{{old('price')}}"
+                    @endif>
+                </div>
                     <div class="form-group">
-                        <label for="class"> Number</label>
+                        <label for="class"> Number *</label>
                         <input  type="number" class="form-control" name="number" placeholder="Number" @if(!empty($adminData['number']))
                         value= "{{$adminData['number']}}"
                         @else value="{{old('number')}}"

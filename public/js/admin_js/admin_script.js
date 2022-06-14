@@ -50,7 +50,7 @@ $(document).ready(function() {
 
 function getRoom(room_id) {
     // alert(room_id)
-    $("#room_ids").val(room_id)
+    $("#room_id").val(room_id)
     $("#table_id").val("")
     $(".room-class").removeClass("marked");
     $(`#room-${room_id}`).addClass("room-class marked");

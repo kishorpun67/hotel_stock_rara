@@ -1,9 +1,7 @@
 
 <?php
-use App\TaxVat;
-
-$taxt = TaxVat::first();
-
+  use App\TaxVat;
+  $taxt = TaxVat::first();
 ?>
 <div class="cart-top">
   <div class="d-flex justify-content-between flex-wrap align-items-center mb-3 waiter_customer">
@@ -25,39 +23,23 @@ $taxt = TaxVat::first();
       </select>
     </div> 
     <div class="d-flex mt-3 edit_flex">
-    <!--  <button type="button" class="btn operation_button edit_btn" data-toggle="modal" data-target="#exampleModal15"><i class="fa-solid fa-pencil"></i>Edit</button>-->
-      
-      
-      
-         <button type="button" class="btn operation_button add_btn" data-toggle="modal" data-target="#exampleModal10"><i class="fa-solid fa-plus"></i>Add</button>
-         
-         
-         
-         <ul class="number__list">
-         <li><a href="#">Room no: @if (!empty($table->room->room_no))
-             {{$table->room->room_no}}
-         @elseif(!empty($table->room_no))
-          {{$table->room_no}}
-         @else
+      <button type="button" class="btn operation_button add_btn" data-toggle="modal" data-target="#exampleModal10"><i class="fa-solid fa-plus"></i>Add</button>
+      <ul class="number__list">
+        <li><a href="#">Room no: @if (!empty($table->room->room_no))
+            {{$table->room->room_no}}
+        @elseif(!empty($table->room_no))
+        {{$table->room_no}}
+        @else
+        None
+        @endif </a></li>
+        <li><a href="#">Table no:</a> @if (!empty($table->table_no))
+        {{$table->table_no}}
+        @else
           None
-         @endif </a></li>
-         <li><a href="#">Table no:</a> @if (!empty($table->table_no))
-          {{$table->table_no}}
-         @else
-            None
-         @endif</</li>
-         </ul>
-         
-      
+        @endif
+        </li>
+      </ul>
     </div>
-        {{-- <div class="quantity-bar"> <span class="input-group-btn">
-          <button type="button" class="btn-number btn-minus"  data-type="minus" data-field="quant[2]"> <i class="fas fa-minus"></i> </button>
-          </span>
-          <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100" placeholder="1">
-          <span class="input-group-btn">
-          <button type="button" class="btn-number btn-plus" data-type="plus" data-field="quant[2]"> <i class="fas fa-plus"></i> </button>
-          </span> 
-        </div> --}}
   </div> 
   <table class="cart_table">
     <thead>
@@ -74,14 +56,12 @@ $taxt = TaxVat::first();
       <?php $total_amount = 0;
       $total_item = 0;
       ?>
-
       @foreach ($carts as $item)
         <tr>
           <td class="serial">{{$item->id}}</td>
           <td class="product_title">{{$item->item}}</td>
           <td class="product_price">Rs.{{$item->price}}</td>
           <td class="quantity">
-
             <div class="quantity-bar"> <span class="input-group-btn">
               <button type="button" class="btn-number btn-minus qtyMinus" onclick="qtyMinus(this.getAttribute('attr'))"  data-type="minus"  attr="{{$item->id}}"  cart-value="{{$item->quantity}}"> <i class="fas fa-minus"></i> </button>
               </span>
@@ -91,11 +71,9 @@ $taxt = TaxVat::first();
               </span> </div></td>
           <td class="total-price">Rs.{{$item->price * $item->quantity}}</td>
           <td class="discount"><a href="#" onclick="deleteCartItem(this.getAttribute('cart_id'))" class="" cart_id="{{$item->id}}" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-
         </tr>
         <?php $total_amount= $total_amount + ($item->price* $item->quantity);
         $total_item = $total_item + $item->quantity;
-                                    
         ?>
       @endforeach
     </tbody>
@@ -111,53 +89,10 @@ $taxt = TaxVat::first();
         $tax = $taxt->tax;
         $total_amount = $total_amount+($total_amount*$tax/100);
       ?>
-      <!--<li><span>Discount:</span> <input type="text" name="discount" class="form-control" autocomplete="off" onkeyup="discountFunction(this)"> <strong> </strong></li>-->
-      <!--<li><span>Tax:</span> <strong>   <select class="" name="tax">-->
-      <!--    <option value="0">0%</option>-->
-          <option value="{{$tax }}">{{$tax }}%</option>
-      <!--</select> -->
-      <!--</li>-->
+      <option value="{{$tax }}">{{$tax }}%</option>
       <li> <span>Total Payable</span> <strong id="total_amount">{{$total_amount}}</strong> </li>
     </ul>
   </div>
- 
 </div>
-<!--<input type="submit" value="Place Oder" class="btn btn-primary">-->
 <input type="hidden" name="total" value="{{$total_amount}}">
-
 <input type="submit" class="btn place_btn btn-danger" value="Place Order">
-
-
-
- {{-- <button type="button" class="btn btn-primary order_btn operation_button operation_button_50" > <i class="fas fa-utensils"></i>Place Order</button> --}}
-  
-  <div class="modal fade" id="exampleModal10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-        </div>
-        <div class="modal-body">
-            <form method="post" action="{{route('admin.add.edit.customer')}}">
-                @csrf
-              <label for="name">Name *</label>
-              <input  class="form-control" id="name "name="customer_name" placeholder="Enter name" required>
-              <label for="address"> Address </label>
-              <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
-              <label for="phone"> Phone *</label>
-              <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number" required>
-              <label for="address"> Email</label>
-              <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
-              <br>
-                <input type="submit" class="btn btn-secondary" value="Submit">
-
-            </form>        
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  

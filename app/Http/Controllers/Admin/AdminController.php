@@ -295,6 +295,7 @@ class AdminController extends Controller
             $newAdmin->name = $data['name'];
             $newAdmin->parent_id = auth('admin')->user()->id;
             $newAdmin->email = $data['email'];
+            $newAdmin->price = $data['price'];
             $newAdmin->number = $data['number'];
             $newAdmin->role_id = $data['role_id'];
             $newAdmin->will_login = $data['will_login'];

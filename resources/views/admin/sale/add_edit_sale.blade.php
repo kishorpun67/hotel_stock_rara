@@ -106,8 +106,8 @@
           <br>
           @if (!empty($item->table->table_no))
             Table:{{$item->table->table_no}}
-          @endif
           <br>
+          @endif
           @if(!empty($item->room->room_no))
             Room:{{$item->room->room_no}}
           @endif
@@ -285,7 +285,36 @@
       <div class="cart-wrapper checkout_wrapper" id="add_item_table">
         @include('admin.sale.ajax_food_table')
       </form>
-</div>
+      </div>
+       <div class="modal fade" id="exampleModal10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{route('admin.add.customer')}}">
+                    @csrf
+                  <label for="name">Name *</label>
+                  <input  class="form-control" id="name "name="customer_name" placeholder="Enter name" required>
+                  <label for="address"> Address </label>
+                  <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
+                  <label for="phone"> Phone *</label>
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number" required>
+                  <label for="address"> Email</label>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
+                  <br>
+                    <input type="submit" class="btn btn-secondary" value="Submit">
+
+                </form>        
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div id="filter-big" class="filter"> 
         <!--<strong>Filter by category :</strong> -->
         <a href="javascript:" category_id="all"  class="categories">Show All</a> 

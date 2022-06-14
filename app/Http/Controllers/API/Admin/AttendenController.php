@@ -55,11 +55,8 @@ class AttendenController extends Controller
             $attendance->in_time = $data['in_time'];
             $attendance->out_date = $data['out_date'];
             $attendance->out_time = $data['out_time'];
-            //$attendance->work_hour = $data['work_hour'];
-            // $attendance->salary = $data['salary'];
             $attendance->save();
             return  response('sucess',200);
-            // Session::flash('success_message', $message);
         }
     }
     public function editAttendance(Request $request)
