@@ -536,11 +536,11 @@
            @endif
            <li class="nav-item has-treeview {{$menuOpen ??''}} ">
              <a href="#" class="nav-link {{$active}}">
-              <i class="fas fa-user-plus"></i><p>
-                Employe Management
+              <i class="fas fa-user-plus"></i>
+               <p> Employe Management</p>
                  <i class="fas fa-angle-right"></i>
                  <span class="right badge badge-danger"></span>
-               </p>
+             
              </a>
              <ul class="nav nav-treeview">
               @if(Session::get('page')=="attendance")
