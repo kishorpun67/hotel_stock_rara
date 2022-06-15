@@ -155,9 +155,9 @@ font-size: 18px;
 	margin: 0;
 }
 .nav-sidebar > .nav-item .nav-icon {
-	font-size: 12px !important;
+/*	font-size: 12px !important;
 	margin-right: 0;
-	padding-right: 0;
+	padding-right: 0;*/
 }
 .layout-fixed .main-sidebar:hover {
 	width: 250px;
@@ -165,12 +165,16 @@ font-size: 18px;
 }
 .nav-sidebar > .nav-item i {
 	font-size: 19px;
-	padding-right: 20px;
+	/*padding-right: 20px;*/
 	color: #625f6e91;
 	width: 30px;
+	text-align: center;
+	margin: 0 auto;
 }
 .nav-sidebar > .nav-item p {
 	color: #625f6ed6;
+	padding-left: 5px;
+	/*background: red;*/
 }
 .nav-sidebar > .nav-item p:hover {
 	color: #6e6b7b;
@@ -254,9 +258,13 @@ transition: 0.5s ease-in-out;
 
  
 
+.info-box .info-box-icon{
+	background: #007bff !important;
+}
 
-
-
+#order_holder.order_holder .single_order .header_portion p.order_number{
+	font-weight:600;
+}
 
 
  @media (min-width: 768px) {
