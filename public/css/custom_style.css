@@ -174,7 +174,7 @@ font-size: 18px;
 .nav-sidebar > .nav-item p {
 	color: #625f6ed6;
 	padding-left: 5px;
-	background: red;
+	/*background: red;*/
 }
 .nav-sidebar > .nav-item p:hover {
 	color: #6e6b7b;
