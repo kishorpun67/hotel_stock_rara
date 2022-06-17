@@ -178,7 +178,7 @@
 
                   <div class="form-group">
                       <label for="code">Code</label>
-                        <input type="text" class="form-control" name="code" id="code" placeholder="Enter sale price"
+                        <input type="text" class="form-control" name="code" value="{{rand(111,9999)}}" id="code" placeholder="Enter sale price"
                         @if(!empty($foodMenusData['code']))
                         value= "{{$foodMenusData['code']}}"
                         @else value="{{old('code')}}"

@@ -18,6 +18,18 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    <script>
+    
+      @if(Session::has('success_message'))
+      toastr.options =
+      {
+        "closeButton" : true,
+        "progressBar" : true
+      }
+          toastr.success("{{ session('success_message') }}");
+      @endif
+    
+    </script>
     @if(Session::has('success_message'))
       <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
         {{ Session::get('success_message') }}
@@ -25,8 +37,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    @endif
-    <!-- Main content -->
+    @endif 
+    {{-- <!-- Main content --> --}}
     <section class="content">
       <div class="row">
         <div class="col-12">

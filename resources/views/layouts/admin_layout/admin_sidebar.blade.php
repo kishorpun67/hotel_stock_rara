@@ -537,8 +537,8 @@
            <li class="nav-item has-treeview {{$menuOpen ??''}} ">
              <a href="#" class="nav-link {{$active}}">
               <i class="fas fa-user-plus"></i>
-               <p> Employe Management</p>
-                 <i class="fas fa-angle-right"></i>
+               <p> Employe Management  <i class="fas fa-angle-right"></i></p>
+                
                  <span class="right badge badge-danger"></span>
              
              </a>
@@ -555,13 +555,13 @@
                 </a>
               </li>
             </ul>
+            @if (auth('admin')->user()->type=='Admin')
             <ul class="nav nav-treeview">
               @if(Session::get('page')=="admin_task_view")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
               @endif
-              @if (auth('admin')->user()->type=='Admin')
               <li class="nav-item">
                 <a href="{{route('admin.view.task')}}" class="nav-link {{$active}}">
                   <i class="far fa-circle nav-icon"></i>

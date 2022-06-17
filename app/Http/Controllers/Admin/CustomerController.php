@@ -88,7 +88,7 @@ class CustomerController extends Controller
             $customer->description = $data['description'];
             $customer->save();
             Session::flash('success_message', $message);
-            return redirect()->back();
+            return redirect()->route('admin.customer');
         }
         Session::flash('page', 'customer');
         return view('admin.customer.add_edit_customer', compact('title','button','customerdata'));

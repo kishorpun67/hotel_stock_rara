@@ -77,7 +77,7 @@ class SupplierController extends Controller
             $supplier->description = $data['description'];
             $supplier->save();
             Session::flash('success_message', $message);
-            return redirect()->back();
+            return redirect()->route('admin.supplier');
         }
         Session::flash('page', 'supplier');
         return view('admin.supplier.add_edit_supplier', compact('title','button','supplierdata'));
