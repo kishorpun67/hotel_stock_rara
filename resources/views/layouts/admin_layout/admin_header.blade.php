@@ -33,6 +33,8 @@
       {{-- <li class="nav-item">gitgit 
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li> --}}
+      @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(61))
+
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('admin.add.edit.sale')}}" class="nav-link"><i class="fa fa-coffee" aria-hidden="true"></i>
           POS</a>
@@ -44,6 +46,8 @@
         <a href="#" class="nav-link" data-toggle="modal" data-target="#today_summary"><i class="fa fa-list-alt" aria-hidden="true"></i>
           Today Summary</a>
       </li>
+      @else
+      @endif
     </ul>
 
     <ul class="navbar-nav ml-auto">

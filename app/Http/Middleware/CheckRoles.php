@@ -55,6 +55,8 @@ class CheckRoles
         'Rafting'=>[58],
         'Tent'=>[59],
         'Camping'=>[60],
+        'Dashboard'=>[61],
+
 
     ];
     if(auth('admin')->user()->type !== "Admin"){

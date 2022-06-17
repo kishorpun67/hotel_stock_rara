@@ -120,8 +120,6 @@
                 <!-- accepted payments column -->
                 <div class="col-6">
                     <p class="lead">Payment Methods: <strong>{{$orderbill->payment}}</strong></p>
-                    
-                    
                 </div>
                 <!-- /.col -->
                 <div class="col-6">

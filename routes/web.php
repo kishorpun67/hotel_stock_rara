@@ -72,9 +72,8 @@ Route::group(['namespace' => 'SuperAdmin', 'prefix' => 'superAdmin', 'as' => 'su
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],function() {
     Route::match(['get', 'post'], '/', 'AdminController@login')->name('login');
-    Route::match(['get', 'post'], '/register', 'AdminController@register')->name('register'); 
+   //  Route::match(['get', 'post'], '/register', 'AdminController@register')->name('register'); 
     Route::group(['middleware' => ['admin']], function() {
-        
       // route for billing 
         Route::group(['middleware'=>['ChekcRole:Billing']], function(){
             Route::get('billing', 'BillingController@billing')->name('billing');

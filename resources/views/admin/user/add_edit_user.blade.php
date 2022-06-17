@@ -91,7 +91,7 @@ use App\Admin\AdminPermission;
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="class"> Per hr rate  *</label>
+                    <label for="class"> Per hr rate   *</label>
                     <input class="form-control" name="price" placeholder="Price" @if(!empty($adminData['price']))
                     value= "{{$adminData['price']}}"
                     @else value="{{old('price')}}"

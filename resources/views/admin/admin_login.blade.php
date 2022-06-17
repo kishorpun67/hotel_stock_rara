@@ -86,7 +86,7 @@
             <!-- /.col -->
             </div>
       </form>
-      <a href="{{route('admin.register')}}" class="text-center">Create New Account</a>
+      {{-- <a href="{{route('admin.register')}}" class="text-center">Create New Account</a> --}}
     </div>
     <!-- /.login-card-body -->
   </div>

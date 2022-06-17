@@ -319,7 +319,7 @@ class AdminController extends Controller
             }
             
             
-            return redirect()->back()->with('success_message', $message);
+            return redirect()->route('admin.user')->with('success_message', $message);
 
         }
         Session::flash('page', 'admin_roles');
