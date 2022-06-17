@@ -554,14 +554,16 @@
                   <p>Attendance</p>
                 </a>
               </li>
-            </ul>
+            </ul
+            >@if (auth('admin')->user()->type=='Admin')
+
             <ul class="nav nav-treeview">
               @if(Session::get('page')=="admin_task_view")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
               @endif
-              @if (auth('admin')->user()->type=='Admin')
+              
               <li class="nav-item">
                 <a href="{{route('admin.view.task')}}" class="nav-link {{$active}}">
                   <i class="far fa-circle nav-icon"></i>

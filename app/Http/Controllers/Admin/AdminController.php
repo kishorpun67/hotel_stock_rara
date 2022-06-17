@@ -253,7 +253,7 @@ class AdminController extends Controller
             $message = "Ingredient Items has been updated sucessfully";
         }
         if(request()->isMethod('POST')){
-             $data = request()->all();
+            $data = request()->all();
 
             $rules = [
                 'name'=>'required',
@@ -292,6 +292,7 @@ class AdminController extends Controller
                     $newAdmin->image = $imagePath;
                 }
             }
+
             $newAdmin->name = $data['name'];
             $newAdmin->parent_id = auth('admin')->user()->id;
             $newAdmin->email = $data['email'];
