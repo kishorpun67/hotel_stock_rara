@@ -1,5 +1,5 @@
 // const { Toast } = require("bootstrap");
-// const { pad } = require("lodash");
+// const { pad } = require("lodash"); totalSummingAmount
 
 $(document).ready(function() {
 
@@ -914,6 +914,8 @@ $(".totalAmountRoom").keyup(function() {
 
 $(".totalSummingAmount").keyup(function() {
 
+    var number_of_customer = ($("#number_of_customer").val())
+        // alert(number_of_customer)
     var price = ($("#price").val())
     var duration = ($("#duration").val())
     var paid = ($("#paid").val())
@@ -927,7 +929,10 @@ $(".totalSummingAmount").keyup(function() {
     if (paid == "") {
         paid = 0;
     }
-    var total = (parseInt(price) * parseInt(duration));
+    if (number_of_customer == "") {
+        number_of_customer = 0;
+    }
+    var total = (parseInt(price) * parseInt(duration) * parseInt(number_of_customer));
     var due = total - parseInt(paid);
 
     $("#total").val(total)
@@ -959,22 +964,22 @@ $("#tent_id").change(function() {
 
 
 $(".totalCampingAmount").keyup(function() {
-
+    alert("Totalt");
+    var number_of_customer = ($("#number_of_customer").val())
     var price = ($("#price").val())
     var duration = ($("#duration").val())
-    var paid = ($("#paid").val())
     console.log(price, duration, paid)
+    if (number_of_customer == "") {
+        number_of_customer = 0;
+    }
     if (price == "") {
         price = 0;
     }
     if (duration == "") {
         duration = 0;
     }
-    if (paid == "") {
-        paid = 0;
-    }
-    var total = (parseInt(price) * parseInt(duration));
-    var due = total - parseInt(paid);
+
+    var total = (parseInt(price) * parseInt(duration) * parseInt(number_of_customer));
 
     $("#total").val(total)
     $("#due").val(due)

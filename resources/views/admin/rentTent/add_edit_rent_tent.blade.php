@@ -101,8 +101,8 @@
                     </p>
                 </div>
                 <div class="form-group">
-                    <label for="price">Price (per day rate) *</label>
-                    <input type="number" min="1" class="form-control totalCampingAmount" name="price" id="price" placeholder="Enter Price"
+                    <label for="price">Price (per day rate\per person) *</label>
+                    <input type="number" readonly min="1" class="form-control totalCampingAmount" name="price" id="price" placeholder="Enter Price"
                     @if(!empty($rentTentData['price']))
                     value= "{{$rentTentData['price']}}"
                     @else value="{{old('price')}}"
@@ -131,7 +131,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="address">Number of Customer *</label>
-                    <input type="number" min="1" class="form-control" name="number_of_customer" id="number_of_customer" placeholder="Number of Customer"
+                    <input type="number" min="1" class="form-control totalCampingAmount" name="number_of_customer" id="number_of_customer" placeholder="Number of Customer"
                     @if(!empty($rentTentData['number_of_customer']))
                     value= "{{$rentTentData['number_of_customer']}}"
                     @else value="{{old('number_of_customer')}}"
@@ -143,21 +143,14 @@
                     </p>
                   </div>  
                   <div class="form-group">
-                    <!--<label for="address">Total</label>-->
-                    <input type="hidden" class="form-control" name="total" id="total" readonly placeholder="Total"
+                    <label for="address">Total</label>
+                    <input type="number" class="form-control" name="total" id="total" readonly placeholder="Total"
                     @if(!empty($rentTentData['total']))
                     value= "{{$rentTentData['total']}}"
                     @else value="{{old('total')}}"
                     @endif>
                   </div>  
-                  <div class="form-group">
-                    <label for="address">Paid</label>
-                    <input type="number"min="1" class="form-control totalCampingAmount" name="paid" id="paid"  placeholder="Paid"
-                    @if(!empty($rentTentData['paid']))
-                    value= "{{$rentTentData['paid']}}"
-                    @else value="{{old('paid')}}"
-                    @endif>
-                  </div>  
+                  
                   <div class="form-group">
                     <label for="address">Due</label>
                     <input type="number" class="form-control" name="due" id="due" readonly placeholder="Due"

@@ -54,7 +54,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="code">Code</label>
-                    <input type="text" class="form-control" name="code" id="code" placeholder="Enter purchase code"
+                    <input type="text" class="form-control" name="code" value="{{rand(111,9999)}}" id="code" placeholder="Enter purchase code"
                     @if(!empty($purchasedata['code']))
                     value= "{{$purchasedata['code']}}"
                     @else value="{{old('code')}}"

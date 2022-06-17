@@ -318,10 +318,7 @@ class AdminController extends Controller
                     $newPermission->save();
                 }
             }
-            
-            
             return redirect()->route('admin.user')->with('success_message', $message);
-
         }
         Session::flash('page', 'admin_roles');
         $roles = Role::where('id','>',2)->get();

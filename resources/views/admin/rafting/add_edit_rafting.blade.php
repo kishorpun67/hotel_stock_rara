@@ -79,7 +79,7 @@
                 </div>
                 <div class="form-group">
                   <label for="address">Number of Customer *</label>
-                  <input type="number" min="1" class="form-control" name="number_of_customer" id="number_of_customer" placeholder="Number of Customer"
+                  <input type="number" min="1" class="form-control totalSummingAmount" name="number_of_customer" id="number_of_customer" placeholder="Number of Customer"
                   @if(!empty($raftingData['number_of_customer']))
                   value= "{{$raftingData['number_of_customer']}}"
                   @else value="{{old('number_of_customer')}}"
@@ -91,7 +91,7 @@
                   </p>
                 </div>  
                 <div class="form-group">
-                    <label for="price">Price (per hr rate) *</label>
+                    <label for="price">Price (per hr rate\per person) *</label>
                     <input type="number" min="1" class="form-control totalSummingAmount" name="price" id="price" placeholder="Enter Price"
                     @if(!empty($raftingData['price']))
                     value= "{{$raftingData['price']}}"
@@ -117,22 +117,14 @@
                   </p>
                 </div>  
                 <div class="form-group">
-                  <!--<label for="address">Total</label>-->
-                  <input type="hidden"min="1" class="form-control" name="total" id="total" readonly placeholder="Total"
+                  <label for="address">Total</label>
+                  <input type="number" class="form-control" name="total" id="total" readonly placeholder="total"
                   @if(!empty($raftingData['total']))
                   value= "{{$raftingData['total']}}"
                   @else value="{{old('total')}}"
                   @endif>
-                 
                 </div>  
-                <div class="form-group">
-                  <label for="address">Paid</label>
-                  <input type="number" min="1" class="form-control totalSummingAmount" name="paid" id="paid"  placeholder="Paid"
-                  @if(!empty($raftingData['paid']))
-                  value= "{{$raftingData['paid']}}"
-                  @else value="{{old('paid')}}"
-                  @endif>
-                </div>  
+         
                 <div class="form-group">
                   <label for="address">Due</label>
                   <input type="number" class="form-control" name="due" id="due" readonly placeholder="Due"

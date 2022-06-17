@@ -79,7 +79,7 @@
                 </div>
                 <div class="form-group">
                   <label for="number">Number of Customer *</label>
-                  <input type="number"  min="1" class="form-control" name="number_of_customer" id="number_of_customer" placeholder="Number of Customer"
+                  <input type="number"  min="1" class="form-control totalSummingAmount" name="number_of_customer" id="number_of_customer" placeholder="Number of Customer"
                   @if(!empty($swimmingPoolData['number_of_customer']))
                   value= "{{$swimmingPoolData['number_of_customer']}}"
                   @else value="{{old('number_of_customer')}}"
@@ -91,7 +91,7 @@
                   </p>
                 </div>  
                 <div class="form-group">
-                    <label for="price">Price (per hr rate) *</label>
+                    <label for="price">Price (Per hrs rate\Per Person) *</label>
                     <input type="number"  min="1" class="form-control totalSummingAmount" name="price" id="price" placeholder="Enter Price"
                     @if(!empty($swimmingPoolData['price']))
                     value= "{{$swimmingPoolData['price']}}"
