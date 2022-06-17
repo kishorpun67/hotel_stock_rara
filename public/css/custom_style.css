@@ -165,7 +165,7 @@ font-size: 18px;
 }
 .nav-sidebar > .nav-item i {
 	font-size: 19px;
-	/*padding-right: 20px;*/
+	padding-right: 20px;
 	color: #625f6e91;
 	width: 30px;
 	text-align: center;
@@ -173,15 +173,42 @@ font-size: 18px;
 }
 .nav-sidebar > .nav-item p {
 	color: #625f6ed6;
-	padding-left: 5px;
+	/*padding-left: 5px;*/
 	/*background: red;*/
 }
 .nav-sidebar > .nav-item p:hover {
 	color: #6e6b7b;
 }
-.nav-sidebar > .nav-item.menu-open > .nav-link {
-	background: #ddd !important;
+.nav-sidebar > .nav-item.menu-open > .nav-link,
+.nav-sidebar > .nav-item.menu-open > .nav-link:hover
+
+ {
+	background: #3f8fd7 !important;
 }
+
+
+
+
+.nav-sidebar > .nav-item.menu-open > .nav-link p,
+.nav-sidebar > .nav-item.menu-open > .nav-link i
+{
+	color:#fff;
+}
+
+
+.nav-sidebar .nav-link.active{
+	
+background: #5f94c4 !important;
+	
+}
+
+
+.nav-sidebar .nav-link.active p,
+.nav-sidebar  .nav-link.active i{
+	  color:#fff;
+  }
+ 
+
 
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active i,
 .sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active p
@@ -197,12 +224,58 @@ font-size: 18px;
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	right: 0;
-	transition: 0.1s ease-in-out;
+	right:0;
+/*	transition: 0.1s ease-in-out;*/
+display:none;
 }
+
+
+
+
+
+.nav-sidebar  .has-treeview .nav-link p:after{
+font-family: "Font Awesome 5 Free";
+content: "\f105";
+position: absolute;
+top: 4px;
+right: auto;
+color: #a6a4ad;
+font-weight: 600;
+font-size: 24px;
+transition: all 0.5s ease-in-out;
+margin-left: 15px;
+
+}
+
+
+.nav-sidebar  .has-treeview.menu-open .nav-link p{
+}
+
+
+.nav-sidebar  .has-treeview.menu-open .nav-link p:after{
+transform: rotate(90deg);
+transition: all 0.5s ease-in-out;
+color:#fff;
+}
+
+
+.nav-sidebar  .has-treeview .nav-link.active p:after{
+	color:#fff;
+}
+
+
+
+.nav-sidebar  .has-treeview .nav-treeview p:after{
+	display:none;
+}
+
+
+
+
+
 .nav-sidebar > .nav-item.menu-open > .nav-link p i {
 	transform: rotate(90deg);
-	transition: 0.1s ease-in-out;
+/*	transition: 0.1s ease-in-out;*/
 }
 .user-panel .info a:hover {
 	color: #ddd;
@@ -266,6 +339,17 @@ transition: 0.5s ease-in-out;
 	font-weight:600;
 }
 
+ 
+
+.layout-fixed .main-sidebar{
+	overflow-y: scroll;
+	scrollbar-width: none !important;
+}
+
+
+.nav-sidebar .nav-item .nav-link:hover {
+background: #d2d2d29e !important;
+}
 
  @media (min-width: 768px) {
 body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-footer, body:not(.sidebar-mini-md) .main-header {
