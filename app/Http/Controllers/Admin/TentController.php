@@ -67,7 +67,7 @@ class TentController extends Controller
         return view('admin.tent.add_edit_tent', compact('title','button','tentData', 'tentTypes'));
     }
 
-    public function deleteRoom($id=null)
+    public function deleteTent($id=null)
     {
         Tent::where('id', $id)->delete();
         return redirect()->back()->with('success_message', 'Tent  has been deleted successfully');

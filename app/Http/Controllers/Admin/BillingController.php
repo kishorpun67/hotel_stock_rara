@@ -12,42 +12,90 @@ use App\Admin\Rafting;
 use App\Admin\SwimmingPool;
 // use App\Admin\Camping;
 use App\Admin\RentTent;
+use App\AllActivity;
+use App\PaymentMethod;
+
+use function GuzzleHttp\Promise\all;
 
 class BillingController extends Controller
 {
     public function billing()
     {
-        $customer = Customer::get();
+        $customer = AllActivity::orderBy('id', 'desc')->with('customer', 'order','book_rooms','rafting', 'swimming', 'camping')->get();
+        // return $customer;
         Session::flash('page', 'billing');
         return view('admin.billing.view_billing', compact('customer'));
     }   
-
+    public function billingCheckout($id=null)
+    {
+        $activity = AllActivity::find($id);
+        // $id = $activity->customer_id;
+        // return $activity;
+        $paymentMethod = PaymentMethod::get();
+        $customer = Customer::where('id', $activity->customer_id)->first();
+        $sales = Order::with('ordrDetails')->where(['id' => $activity->order_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $swimmingPool = SwimmingPool::where(['id' => $activity->swimming_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $rafting = Rafting::where(['id' => $activity->rafting_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $camping = RentTent::where(['id' => $activity->camping_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $bookRoom = BookRoom::with('room')->where(['id' => $activity->book_room_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        Session::flash('page', 'billing');
+        return view('admin.billing.billing_checkout', compact('paymentMethod','activity','customer', 'sales', 'swimmingPool', 'rafting', 'camping' , 'bookRoom'));
+        
+    }
     public function customerAllInvoice($id=null)
     {
-        $customer = Customer::with(['sales', 'swimming_pool', 'rafting', 'camping', 'book_room'])->where('id', $id)->first();
-        $sales = Order::with('ordrDetails')->where('customer_id', $id)->where('status', '!=', 'Paid')->latest()->first();
-        $swimmingPool = SwimmingPool::where('customer_id', $id)->where('status', '!=', 'Paid')->latest()->first();
-        $rafting = Rafting::where('customer_id', $id)->where('status', '!=', 'Paid')->latest()->first();
-        $camping = RentTent::where('customer_id', $id)->where('status', '!=', 'Paid')->latest()->first();
-        $bookRoom = BookRoom::with('room')->where('customer_id', $id)->where('status', '!=', 'Paid')->latest()->first();
+        $data = request()->all();
+        if(empty($data['service_charge']))
+        {
+            $data['service_charge'] = "";
+        }if(empty($data['subtotal']))
+        {
+            $data['subtotal'] = "";
+        }if(empty($data['discount']))
+        {
+            $data['discount'] = "";
+        }if(empty($data['paid']))
+        {
+            $data['paid'] = "";
+        }
+        $updateActivity = AllActivity::find($id);
+        Order::where('id', $updateActivity->order_id)->update(['status' => $data['status']]);
+        $updateActivity->service_charge = $data['service_charge'];
+        $updateActivity->discount = $data['discount'];
+        $updateActivity->tax = $data['tax'];
+        $updateActivity->paid = $data['paid'];
+        $updateActivity->total = $data['total'];
+        $updateActivity->sub_total = $data['subtotal'];
+        $updateActivity->paid = $data['paid'];
+        $updateActivity->payment_id = $data['payment_id'];
+        $updateActivity->status = $data['status'];
+        $updateActivity->save();
+        $activity = AllActivity::find($id);
+        // $id = $activity->customer_id;
+        // return $activity;
+        $customer = Customer::where('id', $activity->customer_id)->first();
+        $sales = Order::with('ordrDetails')->where(['id' => $activity->order_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $swimmingPool = SwimmingPool::where(['id' => $activity->swimming_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $rafting = Rafting::where(['id' => $activity->rafting_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $camping = RentTent::where(['id' => $activity->camping_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $bookRoom = BookRoom::with('room')->where(['id' => $activity->book_room_id, 'customer_id'=> $activity->customer_id])->latest()->first();
         Session::flash('page', 'billing');
-        return view('admin.billing.billing_invoice', compact('customer','sales', 'swimmingPool', 'rafting', 'camping' , 'bookRoom'));
+        return view('admin.billing.billing_invoice', compact('activity','customer','sales', 'swimmingPool', 'rafting', 'camping' , 'bookRoom'));
         
     }
 
     public function customerBillingPrint($id=null)
     {
-        Order::where('customer_id', $id)->latest()->update(['status'=>"Paid"]);
-        SwimmingPool::where('customer_id', $id)->latest()->update(['status'=>"Paid"]);
-        Rafting::where('customer_id', $id)->latest()->update(['status'=>"Paid"]);
-        RentTent::where('customer_id', $id)->latest()->update(['status'=>"Paid"]);
-        BookRoom::with('room')->where('customer_id', $id)->latest()->update(['status'=>"Paid"]);        
-        $customer = Customer::with(['sales', 'swimming_pool', 'rafting', 'camping', 'book_room'])->where('id', $id)->first();
-        $sales = Order::with('ordrDetails')->where('customer_id', $id)->latest()->first();
-        $swimmingPool = SwimmingPool::where('customer_id', $id)->latest()->first();
-        $rafting = Rafting::where('customer_id', $id)->latest()->first();
-        $camping = RentTent::where('customer_id', $id)->latest()->first();
-        $bookRoom = BookRoom::with('room')->where('customer_id', $id)->latest()->first();
-        return view('admin.billing.bill_print', compact('customer', 'sales', 'swimmingPool', 'rafting', 'camping' , 'bookRoom'));
+        $activity = AllActivity::find($id);
+        // $id = $activity->customer_id;
+        // return $activity;
+        $customer = Customer::where('id', $activity->customer_id)->first();
+        $sales = Order::with('ordrDetails')->where(['id' => $activity->order_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $swimmingPool = SwimmingPool::where(['id' => $activity->swimming_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $rafting = Rafting::where(['id' => $activity->rafting_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $camping = RentTent::where(['id' => $activity->camping_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        $bookRoom = BookRoom::with('room')->where(['id' => $activity->book_room_id, 'customer_id'=> $activity->customer_id])->latest()->first();
+        Session::flash('page', 'billing');
+        return view('admin.billing.bill_print', compact('activity','customer', 'sales', 'swimmingPool', 'rafting', 'camping' , 'bookRoom'));
     }
 }

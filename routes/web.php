@@ -77,7 +77,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
       // route for billing 
         Route::group(['middleware'=>['ChekcRole:Billing']], function(){
             Route::get('billing', 'BillingController@billing')->name('billing');
-            Route::get('customer-all-inovice/{id?}', 'BillingController@customerAllInvoice')->name('customer.all.invoice');
+            Route::get('billing-chekout/{id?}', 'BillingController@billingCheckout')->name('billing.checkout');
+            Route::post('customer-all-inovice/{id?}', 'BillingController@customerAllInvoice')->name('customer.all.invoice');
             Route::get('customer-bill-print/{id?}', 'BillingController@customerBillingPrint')->name('customer.bill.print');
         });
         Route::group(['middleware'=>['ChekcRole:Room']], function(){
@@ -114,12 +115,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::match(['get', 'post'], 'add-edit-tent/{id?}', 'TentController@addEditTent')->name('add.edit.tent');
             Route::get('delete-tent/{id?}', 'TentController@deleteTent')->name('delete.tent');
         });
-        Route::group(['middleware'=>['ChekcRole:Room']], function(){
+        Route::group(['middleware'=>['ChekcRole:Camping']], function(){
             // route for RentTent
-           Route::get('rent-tent', 'RentTentController@rentTent')->name('rent.tent');
+           Route::get('camping', 'RentTentController@rentTent')->name('rent.tent');
            Route::post('ajax-get-tent-price','RentTentController@ajaxGetTentPrice');
-           Route::match(['get', 'post'], 'add-edit-rent-tent/{id?}', 'RentTentController@addEditRentTent')->name('add.edit.rent.tent');
-           Route::get('delete-rent-tent/{id?}', 'RentTentController@deleteRentTent')->name('delete.rent.tent');
+           Route::match(['get', 'post'], 'add-edit-camping/{id?}', 'RentTentController@addEditRentTent')->name('add.edit.rent.tent');
+           Route::get('delete-camping/{id?}', 'RentTentController@deleteRentTent')->name('delete.rent.tent');
         });
 
    
@@ -143,11 +144,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
       Route::match(['get', 'post'], 'update-admin-details', 'AdminController@updateAdminDetails')->name('update.admin.details');
       
       //   rotue for all screen 
-      //   Route for POS
+      //   Route for POS 
       Route::group(['middleware'=>['ChekcRole:POS']], function(){
          Route::match(['get', 'post'], 'sale-food/{id?}', 'SaleController@addEditSale')->name('add.edit.sale');
          Route::get('food/{url}', 'SaleController@table')->name('food');
          Route::get('ajax-get-room-table', 'SaleController@ajaxGetRoomTable');
+         Route::get('ajax-get-big-room-table', 'SaleController@ajaxGetBigRoomTable');
+         Route::get('ajax-table', 'SaleController@ajaxTable');
          Route::post('ajax-add-customer', 'SaleController@addCusomter');
          Route::post('ajax-delete-customer-table', 'SaleController@deleteCusomter');
          Route::post('ajax-search-food', 'SaleController@ajaxSearchFood');

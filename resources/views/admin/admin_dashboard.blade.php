@@ -34,35 +34,36 @@ if(auth('admin')->user()->parent_id > 0){
       $admin_id = auth('admin')->user()->id;
   }
 
-// $user = User::count();
+// $user = User::count(); expanse
 // $total_order = OrderDetail::where('admin_id', $admin_id)->sum('quantity');
 
 
 
 
 ?>
- <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            @if(Session::has('error_message'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-              {{ Session::get('error_message') }}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          @endif          
-        </div><!-- /.col -->
-         
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+
     @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(61))
+     <!-- Content Wrapper. Contains page content -->
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          @if(Session::has('error_message'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+            {{ Session::get('error_message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        @endif          
+      </div><!-- /.col -->
+       
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
       <section class="content">
         <div class="container-fluid">
           <div class="row">
@@ -254,7 +255,7 @@ if(auth('admin')->user()->parent_id > 0){
                   <span class="info-box-text"></span>
 
                   <span class="info-box-number">
-                  + Expanse
+                  + Expense
                   </span>
                 </a>
                 </div>
@@ -481,7 +482,28 @@ if(auth('admin')->user()->parent_id > 0){
         </div>
         <!-- /.container-fluid -->
       </div>
-    @else
+    @els
+     <!-- Content Wrapper. Contains page content -->
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <h3></h3>
+          @if(Session::has('error_message'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+            {{ Session::get('error_message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        @endif          
+      </div><!-- /.col -->
+       
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
     @endif
     <!-- Main content -->
     

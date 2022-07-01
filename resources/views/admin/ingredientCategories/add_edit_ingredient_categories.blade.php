@@ -70,8 +70,8 @@
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <textarea name="description" id="description" cols="20" class="form-control" rows="4"> @if(!empty($ingredientCategoriesData['description']))
-                    {{$ingredientCategoriesData['description']}}
+                  <textarea name="description" id="description" cols="20" class="form-control" rows="4">@if(!empty($ingredientCategoriesData['description']))
+                    {{ltrim($ingredientCategoriesData['description'])}}
                     @else {{old('description')}}
                     @endif</textarea>
                 </div>

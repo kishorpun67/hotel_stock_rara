@@ -30,7 +30,11 @@
         <td>{{ $data->ingredient_id }}</td>
         <td>{{ $data->name}}</td>
         <td>{{ $data->price}}</td>
-        <td><input class="" onkeyup="purchaseCalculate(this, this.getAttribute('ingredientCart_id'))" type="text" name="quantity[]" value="{{ $data->quantity}}" ingredientCart_id="{{ $data->id }}" 
+        <td><input class=""  onkeyup="purchaseCalculate(this, this.getAttribute('ingredientCart_id'))" type="text" name="quantity[]" @if ($data->quantity>0)
+          value="{{ $data->quantity}}" 
+        @else
+            value=""
+        @endif ingredientCart_id="{{ $data->id }}" 
           >@if (!empty($data->ingredientUnit->unit_name))
           {{$data->ingredientUnit->unit_name}}
           @endif

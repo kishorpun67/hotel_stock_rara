@@ -23,11 +23,13 @@ use View;
 use App\CustomerTable;
 use Facade\Ignition\Tabs\Tab;
 use App\Admin\Room;
+use App\AllActivity;
 
 class SaleController extends Controller
 {
     public function Sale()
     {
+        // ajaxGetRoomTable
         $sale = Order::orderBy('id', 'DESC')->get();
         Session::flash('page', 'sale');
         return view('admin.sale.view_sale', compact('sale'));
@@ -115,7 +117,7 @@ class SaleController extends Controller
         return response()->json(['view'=>(String)View::make('admin.sale.ajax_food_table')->with(compact('carts', 'waiter', 'customer'))]);
    
     }
-
+    // add_edit_sale
     public function deleteCart()
     {
         Cart::where('id', request('cart_id'))->delete();
@@ -139,8 +141,23 @@ class SaleController extends Controller
     }
     public function ajaxGetRoomTable()
     {
-        $table = Table::where('room_id', request('room_id'))->get();
-        return view('admin.sale.ajax_table_room', compact('table'));
+        $room = Room::where('id', request('room_id'))->first();
+        if($room->room_size == "Big"){
+            $table = Table::orderBy('table_no', 'asc')->where('room_id', request('room_id'))->get();
+            return view('admin.sale.ajax_table_room', compact('table'));
+        }else{
+            return response()->json(['data' => 0], 200);
+        }
+    }
+    public function ajaxGetBigRoomTable()
+    {
+        $table = Table::where('id', request('table_id'))->first();
+        return view('admin.sale.ajax_big_room_table', compact('table'));
+    }
+    public function ajaxTable()
+    {
+        $table = Table::where('id', request('table_id'))->first();
+        return view('admin.sale.ajax_table', compact('table'));
     }
     public function addCusomter()
     {
@@ -189,7 +206,8 @@ class SaleController extends Controller
             $table = Table::where('id',request('table_id'))->first();
         }
         $foodCategories = FoodCategory::get();
-        $carts = Cart::orderBy('id', 'DESC')->where('admin_id', auth('admin')->user()->id)->get();
+        Cart::where('admin_id', auth('admin')->user()->id)->delete();
+        $carts =  array();
         $foodMenus = FoodMenu::with('foodCategory')->get();
         $waiter = Admin::where('role_id',6)->get();
         $customer = Customer::get();
@@ -235,6 +253,7 @@ class SaleController extends Controller
         $latestOder = Order::where('customer_id', $data['customer_id'])->latest()->first();
 
         $carts = Cart::get();
+        $orderCheck =  AllActivity::where('customer_id',$data['customer_id'])->latest()->first();
         if(empty($latestOder->status)  || $latestOder->status == "Paid" || $latestOder->status == "Cancel"){
             $new  = new Order();
             $new->waiter_id = $data['waiter_id'];
@@ -252,7 +271,30 @@ class SaleController extends Controller
         }else{
             $order_id = $latestOder->id;
         }
-
+        // $orderCheck = AllActivity::where(['customer_id'=>$data['customer_id']])->first();
+        if(empty($orderCheck->status) ){
+            $newActivity = new AllActivity();
+            $newActivity->order_id = $order_id;
+            $newActivity->waiter_id = $data['waiter_id'];
+            $newActivity->customer_id = $data['customer_id'];
+            $newActivity->admin_id = auth('admin')->user()->id;
+            $newActivity->status = "New";
+            $newActivity->save();
+        }else if ( $orderCheck->status == 'Paid' || $orderCheck->status == 'Cancel') {
+            $newActivity = new AllActivity();
+            $newActivity->order_id = $order_id;
+            $newActivity->waiter_id = $data['waiter_id'];
+            $newActivity->customer_id = $data['customer_id'];
+            $newActivity->admin_id = auth('admin')->user()->id;
+            $newActivity->status = "New";
+            $newActivity->save();
+        } else if($orderCheck->status != 'Paid' || $orderCheck->status != 'Cancel') {
+            $newActivity =  AllActivity::where('customer_id', $data['customer_id'])->latest()->first();
+            $newActivity->waiter_id = $data['waiter_id'];
+            $newActivity->customer_id = $data['customer_id'];
+            $newActivity->order_id = $order_id;
+            $newActivity->save();
+        }
         foreach($carts as $cart)
         {
             // return $cart->is_kitchen;
@@ -358,7 +400,15 @@ class SaleController extends Controller
         return view('admin.sale.innovice', compact('orderDetails'));
     }
     public function cancelOrder(){
+        $id =request('order_id');
         Order::where('id' , request('order_id'))->update(['status'=>'Cancel']);
+        $checkID =  AllActivity::where(['order_id'=> $id])->first();
+        if(!empty($checkID->swimming_id) || !empty($checkID->camping_id) || !empty($checkID->book_room_id) || !empty($checkID->rafting_id)) {
+            AllActivity::where('order_id', $id)->update(['order_id' => null]);
+        }else{
+            // return 'test';
+            AllActivity::where('rafting_id', $id)->delete();
+        }
         return redirect()->back();
     
     }

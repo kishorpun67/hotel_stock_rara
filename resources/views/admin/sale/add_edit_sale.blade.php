@@ -73,7 +73,7 @@
         </ul>
       </div>
       </div>
-  <div class="col-2"> <figure class="logo_holder"><a href="index.html"> 
+  <div class="col-2"> <figure class="logo_holder"><a href="{{route('admin.dashboard')}}"> 
     <img src="{{asset('front/images/istockphoto-1156053620-612x612.jpg')}}" alt="This is web logo">  </a> </figure>
     </div>
        <div class="col-5">

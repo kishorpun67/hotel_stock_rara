@@ -15,7 +15,7 @@
     </div>
     <div class="select_dropdown w-50">
       <select class="form-control select2" name="customer_id">
-        <option value="">Walk-in Customer   </option>
+        <option value="">Select Customer   </option>
         @foreach ($customer as $item)
           <option value="{{$item->id}}">{{$item->customer_name}}</option>
             

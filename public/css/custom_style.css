@@ -238,20 +238,6 @@ table#categories tbody tr td form {
 }
 
 .nav-sidebar .has-treeview .nav-link p:after {
-<<<<<<< HEAD
-	font-family: "Font Awesome 5 Free";
-	content: "\f105";
-	position: absolute;
-	top: 10px;
-	right: auto;
-	color: #a6a4ad;
-	font-weight: 600;
-/*	font-size: 19px;*/
-	transition: all 0.5s ease-in-out;
-	margin-left: 15px;
-}
-.nav-sidebar .has-treeview.menu-open .nav-link p {
-=======
     font-family: "Font Awesome 5 Free";
     content: "\f105";
     position: absolute;
@@ -262,7 +248,6 @@ table#categories tbody tr td form {
     font-size: 24px;
     transition: all 0.5s ease-in-out;
     margin-left: 15px;
->>>>>>> 60c1c9d3846417952e676fda68726469ea9ba2a5
 }
 
 .nav-sidebar .has-treeview.menu-open .nav-link p {}

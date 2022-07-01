@@ -71,9 +71,9 @@
                   <th>Room No</th>
                   <th>Room </th>
                   <th>Total</th>
-                  <th>Paid</th>
+                  {{-- <th>Paid</th>
                   <th>Due</th>
-                  <th>Status</th>
+                  <th>Status</th> --}}
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -112,15 +112,13 @@
                     @else
                     @endif</td>
                     <td>{{$bookRoom->total}}</td>
-                    <td>{{$bookRoom->paid}}</td>
+                    {{-- <td>{{$bookRoom->paid}}</td>
                     <td>{{$bookRoom->due}}</td>
-                    <td>{{$bookRoom->status}}</td>
+                    <td>{{$bookRoom->status}}</td> --}}
 
-                    
                     </td>
                     <td>
                     <a href="javascript:" data-toggle="modal" data-target="#myModal{{$bookRoom->id}}"> <i class="fa fa-file-invoice"></i></a>&nbsp;&nbsp;
-
                     <a href="{{route('admin.add.edit.book.room', $bookRoom->id)}}"> <i class="fa fa-edit"></i></a>&nbsp;&nbsp;
                     <a href="javascript:" class="delete_form" record="book-room" rel="{{$bookRoom->id}}" style="display:inline;">
                         <i class="fa fa-trash fa-" aria-hidden="true" ></i>

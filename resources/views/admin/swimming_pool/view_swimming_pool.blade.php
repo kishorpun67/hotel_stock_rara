@@ -68,8 +68,8 @@
                   <th>Price</th>
                   <th>Duration (Hrs)</th>
                   <th>Total</th>
-                  <th>Paid</th>
-                  <th>Due</th>
+                  {{-- <th>Paid</th>
+                  <th>Due</th> --}}
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -85,8 +85,8 @@
                     <td>{{$swimming->price}}</td>
                     <td>{{$swimming->duration}}</td>
                     <td>{{$swimming->total}}</td>
-                    <td>{{$swimming->paid}}</td>
-                    <td>{{$swimming->due}}</td>
+                    {{-- <td>{{$swimming->paid}}</td>
+                    <td>{{$swimming->due}}</td> --}}
                     <td>
                     <a href="{{route('admin.add.edit.swimming.pool', $swimming->id)}}" > <i class="fa fa-edit"></i></a>&nbsp;&nbsp;
                     <a href="javascript:" class="delete_form" record="swimming-pool" rel="{{$swimming->id}}" style="display:inline;">

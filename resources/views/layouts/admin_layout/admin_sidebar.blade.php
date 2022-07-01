@@ -48,9 +48,14 @@
             </a>
           </li>
           @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(26)|| auth('admin')->user()->hasPermission(27) 
-          || auth('admin')->user()->hasPermission(28) || auth('admin')->user()->hasPermission(29) || auth('admin')->user()->hasPermission(32))
+          || auth('admin')->user()->hasPermission(28) || auth('admin')->user()->hasPermission(29) || auth('admin')->user()->hasPermission(32)
+          || auth('admin')->user()->hasPermission(56) || auth('admin')->user()->hasPermission(57) || auth('admin')->user()->hasPermission(58)
+          || auth('admin')->user()->hasPermission(60) || auth('admin')->user()->hasPermission(55) || auth('admin')->user()->hasPermission(59))
 
-            @if(Session::get('page')=="kitchen" || Session::get('page')=="caffe" || Session::get('page')=="bar" || Session::get('page')=="waiter" )
+            @if(Session::get('page')=="kitchen" || Session::get('page')=="caffe" || Session::get('page')=="bar" || Session::get('page')=="waiter" 
+            || Session::get('page')=="bookRoom" || Session::get('page')=="swimming_pool" || Session::get('page')=="rafting" 
+            || Session::get('page')=="rent_tent" || Session::get('page')=="room" || Session::get('page')=="tent"  )
+            
             <?php $active = "active";
             $menuOpen="menu-open"; ?>
               @else
@@ -66,7 +71,6 @@
                   <span class="right badge badge-danger"></span>
                 </p>
               </a>
-
               @if(Session::get('page')=="dfdf")
             <?php $active = "active"; ?>
               @else
@@ -125,23 +129,102 @@
                 @endif
                 @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(32))
 
-                @if(Session::get('page')=="waiter")
-                <?php $active = "active"; ?>
-                @else
-                <?php $active = ""; ?>
+                  @if(Session::get('page')=="waiter")
+                  <?php $active = "active"; ?>
+                  @else
+                  <?php $active = ""; ?>
+                  @endif
+                  <li class="nav-item">
+                    <a href="{{route('admin.waiter.collect.food')}}" class="nav-link {{$active}}">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Waiter</p>
+                    </a>
+                  </li>
+              @endif
+              @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(56))
+                @if(Session::get('page')=="bookRoom")
+                    <?php $active = "active"; ?>
+                  @else
+                    <?php $active = ""; ?>
                 @endif
                 <li class="nav-item">
-                  <a href="{{route('admin.waiter.collect.food')}}" class="nav-link {{$active}}">
+                  <a href="{{route('admin.book.room')}}" class="nav-link {{$active}}">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Waiter</p>
+                    <p>BookRoom</p>
+                  </a>
+                </li>
+              @endif
+              @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(57))
+                @if(Session::get('page')=="swimming_pool")
+                    <?php $active = "active"; ?>
+                  @else
+                    <?php $active = ""; ?>
+                @endif
+                <li class="nav-item">
+                  <a href="{{route('admin.swimming.pool')}}" class="nav-link {{$active}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Swimming Pool</p>
+                  </a>
+                </li>
+              @endif
+              @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(58))
+                @if(Session::get('page')=="rafting")
+                    <?php $active = "active"; ?>
+                  @else
+                    <?php $active = ""; ?>
+                @endif
+                <li class="nav-item">
+                  <a href="{{route('admin.rafting')}}" class="nav-link {{$active}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Rafting</p>
+                  </a>
+                </li>
+              @endif
+              @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(60))
+              @if(Session::get('page')=="rent_tent")
+                  <?php $active = "active"; ?>
+                @else
+                  <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.rent.tent')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Camping</p>
+                </a>
+              </li>
+            @endif
+              
+                @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(55))
+                @if(Session::get('page')=="room")
+                    <?php $active = "active"; ?>
+                  @else
+                    <?php $active = ""; ?>
+                @endif
+                <li class="nav-item">
+                  <a href="{{route('admin.room')}}" class="nav-link {{$active}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Room</p>
+                  </a>
+               </li>
+              @endif @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(59))
+                @if(Session::get('page')=="tent")
+                    <?php $active = "active"; ?>
+                  @else
+                    <?php $active = ""; ?>
+                @endif
+                <li class="nav-item">
+                  <a href="{{route('admin.tent')}}" class="nav-link {{$active}}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tent</p>
                   </a>
                 </li>
               @endif
               </ul>
             </li>
           @endif
+   
           {{-- end pos section  --}}
-          @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(54))
+        @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(54))
               @if(Session::get('page')=="billing"  )
               <?php $active = "active";
               $menuOpen="menu-open"; ?>
@@ -158,108 +241,8 @@
               </a>
             </li>
         @endif
-        @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(55))
-            @if(Session::get('page')=="room"  )
-            <?php $active = "active";
-            $menuOpen="menu-open"; ?>
-             @else
-             <?php $active = "";
-             $menuOpen=""; ?>
-            @endif
-            <li class="nav-item ">
-              <a href="{{route('admin.room')}}" class="nav-link {{$active}}">
-                <i class="fas fa-bed"></i>            
-                <p>
-                   Room
-                </p>
-              </a>
-            </li>
-        @endif
-        @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(56))
-            @if(Session::get('page')=="bookRoom"  )
-            <?php $active = "active";
-            $menuOpen="menu-open"; ?>
-             @else
-             <?php $active = "";
-             $menuOpen=""; ?>
-           @endif
-            <li class="nav-item ">
-              <a href="{{route('admin.book.room')}}" class="nav-link {{$active}}">
-                <i class="fas fa-bed	"></i>            
-                <p>
-                  Book Room
-                </p>
-              </a>
-            </li>
-        @endif
-        @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(57))
-            @if(Session::get('page')=="swimming_pool"  )
-            <?php $active = "active";
-            $menuOpen="menu-open"; ?>
-             @else
-             <?php $active = "";
-             $menuOpen=""; ?>
-           @endif
-            <li class="nav-item ">
-              <a href="{{route('admin.swimming.pool')}}" class="nav-link {{$active}}">
-                <i class="fas fa-swimming-pool"></i>            
-                <p>
-                  Swimming Pool
-                </p>
-              </a>
-            </li>
-        @endif
-        @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(58))
-            @if(Session::get('page')=="rafting"  )
-            <?php $active = "active";
-            $menuOpen="menu-open"; ?>
-             @else
-             <?php $active = "";
-             $menuOpen=""; ?>
-            @endif
-            <li class="nav-item ">
-              <a href="{{route('admin.rafting')}}" class="nav-link {{$active}}">
-                <i class="fab fa-red-river"></i>            
-                <p>
-                   Rafting
-                </p>
-              </a>
-            </li>
-        @endif
-        @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(59))
-            @if(Session::get('page')=="tent"  )
-            <?php $active = "active";
-            $menuOpen="menu-open"; ?>
-             @else
-             <?php $active = "";
-             $menuOpen=""; ?>
-           @endif
-            <li class="nav-item ">
-              <a href="{{route('admin.tent')}}" class="nav-link {{$active}}">
-                <i class="fab fa-red-river"></i>            
-                <p>
-                   Tent
-                </p>
-              </a>
-            </li>
-        @endif
-        @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(60))
-            @if(Session::get('page')=="rent_tent"  )
-            <?php $active = "active";
-            $menuOpen="menu-open"; ?>
-             @else
-             <?php $active = "";
-             $menuOpen=""; ?>
-            @endif
-            <li class="nav-item ">
-              <a href="{{route('admin.rent.tent')}}" class="nav-link {{$active}}">
-                <i class="fab fa-red-river"></i>            
-                <p>
-                   Camping
-                </p>
-              </a>
-            </li>
-        @endif
+      
+        
 
             @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(33)|| auth('admin')->user()->hasPermission(34) 
             || auth('admin')->user()->hasPermission(35) || auth('admin')->user()->hasPermission(36) || auth('admin')->user()->hasPermission(37)
@@ -554,24 +537,16 @@
                   <p>Attendance</p>
                 </a>
               </li>
-<<<<<<< HEAD
-            </ul
-            >@if (auth('admin')->user()->type=='Admin')
-
-=======
             </ul>
             @if (auth('admin')->user()->type=='Admin')
->>>>>>> 60c1c9d3846417952e676fda68726469ea9ba2a5
+
             <ul class="nav nav-treeview">
               @if(Session::get('page')=="admin_task_view")
               <?php $active = "active"; ?>
               @else
               <?php $active = ""; ?>
               @endif
-<<<<<<< HEAD
-              
-=======
->>>>>>> 60c1c9d3846417952e676fda68726469ea9ba2a5
+
               <li class="nav-item">
                 <a href="{{route('admin.view.task')}}" class="nav-link {{$active}}">
                   <i class="far fa-circle nav-icon"></i>

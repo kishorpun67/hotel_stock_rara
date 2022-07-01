@@ -60,7 +60,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="name">Name</label>
+                  <label for="name">Name *</label>
                   <input type="text" class="form-control" name="name" id="name" placeholder="Enter name"
                   @if(!empty($ingredientItemsData['name']))
                   value= "{{$ingredientItemsData['name']}}"
@@ -68,7 +68,7 @@
                   @endif>
                 </div>
                 <div class="form-group">
-                  <label for="category_id">Ingredient Category</label>
+                  <label for="category_id">Ingredient Category *</label>
                   <select name="category_id" id="category_id" class="form-control form-control-sm " >
                       <option value="" >Select</option>
                       @forelse($ingredientCategory as $data)
@@ -83,7 +83,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="category_id">Ingredient Unit</label>
+                  <label for="category_id">Ingredient Unit *</label>
                   <select name="unit_id" id="unit_id" class="form-control form-control-sm " >
                       <option value="" >Select</option>
                       @forelse($ingredientUnit as $data)
@@ -100,7 +100,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="purchase_price">Purchase Price</label>
+                <label for="purchase_price">Purchase Price *</label>
                 <input type="text" class="form-control" name="purchase_price" id="purchase_price" placeholder="Enter purchase price"
                 @if(!empty($ingredientItemsData['purchase_price']))
                 value= "{{$ingredientItemsData['purchase_price']}}"
@@ -108,7 +108,7 @@
                 @endif>
               </div>
               <div class="form-group">
-                <label for="purchase_price">Alert Qty</label>
+                <label for="purchase_price">Alert Qty *</label>
                 <input type="text" class="form-control" name="alert_qty" id="alert_qty" placeholder="Enter purchase price"
                 @if(!empty($ingredientItemsData['alert_qty']))
                 value= "{{$ingredientItemsData['alert_qty']}}"

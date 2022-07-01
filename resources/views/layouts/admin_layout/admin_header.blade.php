@@ -112,11 +112,11 @@
             <tbody>
 
               <tr>
-                <td>Purchase(only padi Amount)</td>
+                <td>Purchase(only paid Amount)</td>
                 <th>{{$purchasePaid}}.00</th>
               </tr>
               <tr>
-                <td>Sale(only padi Amount)</td>
+                <td>Sale(only paid Amount)</td>
                 <th>{{$salePaid}}.00</th>
               </tr>
               <tr>
@@ -124,7 +124,7 @@
                 <th>{{$tax*10/100}}.00</th>
               </tr>
               <tr>
-                <td>Expanse</td>
+                <td>Expense</td>
                 <th>{{$expanse}}.00</th>
               </tr>
               <tr>

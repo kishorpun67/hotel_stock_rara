@@ -68,8 +68,6 @@
                   <th>Price</th>
                   <th>Duration (Hrs)</th>
                   <th>Total</th>
-                  <th>Paid</th>
-                  <th>Due</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -85,8 +83,6 @@
                     <td>{{$rafting->price}}</td>
                     <td>{{$rafting->duration}}</td>
                     <td>{{$rafting->total}}</td>
-                    <td>{{$rafting->paid}}</td>
-                    <td>{{$rafting->due}}</td>
                     <td>
                     <a href="{{route('admin.add.edit.rafting', $rafting->id)}}" > <i class="fa fa-edit"></i></a>&nbsp;&nbsp;
                     <a href="javascript:" class="delete_form" record="rafting" rel="{{$rafting->id}}" style="display:inline;">

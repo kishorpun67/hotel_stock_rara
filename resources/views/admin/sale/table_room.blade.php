@@ -38,15 +38,21 @@
   use App\Table;
   use App\CustomerTable;
   use App\Admin\Room;
-  $tables = Table::get();
+  $tables = Table::orderBy('table_no','asc')->where('room_id', 0)->get();
   $roomBig = Room::where('room_size','Big')->get();
-  $roomSmall = Room::where('room_size','Small')->get();
+  $roomSmall = Room::orderBy('room_no','asc')->where('room_size','Small')->get();
 
 ?>
+<style>
+  .metting-room-active{
+    background-color: green;
+    color: white;
+  }
+</style>
 </head>
 <body>
 <div class="container">
-  <figure class="logo_holder"><a href="index.html"> <img src="{{asset('front/images/istockphoto-1156053620-612x612.jpg')}}" alt="This is web logo"> </a> </figure>
+  <figure class="logo_holder"><a href="{{route('admin.dashboard')}}"> <img src="{{asset('front/images/istockphoto-1156053620-612x612.jpg')}}" alt="This is web logo"> </a> </figure>
   <div class="title_bar my-3">
     <ul>
       <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
@@ -99,7 +105,7 @@
             <div class="owl-carousel owl-theme">
                @foreach ($roomBig as $item)
                   <a href="javascript:" onclick="getRoom(this.getAttribute('room_id'))" room_id={{$item->id}}>
-                    <div class="item active">
+                    <div class="item test" id="metting-room-active-{{$item->id}}">
                       <figure class="room_image zoomIn animated">
                         <img src="{{asset('front/images/71556-200.png')}}" alt="This is Room img"> 
                         <figcaption class="room_caption"> 
@@ -112,21 +118,14 @@
               @endforeach
             </div>
           </div>
-          <table class="burger-table mt-3">
-            @foreach ($roomSmall->chunk(10) as $item)
-            <tbody>
-            <tr>
-            @foreach ($item as $room)
-              <td  class="room-class" id="room-{{$room->id}}">
-                <a href="javascript:"  onclick="getRoom(this.getAttribute('room_id'))" room_id={{$room->id}}><i class="fa-brands fa-figma"></i></a>
-              </td>
-            @endforeach
-            </tr>
-            <tbody>
-          @endforeach
-          </table>
+          {{-- <div  id=""> --}}
+            @include('admin.sale.ajax_small_room')
+          {{-- </div> --}}
           <div class="table-outer" id="ajaxTableRoom">
             @include('admin.sale.ajax_table_room')
+          </div>
+          <div class="table-outer" id="ajaxTableBigRoom">
+            @include('admin.sale.ajax_big_room_table')
           </div>
         </div>
       </div>
@@ -152,67 +151,24 @@
       </div>
       <div class="modal-body">
         <div class="cart-wrapper checkout_wrapper">
-          <div class="table-outer"> @foreach ($tables as $item)
-            <?php
-                $customer_table = CustomerTable::where('table_id',$item->id)->get();
-                $total_customer = CustomerTable::where('table_id',$item->id)->sum('no_customer');
-        
-              ?>
-            <div class="table-inner mb-3">
-<!--              <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
-              <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
-              <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
-              <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>-->
-              <figure class="table_image flipInY animatable"> <img src="{{asset('front/images/table-dinner.png')}}" alt=""> 
-              
-              <figcaption class="table_caption"> 
-              
-              <h5 style="text-align: center;">Table No : {{$item->table_no}} </h5>
-              <h5 style="text-align: center;">Seat Capacity : {{$item->seat_capacity}} </h5>
-              <h5 style="text-align: center;" >Total Customer : <span id="total-customer-{{$item->id}}">{{$total_customer}}</span> </h5>
-              <h5 style="text-align: center;"  id="available_seat-{{$item->id}}">Avaliable : {{$item->seat_capacity-$total_customer}} </h5>
-              </figcaption>
-              
-              
-              </figure>
-              <table class="cart_table">
-                <thead>
-                  <tr>
-                    <th>Person</th>
-                    <th>Type</th>
-                    <th>Del</th>
-                  </tr>
-                </thead>
-                <tbody id="data-{{$item->id}}">
-                <div > @foreach ($customer_table as $data)
-                  <tr>
-                    <td>{{$data->no_customer}}</td>
-                    <td>{{$data->type}}</td>
-                    <td><a href="javascript:" onclick="deleteCustomerTable(this.getAttribute('customer_id'), this.getAttribute('table_id'))" table_id={{$item->id}}  customer_id ={{$data->id}} ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                  </tr>
-                  @endforeach </div>
-                <div class="row">
-                  <div class="col-md-12 d-flex">
-                    <?php $avaliable_seat = $item->seat_capacity-$total_customer;?>
-                    @if ($avaliable_seat >= 1)
-                    <?php $dispaly ="flex"; $dispaly1 ="none"  ?>
-                    @else
-                    <?php $dispaly ="none"; $dispaly1 ="block"  ?>
-                    @endif
-                    <input style="display:{{$dispaly}}" type="number" min="1" id="no_of_customer-{{$item->id}}" value="1" class="form-control">
-                    <select style="display:{{$dispaly}}" name="type" id="type-{{$item->id}}" class="form-control">
-                      <option value="Sigle">Single</option>
-                      <option value="Group">Group</option>
-                    </select>
-                    <button id="display-btn-{{$item->id}}" style="display:{{$dispaly}}" onclick="addCustomer(this.getAttribute('table_id'))" table_id={{$item->id}} class="btn btn-primary add_btn"><i class="fa-solid fa-plus"></i>Add</button>
-                    <button id="display-{{$item->id}}" style="color: red; display:{{$dispaly1}}"  class="btn btn-danger">Booked</button>
-                  </div>
-                </div>
-                  </tbody>
-                
-              </table>
-            </div>
-            @endforeach </div>
+          <div class="table-outer"> 
+            <table class="burger-table">
+              @foreach ($tables->chunk(10) as $item)
+              <tbody>
+                <tr>
+                @foreach ($item as $tables)
+                  <td  class="room-class" id="table-{{$tables->id}}">
+                    <a href="javascript:"  onclick="ajaxTable(this.getAttribute('table_id'))" table_id={{$tables->id}}><i class="fas fa-table"> {{$tables->table_no}}</i></a>
+                  </td>
+                @endforeach
+                </tr>
+              <tbody>
+              @endforeach
+            </table>
+          </div>
+          <div class="table-outer" id="ajaxTable"> 
+            @include('admin.sale.ajax_table')
+          </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -258,13 +214,13 @@ $('.room-slider .owl-carousel').owlCarousel({
   loop: false,
   margin: 10,
   dots:true,
-  nav: true,
+  nav: false,
 //  navText: [
 //    "<i class='fa fa-caret-left'></i>",
 //    "<i class='fa fa-caret-right'></i>"
 //  ],
-  autoplay: true,
-  autoplayHoverPause: true,
+  autoplay: false,
+  autoplayHoverPause: false,
   responsive: {
     0: {
       items: 1

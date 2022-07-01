@@ -3,9 +3,9 @@
 <?php 
 use App\Admin\Admin;
 use App\Admin\Room;
-use App\TaxVat;
+// use App\TaxVat;
 
-$tax = TaxVat::first();
+// $tax = TaxVat::first();
 $admin = Admin::first();
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -264,18 +264,32 @@ $admin = Admin::first();
                     <table class="table">
                       <tr>
                         <th style="width:50%">Subtotal:</th>
-                        <td>{{$subTotal}}</td>
+                        <td>{{$activity->sub_total}}</td>
                       </tr>
                       <tr>
                         <th>Tax:</th>
                         <td>
-                          {{$tax->tax}}%
+                          {{$activity->tax}}%
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Discount:</th>
+                        <td>
+                          {{$activity->discount}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Service Charge:</th>
+                        <td>
+                          {{$activity->service_charge}}
                         </td>
                       </tr>
                       <tr>
                         <th>Total:</th>
-                        <?php  $total = $subTotal+(($tax->tax*$subTotal)/100); ?>
-                        <td>{{$total}}</td>
+                        <?php  $total = $subTotal+(($activity->tax*$subTotal)/100); 
+                        $total_amount = $total + $activity->service_charge -$activity->discount;
+                        ?>
+                        <td>{{$activity->total}}</td>
                       </tr>
                     </table>
                   </div>
@@ -287,7 +301,7 @@ $admin = Admin::first();
               <!-- this row will not appear when printing -->
               <div class="row no-print">
                 <div class="col-12">
-                  <a href="{{route('admin.customer.bill.print', $customer->id)}}" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                  <a href="{{route('admin.customer.bill.print', $activity->id)}}" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                   {{-- <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
                     Payment
                   </button> --}}

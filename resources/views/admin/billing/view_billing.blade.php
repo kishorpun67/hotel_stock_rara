@@ -34,17 +34,27 @@
                   <th>Customer Name</th>
                   <th>Phone</th>
                   <th>Email</th>
+                  <th>Status</th>
                   <th>Action</th> 
                 </tr>
                 </thead>
                 <tbody>
                @forelse($customer as $data)
                   <td>{{$data->id}}</td>
-                  <td>{{$data->customer_name}}</td>
-                  <td>{{$data->phone}}</td>
-                  <td>{{$data->email}}</td>
+                  <td>
+                    @if (!empty($data->customer->customer_name))
+                     {{$data->customer->customer_name}}
+                    @endif
+                   </td>
+                  <td>   @if (!empty($data->customer->phone))
+                    {{$data->customer->phone}}
+                   @endif</td>
+                  <td>   @if (!empty($data->customer->email))
+                    {{$data->customer->email}}
+                   @endif</td>
+                   <td>{{$data->status}}</td>
                    <td>
-                    <a href="{{route('admin.customer.all.invoice', $data->id)}}"><i class="fa fa-file-invoice"></i></a>&nbsp;&nbsp;
+                    <a href="{{route('admin.billing.checkout', $data->id)}}"><i class="fa fa-file-invoice"></i></a>&nbsp;&nbsp;
                    </td>
                 </tr>
                 @empty

@@ -61,7 +61,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="name">Name</label>
+                  <label for="name">Name *</label>
                   <input type="text" class="form-control" name="name" id="name" placeholder="Enter name"
                   @if(!empty($foodMenusData['name']))
                   value= "{{$foodMenusData['name']}}"
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="form-group">
-                <label for="sale_price">Sale Price</label>
+                <label for="sale_price">Sale Price *</label>
                   <input type="text" class="form-control" name="sale_price" id="sale_price" placeholder="Enter sale price"
                   @if(!empty($foodMenusData['sale_price']))
                   value= "{{$foodMenusData['sale_price']}}"
@@ -80,7 +80,7 @@
 
               
                 <div class="form-group">
-                    <label for="category_id">Ingredient Food Category</label>
+                    <label for="category_id">Ingredient Food Category *</label>
                     <select name="category_id" id="category_id" class="form-control form-control-sm " >
                         <option value="" >Select</option>
                         @forelse($foodCategory as $data)
@@ -97,7 +97,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="item_id">Ingredient Item</label>
+                    <label for="item_id">Ingredient Item *</label>
                     <select name="item_id" id="foodTable_id" class="form-control form-control-sm " >
                         <option value="" >Select</option>
                         @forelse($ingredientItem as $data)
@@ -150,9 +150,6 @@
                   @endif
                   
 
-                
-      
-        
             </div>
             <div class="col-md-6">
               <div class="form-group">
@@ -173,9 +170,6 @@
                   <img src="{{asset($foodMenusData['image'])}}" width="100" height="100" alt="" srcset="">
                 @endif
               </div>
-              
-
-
                   <div class="form-group">
                       <label for="code">Code</label>
                         <input type="text" class="form-control" name="code" value="{{rand(111,9999)}}" id="code" placeholder="Enter sale price"

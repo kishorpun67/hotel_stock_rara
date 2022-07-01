@@ -19,6 +19,7 @@ use App\Admin\RoomType;
 use App\Admin\BookRoom;
 use App\Admin\Room;
 use App\Customer;
+use App\AllActivity;
 
 class RoomController extends Controller
 {
@@ -126,6 +127,7 @@ class RoomController extends Controller
         if($request->isMethod('post'))
         {
             $data = request()->all();
+            // return $data;
             $rules = [
                 'arrival_date' => 'required|date',
                 'arrival_time' =>'required',
@@ -143,7 +145,7 @@ class RoomController extends Controller
                 'arrival_date.required' => 'Date is required!',
                 'arrival_date.date' => 'Date is not valid format!',
                 'arrival_time.required' => 'Time is required!',
-                // 'arrival_time.time' => 'Time is not valid format!',
+                'arrival_time.time' => 'Time is not valid format!',
                 'depature_date.required' => 'Date is required!',
                 'depature_date.date' => 'Date is not valid format!',
                 'depature_time.required' => 'Time is required!',
@@ -151,7 +153,7 @@ class RoomController extends Controller
                 'depature_time.required' => 'Time is required!',
                 'customer_id.required' => 'Customer name is required!',
                 'address.required' => 'Address is required!',
-                'contact.required' => 'Contact name is required!',
+                'contact.required' => 'Contact  is required!',
                 'contact.number' => ' Contact is invalid format!',
                 // 'contact.between' => 'Contact must be between 10 to 15!',
                 'room_id.required' => 'Room is required!',
@@ -159,7 +161,13 @@ class RoomController extends Controller
                 'travel_agent.required' => 'Travel Agent is required!',
             ];
             $this->validate($request, $rules, $customMessages);
-
+            $getStatus = AllActivity::where('customer_id', $data['customer_id'])->latest()->first();
+            // if($id==null){
+            //    $count = AllActivity::where('customer_id', $data['customer_id'])->where('book_room_id', '!=', null)->whereIn('status', ['Paid','Cancel'])->latest()->count();
+            //     if($count > 1)  {
+            //         return redirect()->back()->with('error_message','Please! Checkout this customor first');
+            //     }
+            // }
             if(empty($data['advance']))
             {
                 $data['advance'] = "";
@@ -197,6 +205,7 @@ class RoomController extends Controller
                 $data['agent_name'] = "";
             }
             $room_id = (['room_id' => implode(',', (array) $request->input('room_id'))]);
+            $orderCheck = AllActivity::where(['customer_id'=>$data['customer_id']])->latest()->first();
 
             // return $data;
             $bookRoom->admin_id =  auth('admin')->user()->id;
@@ -222,6 +231,52 @@ class RoomController extends Controller
             $bookRoom->due = $data['due'];
             $bookRoom->status = "New";
             $bookRoom->save();
+            if($id==null){
+                $book_room_id= DB::getPdo()->lastInsertId();
+                if(empty($orderCheck->status) ){
+                    $newActivity = new AllActivity();
+                    $newActivity->book_room_id = $book_room_id;
+                    $newActivity->customer_id = $data['customer_id'];
+                    $newActivity->admin_id = auth('admin')->user()->id;
+                    $newActivity->status = "New";
+                    $newActivity->save();
+                }elseif($orderCheck->status == 'Paid' || $orderCheck->status == 'Cancel'){
+                    // return "test";
+                    $newActivity = new AllActivity();
+                    $newActivity->book_room_id = $book_room_id;
+                    $newActivity->customer_id = $data['customer_id'];
+                    $newActivity->admin_id = auth('admin')->user()->id;
+                    $newActivity->status = "New";
+                    $newActivity->save();
+                }elseif($orderCheck->status == 'Paid' || $orderCheck->status != 'Cancel'){
+                    // return "test2";
+                    $newActivity =  AllActivity::where('customer_id', $data['customer_id'])->latest()->first();
+                    $newActivity->book_room_id = $book_room_id;
+                    $newActivity->save();
+                }
+            }else{
+                $book_room_id= DB::getPdo()->lastInsertId();
+                $checkID =  AllActivity::where(['book_room_id'=> $id])->first();
+                if(!empty($checkID->swimming_id) || !empty($checkID->rafting_id) || !empty($checkID->camping_id) || !empty($checkID->order_id)) {
+                    AllActivity::where('book_room_id', $id)->update(['book_room_id' => null]);
+                }else{
+                    AllActivity::where('book_room_id', $id)->delete();
+                }
+                if(empty($orderCheck->status) ){
+                    $newActivity = new AllActivity();
+                    $newActivity->book_room_id = $id;
+                    $newActivity->admin_id = auth('admin')->user()->id;
+                    $newActivity->customer_id = $data['customer_id'];
+                    $newActivity->status = "New";
+                    $newActivity->save();
+                }
+                if(!empty($orderCheck->status) && $orderCheck->status != 'Paid' && $orderCheck->status != 'Cancled'){
+                    $newActivity =  AllActivity::where('customer_id', $data['customer_id'])->latest()->first();
+                    $newActivity->customer_id = $data['customer_id'];
+                    $newActivity->book_room_id = $id;
+                    $newActivity->save();
+                }
+            }
             Session::flash('success_message', $message);
             return redirect()->route('admin.book.room');
         }
@@ -258,6 +313,20 @@ class RoomController extends Controller
         // return $billingRoom;
         $customer = Customer::where('id', $billingRoom->customer_id)->first();
         return view('admin.room.room_bill_print', compact('billingRoom', 'customer'));
+    }
+    public function deleteBookRoom($id=null)
+    {
+        // return $id;
+        BookRoom::where('id', $id)->delete();
+        $checkID =  AllActivity::where(['book_room_id'=> $id])->first();
+        // return 'test';
+        if(!empty($checkID->swimming_id) || !empty($checkID->rafting_id) || !empty($checkID->camping_id) || !empty($checkID->order_id)) {
+            AllActivity::where('book_room_id', $id)->update(['book_room_id' => null]);
+        }else{
+            // return 'test';
+            AllActivity::where('book_room_id', $id)->delete();
+        }
+        return redirect()->back()->with('success_message', 'Book Room has been deleted successfully');
     }
 
 }

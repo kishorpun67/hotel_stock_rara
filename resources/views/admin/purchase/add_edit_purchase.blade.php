@@ -62,7 +62,7 @@
                   </div>  
                 <div class="form-group">
  
-                  <label for="supplier_id">Supplier Name</label>
+                  <label for="supplier_id">Supplier Name *</label>
                   <select name="supplier_id" id="supplier_id" class="form-control select2" >
                       <option value="" >Select</option>
                       @forelse($supplier as $data)
@@ -81,7 +81,7 @@
                   
                 </div>
                 <div class="form-group">
-                  <label for="date">Date</label>
+                  <label for="date">Date *</label>
                   <input type="date" class="form-control" name="date" id="date"
                   @if(!empty($purchasedata['date']))
                   value= "{{$purchasedata['date']}}"
@@ -89,7 +89,7 @@
                   @endif>
                 </div>
                 <div class="form-group">
-                  <label for="item_id">Ingredient Item</label>
+                  <label for="item_id">Ingredient Item *</label>
                   <select name="item_id" id="purchase_id" class="form-control form-control-sm ">
                       <option value="" >Select</option>
                       @forelse($ingredientItem as $data)
@@ -229,6 +229,7 @@
                   <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                   <label for="class">Description</label>
                   <textarea name="description" id="description" class="form-control" cols="6" rows="3"></textarea>
+                  <input type="hidden" name="purchase" value="yes" />
               </div>
           </div>
           <!-- Modal footer -->

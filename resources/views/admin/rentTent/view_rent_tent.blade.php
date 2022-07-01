@@ -72,8 +72,7 @@
                   <th>Price (Per\day)</th>
                   <th>Duration (Days)</th>
                   <th>Total</th>
-                  <th>Paid</th>
-                  <th>Due</th>
+               
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -117,12 +116,10 @@
                     <td>{{ $tent->duration}}</td>
 
                     <td>{{ $tent->total}}</td>
-                    <td>{{ $tent->paid}}</td>
-                    <td>{{ $tent->due}}</td>
                     </td>
                     <td>
                     <a href="{{route('admin.add.edit.rent.tent',  $tent->id)}}" > <i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:" class="delete_form" record= "tent" rel="{{ $tent->id}}" style="display:inline;">
+                    <a href="javascript:" class="delete_form" record= "camping" rel="{{ $tent->id}}" style="display:inline;">
                         <i class="fa fa-trash fa-" aria-hidden="true" ></i>
                     </a>
                    </td>

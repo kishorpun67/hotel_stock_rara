@@ -74,11 +74,11 @@ use App\Admin\AdminPermission;
                         @endif>
                     </div>
                     <div class="form-group">
-                        <label for="class"> Email</label>
+                        <label for="class"> Email *</label>
                         <input type="email" class="form-control" name="email" placeholder="Email" @if(!empty($adminData['email']))
                         value= "{{$adminData['email']}}"
                         @else value="{{old('email')}}"
-                        @endif>
+                        @endif required>
                     </div>
                     
                     
@@ -92,20 +92,20 @@ use App\Admin\AdminPermission;
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="class"> Per hr rate   *</label>
-                    <input class="form-control" name="price" placeholder="Price" @if(!empty($adminData['price']))
+                    <input type="number" class="form-control" min="1" name="price" placeholder="Price" @if(!empty($adminData['price']))
                     value= "{{$adminData['price']}}"
                     @else value="{{old('price')}}"
                     @endif>
                 </div>
                     <div class="form-group">
-                        <label for="class"> Number *</label>
-                        <input  type="number" class="form-control" name="number" placeholder="Number" @if(!empty($adminData['number']))
+                        <label for="phone"> Number *</label>
+                        <input  type="number" class="form-control" name="number" id="phone" placeholder="Number" @if(!empty($adminData['number']))
                         value= "{{$adminData['number']}}"
                         @else value="{{old('number')}}"
                         @endif>
                     </div>
                     <div class="form-group">
-                        <label for="class"> Roles</label>
+                        <label for="class"> Roles *</label>
                         <select name="role_id" id="" class="form-control">
                             <option value="" >Select</option>
                             @foreach ($roles as $role)

@@ -87,9 +87,7 @@
                               <?php echo isset($rentTentData['tent_id']) && in_array($tent->id,explode(',',$rentTentData['tent_id'])) ? "selected" : '' ?>
                                 @else 
                                 {{ old('tent_id') == $tent->id ? 'selected' : '' }}
-
                               @endif
-                               
                                 >{{$tent->name}}
                             </option>
                         @endforeach
@@ -131,7 +129,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="address">Number of Customer *</label>
-                    <input type="number" min="1" class="form-control totalCampingAmount" name="number_of_customer" id="number_of_customer" placeholder="Number of Customer"
+                    <input type="number" min="1" class="form-control totalCampingAmount"  name="number_of_customer" name="number_of_customer" id="number_of_customer" placeholder="Number of Customer"
                     @if(!empty($rentTentData['number_of_customer']))
                     value= "{{$rentTentData['number_of_customer']}}"
                     @else value="{{old('number_of_customer')}}"

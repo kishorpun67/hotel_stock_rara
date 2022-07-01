@@ -303,14 +303,14 @@
                       @else value="{{old('discount')}}"
                       @endif>
                   </div>
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                       <label for="name"> Paid</label>
                       <input type="number" name="paid"  min="1" id="paid" class="form-control totalAmountRoom" placeholder="Paid" 
                       @if(!empty($bookRoomData['paid']))
                       value= "{{$bookRoomData['paid']}}"
                       @else value="{{old('paid')}}"
                       @endif>
-                  </div>
+                  </div> --}}
                   
                   <div class="form-group">
                       <label for="name"> Due</label>

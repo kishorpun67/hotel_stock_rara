@@ -80,37 +80,62 @@ $admin = Admin::first();
             <!-- Table row -->
             <div class="row">
                 <div class="col-12 table-responsive">
-                    <table class="table table-striped">
-                      @if(!empty($sales->ordrDetails))
-                    <thead>
-                    <tr>
-                      <th>SN</th>
-                      <th>Resturant</th>
-                      <th>quantity</th>
-                      <th>Rate</th>
-                      <th>Subtotal</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        
-                          @foreach ($sales->ordrDetails as $item)
-                            <tr>
-                              <td>{{$item->id}}</td>
-                              <td>{{$item->item}}</td>
-                              <td>{{$item->quantity}}</td>
-                              <td>{{$item->price}}</td>
-                              <td>{{$item->price *$item->quantity}}</td>
-                            </tr>
-                          @endforeach
-                    </tbody>
-                    @endif
+                  <table class="table table-striped">
+                    @if(!empty($sales->ordrDetails))
+                  <thead>
+                  <tr>
+                    <th>SN</th>
+                    <th>Resturant</th>
+                    <th>quantity</th>
+                    <th>Rate</th>
+                    <th>Subtotal</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      
+                        @foreach ($sales->ordrDetails as $item)
+                          <tr>
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->item}}</td>
+                            <td>{{$item->quantity}}</td>
+                            <td>{{$item->price}}</td>
+                            <td>{{$item->price *$item->quantity}}</td>
+                          </tr>
+                        @endforeach
+                  </tbody>
+                  @endif
 
-                    @if(!empty($swimmingPool->id))
-                   
-                    <thead>
+                  @if(!empty($swimmingPool->id))
+                 
+                  <thead>
+                  <tr>
+                    <th>SN</th>
+                    <th>Swimming Pool</th>
+                    <th>Number of Customer</th>
+                    <th>Duration(Hrs)</th>
+                    <th>Rate(Per\hrs)</th>
+                    <th>Subtotal</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{$swimmingPool->id}}</td>
+                      <td>swimming pool</td>
+                      <td>{{$swimmingPool->number_of_customer}}</td>
+                      <td>{{$swimmingPool->duration}}</td>
+                      <td>{{$swimmingPool->price}}</td>
+                      <td>{{$swimmingPool->price *$swimmingPool->duration}}</td>
+                      <?php $subTotal +=  $swimmingPool->price *$swimmingPool->duration;?>
+                    </tr>
+
+                  </tbody>
+                   @endif
+                  @if(!empty($rafting->id))
+                  <thead>
+
                     <tr>
                       <th>SN</th>
-                      <th>Swimming Pool</th>
+                      <th>Rafting</th>
                       <th>Number of Customer</th>
                       <th>Duration(Hrs)</th>
                       <th>Rate(Per\hrs)</th>
@@ -119,119 +144,94 @@ $admin = Admin::first();
                     </thead>
                     <tbody>
                       <tr>
-                        <td>{{$swimmingPool->id}}</td>
-                        <td>swimming pool</td>
-                        <td>{{$swimmingPool->number_of_customer}}</td>
-                        <td>{{$swimmingPool->duration}}</td>
-                        <td>{{$swimmingPool->price}}</td>
-                        <td>{{$swimmingPool->price *$swimmingPool->duration}}</td>
-                        <?php $subTotal +=  $swimmingPool->price *$swimmingPool->duration;?>
+                        <td>{{$rafting->id}}</td>
+                        <td>Rafting</td>
+                        <td>{{$rafting->number_of_customer}}</td>
+                        <td>{{$rafting->duration}}</td>
+                        <td>{{$rafting->price}}</td>
+                        <td>{{$rafting->price *$rafting->duration}}</td>
+                        <?php $subTotal +=  $rafting->price *$rafting->duration;?>
+
                       </tr>
 
                     </tbody>
-                     @endif
-                    @if(!empty($rafting->id))
+                  @endif
+
+                    @if(!empty($camping->id))
+                  
                     <thead>
 
                       <tr>
                         <th>SN</th>
-                        <th>Rafting</th>
+                        <th>Camping</th>
                         <th>Number of Customer</th>
-                        <th>Duration(Hrs)</th>
-                        <th>Rate(Per\hrs)</th>
+                        <th>Duration(day)</th>
+                        <th>Rate(Per\day)</th>
                         <th>Subtotal</th>
                       </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td>{{$rafting->id}}</td>
-                          <td>Rafting</td>
-                          <td>{{$rafting->number_of_customer}}</td>
-                          <td>{{$rafting->duration}}</td>
-                          <td>{{$rafting->price}}</td>
-                          <td>{{$rafting->price *$rafting->duration}}</td>
-                          <?php $subTotal +=  $rafting->price *$rafting->duration;?>
+                          <td>{{$camping->id}}</td>
+                          <td>Camping</td>
+                          <td>{{$camping->number_of_customer}}</td>
+                          <td>{{$camping->duration}}</td>
+                          <td>{{$camping->price}}</td>
+                          <td>{{$camping->price *$camping->duration}}</td>
+                        <?php $subTotal +=  $camping->price *$camping->duration;?>
 
                         </tr>
   
                       </tbody>
-                    @endif
-
-                      @if(!empty($camping->id))
-                    
+                      @endif
+                      @if(!empty($bookRoom->room_id))
                       <thead>
 
                         <tr>
                           <th>SN</th>
-                          <th>Camping</th>
-                          <th>Number of Customer</th>
-                          <th>Duration(day)</th>
-                          <th>Rate(Per\day)</th>
+                          <th>Room</th>
+                          <th>Room Type</th>
+                          <th>Room Charge</th>
+                          <th>Additional Charge</th>
                           <th>Subtotal</th>
                         </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td>{{$camping->id}}</td>
-                            <td>Camping</td>
-                            <td>{{$camping->number_of_customer}}</td>
-                            <td>{{$camping->duration}}</td>
-                            <td>{{$camping->price}}</td>
-                            <td>{{$camping->price *$camping->duration}}</td>
-                          <?php $subTotal +=  $camping->price *$camping->duration;?>
+                            <td>{{$bookRoom->id}}</td>
+                            <td>
+                                 @if (!empty($bookRoom->room_id))
+                                  <?php 
+                                  $ids = explode(',', $bookRoom->room_id);
+                                  $rooms = Room::whereIn('id', $ids)->with('roomType')->get();
+                                  ?>
+                                  {{-- {{$ids}} --}}
+                                  @foreach ($rooms as $item)
+                                  {{$item->name}} <br>
+                                  @endforeach
+                                @else
+                                @endif
+                              </td>
+                            <td>
+                              @if (!empty($bookRoom->room_id))
+                                 @foreach ($rooms as $item)
+                                  @if (!empty($item->roomType->room_type))
+                                      {{$item->roomType->room_type}} <br>
+                                  @endif
+                                  @endforeach
+                            @else
+                            @endif</td>
+                            <td>{{$bookRoom->room_charge}}</td>
+                            <td>{{$bookRoom->aditional_charge}}</td>
+                            <td>{{$bookRoom->room_charge + $bookRoom->aditional_charge}}</td>
+                        <?php $subTotal +=  $bookRoom->room_charge + $bookRoom->aditional_charge; ?>
 
                           </tr>
     
                         </tbody>
-                        @endif
-                        @if(!empty($bookRoom->room_id))
-                        <thead>
+                      @endif
 
-                          <tr>
-                            <th>SN</th>
-                            <th>Room</th>
-                            <th>Room Type</th>
-                            <th>Room Charge</th>
-                            <th>Additional Charge</th>
-                            <th>Subtotal</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>{{$bookRoom->id}}</td>
-                              <td>
-                                   @if (!empty($bookRoom->room_id))
-                                    <?php 
-                                    $ids = explode(',', $bookRoom->room_id);
-                                    $rooms = Room::whereIn('id', $ids)->with('roomType')->get();
-                                    ?>
-                                    {{-- {{$ids}} --}}
-                                    @foreach ($rooms as $item)
-                                    {{$item->name}} <br>
-                                    @endforeach
-                                  @else
-                                  @endif
-                                </td>
-                              <td>
-                                @if (!empty($bookRoom->room_id))
-                                   @foreach ($rooms as $item)
-                                    @if (!empty($item->roomType->room_type))
-                                        {{$item->roomType->room_type}} <br>
-                                    @endif
-                                    @endforeach
-                              @else
-                              @endif</td>
-                              <td>{{$bookRoom->room_charge}}</td>
-                              <td>{{$bookRoom->aditional_charge}}</td>
-                              <td>{{$bookRoom->room_charge + $bookRoom->aditional_charge}}</td>
-                          <?php $subTotal +=  $bookRoom->room_charge + $bookRoom->aditional_charge; ?>
-
-                            </tr>
-      
-                          </tbody>
-                        @endif
-
-                  </table>
+                </table>
                 </div>
                 <!-- /.col -->
             </div>
@@ -255,23 +255,37 @@ $admin = Admin::first();
                     {{-- <p class="lead">Amount Due 2/22/2014</p> --}}
 
                     <div class="table-responsive">
-                        <table class="table">
-                            <tr>
-                                <th style="width:50%">Subtotal:</th>
-                                <td>{{$subTotal}}</td>
-                            </tr>
-                            <tr>
-                            <th>Tax:</th>
-                            <td>
-                              {{$tax->tax}}%
-                            </td>
-                          </tr>
-                          <tr>
-                            <th>Total:</th>
-                            <?php  $total = $subTotal+(($tax->tax*$subTotal)/100); ?>
-                            <td>{{$total}}</td>
-                          </tr>
-                        </table>
+                      <table class="table">
+                        <tr>
+                          <th style="width:50%">Subtotal:</th>
+                          <td>{{$activity->sub_total}}</td>
+                        </tr>
+                        <tr>
+                          <th>Tax:</th>
+                          <td>
+                            {{$activity->tax}}%
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>Discount:</th>
+                          <td>
+                            {{$activity->discount}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>Service Charge:</th>
+                          <td>
+                            {{$activity->service_charge}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>Total:</th>
+                          <?php  $total = $subTotal+(($activity->tax*$subTotal)/100); 
+                          $total_amount = $total + $activity->service_charge -$activity->discount;
+                          ?>
+                          <td>{{$activity->total}}</td>
+                        </tr>
+                      </table>
                     </div>
                 </div>
                 <!-- /.col -->

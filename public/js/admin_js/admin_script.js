@@ -1,5 +1,5 @@
 // const { Toast } = require("bootstrap");
-// const { pad } = require("lodash"); totalSummingAmount
+// const { pad } = require("lodash"); totalSummingAmount totalCampingAmount getRoom
 
 $(document).ready(function() {
 
@@ -50,10 +50,27 @@ $(document).ready(function() {
 
 function getRoom(room_id) {
     // alert(room_id)
+    // $(".test").removeClass("metting-room-active");
+    // $(`#metting-room-active-${room_id}`).addClass("test metting-room-active"); getTable
+
+    $("#ajaxTableBigRoom").css("display", "none");
+
+    if ($(`#metting-room-active-${room_id}`).hasClass('metting-room-active')) {
+        $("#room_id").val('')
+        $(".test").removeClass("metting-room-active");
+        $("#tableRoomShow").css("display", "inline-block");
+        $("#ajaxtTableShow").css("display", "none");
+        return;
+
+    } else {
+        $(".test").removeClass("metting-room-active");
+        $(`#metting-room-active-${room_id}`).addClass("test metting-room-active");
+    }
+
     $("#room_id").val(room_id)
     $("#table_id").val("")
-    $(".room-class").removeClass("marked");
-    $(`#room-${room_id}`).addClass("room-class marked");
+    $(".room-class").removeClass("active");
+    $(`#room-${room_id}`).addClass("room-class active");
 
     $.ajax({
         type: 'get',
@@ -63,13 +80,63 @@ function getRoom(room_id) {
         },
         success: function(response) {
             // console.log(response)
-            $("#ajaxTableRoom").empty();
-            $("#ajaxTableRoom").html(response);
+            if (response.data == 0) {} else {
+                $("#tableRoomShow").css("display", "none");
+                $("#ajaxTableRoom").empty();
+                $("#ajaxTableRoom").html(response);
+                // console.log('tst')
+            }
         },
         error: function() {
             alert("Error");
         }
     });
+}
+
+function getSingleTable(table_id) {
+    // alert(table_id);
+    $("#table_id").val(table_id)
+    $(".room-class").removeClass("active");
+    $(`#table-${table_id}`).addClass("room-class active");
+    return;
+    $.ajax({
+        type: 'get',
+        url: '/admin/ajax-get-big-room-table',
+        data: {
+            table_id: table_id
+        },
+        success: function(response) {
+            $("#ajaxTableBigRoom").css("display", "block");
+            $("#ajaxTableBigRoom").html(response);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+
+}
+
+function ajaxTable(table_id) {
+    // alert(table_id);
+    $(".room-class").removeClass("active");
+    $(`#table-${table_id}`).addClass("room-class active");
+    $(`#table_ids`).val(table_id);
+    return;
+    $.ajax({
+        type: 'get',
+        url: '/admin/ajax-table',
+        data: {
+            table_id: table_id
+        },
+        success: function(response) {
+            // $("#ajaxTableBigRoom").css("display", "block");
+            $("#ajaxTable").html(response);
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+
 }
 
 function getFoodType(item_type) {
@@ -81,6 +148,7 @@ function getFoodType(item_type) {
             item_type: item_type
         },
         success: function(response) {
+
             // console.log(response)
             $("#ajaxItem").html(response);
         },
@@ -879,8 +947,8 @@ $(".totalAmountRoom").keyup(function() {
     var advance = ($("#advance").val())
     var additional_charge = ($("#additional_charge").val())
     var discount = ($("#discount").val())
-    var paid = ($("#paid").val())
-    console.log(room_charge, advance, additional_charge, discount, paid)
+        // var paid = ($("#paid").val())
+    console.log(room_charge, advance, additional_charge, discount)
     if (room_charge == "") {
         room_charge = 0;
     }
@@ -893,14 +961,50 @@ $(".totalAmountRoom").keyup(function() {
     if (discount == "") {
         discount = 0;
     }
-    if (paid == "") {
-        paid = 0;
-    }
+    // if (paid == "") {
+    //     paid = 0;
+    // }
 
 
     var subTotal = parseInt(room_charge) + parseInt(additional_charge);
     var total = (parseInt(subTotal) - parseInt(advance)) - parseInt(discount);
-    var due = total - parseInt(paid);
+    var due = total;
+
+    $("#total").val(total)
+    $("#due").val(due)
+
+
+
+
+
+})
+$(".totalAmountRoom").change(function() {
+    var room_charge = ($("#room_charge").val())
+    var advance = ($("#advance").val())
+    var additional_charge = ($("#additional_charge").val())
+    var discount = ($("#discount").val())
+        // var paid = ($("#paid").val())
+    console.log(room_charge, advance, additional_charge, discount)
+    if (room_charge == "") {
+        room_charge = 0;
+    }
+    if (additional_charge == "") {
+        additional_charge = 0;
+    }
+    if (advance == "") {
+        advance = 0;
+    }
+    if (discount == "") {
+        discount = 0;
+    }
+    // if (paid == "") {
+    //     paid = 0;
+    // }
+
+
+    var subTotal = parseInt(room_charge) + parseInt(additional_charge);
+    var total = (parseInt(subTotal) - parseInt(advance)) - parseInt(discount);
+    var due = total;
 
     $("#total").val(total)
     $("#due").val(due)
@@ -912,6 +1016,33 @@ $(".totalAmountRoom").keyup(function() {
 })
 
 
+$(".totalSummingAmount").change(function() {
+
+    var number_of_customer = ($("#number_of_customer").val())
+        // alert(number_of_customer)
+    var price = ($("#price").val())
+    var duration = ($("#duration").val())
+    var paid = ($("#paid").val())
+    console.log(price, duration, paid)
+    if (price == "") {
+        price = 0;
+    }
+    if (duration == "") {
+        duration = 0;
+    }
+    if (paid == "") {
+        paid = 0;
+    }
+    if (number_of_customer == "") {
+        number_of_customer = 0;
+    }
+    var total = (parseInt(price) * parseInt(duration) * parseInt(number_of_customer));
+    var due = total - parseInt(paid);
+
+    $("#total").val(total)
+    $("#due").val(total)
+
+})
 $(".totalSummingAmount").keyup(function() {
 
     var number_of_customer = ($("#number_of_customer").val())
@@ -936,7 +1067,7 @@ $(".totalSummingAmount").keyup(function() {
     var due = total - parseInt(paid);
 
     $("#total").val(total)
-    $("#due").val(due)
+    $("#due").val(total)
 
 })
 $("#tent_id").change(function() {
@@ -964,11 +1095,11 @@ $("#tent_id").change(function() {
 
 
 $(".totalCampingAmount").keyup(function() {
-    alert("Totalt");
+    // alert('teseted')
     var number_of_customer = ($("#number_of_customer").val())
     var price = ($("#price").val())
     var duration = ($("#duration").val())
-    console.log(price, duration, paid)
+    console.log(price, duration)
     if (number_of_customer == "") {
         number_of_customer = 0;
     }
@@ -978,9 +1109,89 @@ $(".totalCampingAmount").keyup(function() {
     if (duration == "") {
         duration = 0;
     }
-
     var total = (parseInt(price) * parseInt(duration) * parseInt(number_of_customer));
+    $("#total").val(total)
+    $("#due").val(total)
 
+})
+$(".totalCampingAmount").click(function() {
+    // alert('teseted')
+    var number_of_customer = ($("#number_of_customer").val())
+    var price = ($("#price").val())
+    var duration = ($("#duration").val())
+    console.log(price, duration)
+    if (number_of_customer == "") {
+        number_of_customer = 0;
+    }
+    if (price == "") {
+        price = 0;
+    }
+    if (duration == "") {
+        duration = 0;
+    }
+    var total = (parseInt(price) * parseInt(duration) * parseInt(number_of_customer));
+    $("#total").val(total)
+    $("#due").val(total)
+
+})
+$(".totalCheckoutBillAmount").change(function() {
+    // alert('teseted') totalAmountRoom
+    var service_charge = ($("#service_charge").val())
+    var paid = ($("#paid").val())
+    var discount = ($("#discount").val())
+    var tax = ($("#tax").val())
+    var subtotal = ($("#subtotal").val())
+    if (service_charge == "") {
+        service_charge = 0;
+    }
+    if (paid == "") {
+        paid = 0;
+    }
+    if (discount == "") {
+        discount = 0;
+    }
+    if (tax == "") {
+        tax = 0;
+    }
+    if (subtotal == "") {
+        subtotal = 0;
+    }
+    console.log(subtotal, tax)
+
+    var subtotal = (parseInt(subtotal) + parseInt(service_charge) - parseInt(discount));
+    var total = subtotal + (subtotal * tax / 100);
+    var due = total - parseInt(paid)
+    $("#total").val(total)
+    $("#due").val(due)
+
+})
+$(".totalCheckoutBillAmount").keyup(function() {
+    // alert('teseted')
+    var service_charge = ($("#service_charge").val())
+    var paid = ($("#paid").val())
+    var discount = ($("#discount").val())
+    var tax = ($("#tax").val())
+    var subtotal = ($("#subtotal").val())
+    if (service_charge == "") {
+        service_charge = 0;
+    }
+    if (paid == "") {
+        paid = 0;
+    }
+    if (discount == "") {
+        discount = 0;
+    }
+    if (tax == "") {
+        tax = 0;
+    }
+    if (subtotal == "") {
+        subtotal = 0;
+    }
+    console.log(subtotal, tax)
+
+    var subtotal = (parseInt(subtotal) + parseInt(service_charge) - parseInt(discount));
+    var total = subtotal + (subtotal * tax / 100);
+    var due = total - parseInt(paid)
     $("#total").val(total)
     $("#due").val(due)
 

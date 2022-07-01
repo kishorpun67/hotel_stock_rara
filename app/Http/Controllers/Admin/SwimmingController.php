@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Session;
 use App\Admin\SwimmingPool;
 use App\Customer;
+use DB;
+use App\AllActivity;
+
+use function GuzzleHttp\Promise\all;
 
 class SwimmingController extends Controller
 {
@@ -41,8 +45,6 @@ class SwimmingController extends Controller
                 'number_of_customer' =>'required|numeric',
                 'price' =>'required|numeric',
                 'duration' =>'required',
-
-
             ];
 
             $customMessages = [
@@ -53,6 +55,12 @@ class SwimmingController extends Controller
                 'duration.required' => 'Duration is required',
             ];
             $this->validate($request, $rules, $customMessages);
+            // if($id==null){
+            //     $getStatus = AllActivity::where('customer_id', $data['customer_id'])->latest()->first();
+            //     if(!empty($getStatus->status) && $getStatus->status != 'Paid' && $getStatus->status != 'Cancled'){
+            //         return redirect()->back()->with('error_message','Please! Checkout this customor first');
+            //     }
+            // }
                 
             if(empty($data['paid']))
             {
@@ -66,6 +74,7 @@ class SwimmingController extends Controller
             {
                 $data['total'] = "";
             }
+            $orderCheck = AllActivity::where(['customer_id'=>$data['customer_id']])->latest()->first();
             $swimmingPool->admin_id = auth('admin')->user()->id;
             $swimmingPool->customer_id = $data['customer_id'];
             $swimmingPool->number_of_customer = $data['number_of_customer'];
@@ -75,6 +84,53 @@ class SwimmingController extends Controller
             $swimmingPool->paid = $data['paid'];
             $swimmingPool->due = $data['due'];
             $swimmingPool->save();
+            if($id==null){
+                $swimming_id= DB::getPdo()->lastInsertId();
+                if(empty($orderCheck->status) ){
+                    $newActivity = new AllActivity();
+                    $newActivity->swimming_id = $swimming_id;
+                    $newActivity->customer_id = $data['customer_id'];
+                    $newActivity->admin_id = auth('admin')->user()->id;
+                    $newActivity->status = "New";
+                    $newActivity->save();
+                }elseif($orderCheck->status == 'Paid' || $orderCheck->status == 'Cancel'){
+                    // return "test";
+                    $newActivity = new AllActivity();
+                    $newActivity->swimming_id = $swimming_id;
+                    $newActivity->customer_id = $data['customer_id'];
+                    $newActivity->admin_id = auth('admin')->user()->id;
+                    $newActivity->status = "New";
+                    $newActivity->save();
+                }elseif($orderCheck->status == 'Paid' || $orderCheck->status != 'Cancel'){
+                    // return "test2";
+                    $newActivity =  AllActivity::where('customer_id', $data['customer_id'])->latest()->first();
+                    $newActivity->swimming_id = $swimming_id;
+                    $newActivity->save();
+                }
+            }else{
+                $swimming_id= DB::getPdo()->lastInsertId();
+                $checkID =  AllActivity::where(['swimming_id'=> $id])->first();
+                if(!empty($checkID->book_room_id) || !empty($checkID->rafting_id) || !empty($checkID->camping_id) || !empty($checkID->order_id)) {
+                    AllActivity::where('swimming_id', $id)->update(['swimming_id' => null]);
+                }else{
+                    AllActivity::where('swimming_id', $id)->delete();
+                }
+                $orderCheck = AllActivity::where(['customer_id'=>$data['customer_id']])->latest()->first();
+                if(empty($orderCheck->status) ){
+                    $newActivity = new AllActivity();
+                    $newActivity->swimming_id = $id;
+                    $newActivity->admin_id = auth('admin')->user()->id;
+                    $newActivity->customer_id = $data['customer_id'];
+                    $newActivity->status = "New";
+                    $newActivity->save();
+                }
+                if(!empty($orderCheck->status) && $orderCheck->status != 'Paid' && $orderCheck->status != 'Cancled'){
+                    $newActivity =  AllActivity::where('customer_id', $data['customer_id'])->latest()->first();
+                    $newActivity->customer_id = $data['customer_id'];
+                    $newActivity->swimming_id = $id;
+                    $newActivity->save();
+                }
+            }
             Session::flash('success_message', $message);
             return redirect()->route('admin.swimming.pool');
         }
@@ -85,7 +141,17 @@ class SwimmingController extends Controller
 
     public function deleteSwimmingPool($id=null)
     {
+        
+        $checkID =  AllActivity::where(['swimming_id'=> $id])->first();
+        if(!empty($checkID->book_room_id) || !empty($checkID->rafting_id) || !empty($checkID->camping_id) || !empty($checkID->order_id)) {
+            AllActivity::where('swimming_id', $id)->update(['swimming_id' => null]);
+        }else{
+            // return 'test';
+            AllActivity::where('swimming_id', $id)->delete();
+        }
+        // return $id;
         SwimmingPool::where('id', $id)->delete();
+
         return redirect()->back()->with('success_message', 'Swimming Pool has been deleted successfully');
     }
 }

@@ -77,6 +77,9 @@ class SupplierController extends Controller
             $supplier->description = $data['description'];
             $supplier->save();
             Session::flash('success_message', $message);
+            if(!empty($data['purchase'])) {  
+                return redirect()->back();
+            }
             return redirect()->route('admin.supplier');
         }
         Session::flash('page', 'supplier');
