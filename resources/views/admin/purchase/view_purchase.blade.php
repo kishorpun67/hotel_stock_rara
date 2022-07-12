@@ -1,5 +1,6 @@
 @extends('layouts.admin_layout.admin_layout')
 @section('content')
+<?php  use App\Purchase;?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -18,14 +19,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
+    
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -58,7 +52,11 @@
                   </td>
                   <td>{{$data->date}}</td>
                   <td>{{$data->total}}</td>
-                  <td>{{$data->paid}}</td>
+                  <td>
+                    <?php $due_paid = Purchase::purchaseDue($data->id);
+                    $total_paid = $due_paid +$data->paid;
+                     ?>
+                    {{$total_paid}}</td>
                   <td>{{$data->due}}</td>
 
                    <td>

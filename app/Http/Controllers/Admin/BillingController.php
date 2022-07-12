@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Customer;
 use Session;
 use App\Admin\BookRoom;
+use App\Admin\BookSwimmingPool;
 use App\Order;
 use App\Admin\Rafting;
 use App\Admin\SwimmingPool;
@@ -28,7 +29,7 @@ class BillingController extends Controller
     }   
     public function billingCheckout($id=null)
     {
-        $activity = AllActivity::find($id);
+       $activity = AllActivity::find($id);
         // $id = $activity->customer_id;
         // return $activity;
         $paymentMethod = PaymentMethod::get();
@@ -58,11 +59,17 @@ class BillingController extends Controller
         {
             $data['paid'] = "";
         }
+       
         $updateActivity = AllActivity::find($id);
         Order::where('id', $updateActivity->order_id)->update(['status' => $data['status']]);
+        SwimmingPool::where('id', $updateActivity->swimming_id)->update(['status' => $data['status']]);
+        BookRoom::where('id', $updateActivity->book_room_id)->update(['status' => $data['status']]);
+        RentTent::where('id', $updateActivity->camping_id)->update(['status' => $data['status']]);
+        Rafting::where('id', $updateActivity->rafting_id)->update(['status' => $data['status']]);
         $updateActivity->service_charge = $data['service_charge'];
         $updateActivity->discount = $data['discount'];
         $updateActivity->tax = $data['tax'];
+        $updateActivity->vat = $data['vat'];
         $updateActivity->paid = $data['paid'];
         $updateActivity->total = $data['total'];
         $updateActivity->sub_total = $data['subtotal'];
@@ -97,5 +104,11 @@ class BillingController extends Controller
         $bookRoom = BookRoom::with('room')->where(['id' => $activity->book_room_id, 'customer_id'=> $activity->customer_id])->latest()->first();
         Session::flash('page', 'billing');
         return view('admin.billing.bill_print', compact('activity','customer', 'sales', 'swimmingPool', 'rafting', 'camping' , 'bookRoom'));
+    }
+
+    public function deleteBilling($id)
+    {
+        AllActivity::where('id',$id)->delete();
+        return redirect()->back()->with('success_message', 'Billing deleted successfully');
     }
 }

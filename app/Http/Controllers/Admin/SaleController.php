@@ -24,6 +24,7 @@ use App\CustomerTable;
 use Facade\Ignition\Tabs\Tab;
 use App\Admin\Room;
 use App\AllActivity;
+use App\IngredientItem;
 
 class SaleController extends Controller
 {
@@ -88,10 +89,10 @@ class SaleController extends Controller
         $newcarts = new Cart;
         // $newcarts->item_id = $data['item_id'];
         $newcarts->admin_id = auth('admin')->user()->id;
+        $newcarts->item_id = $data['item_id'];
         $newcarts->price = $data['price'];
         $newcarts->item = $data['name'];
         $newcarts->quantity =1;
-        // $newcarts->total = $data['price'] ;
         $newcarts->is_caffe = $data['is_caffe'];
         $newcarts->is_bar = $data['is_bar'];
         $newcarts->is_kitchen = $data['is_kitchen'];
@@ -129,7 +130,16 @@ class SaleController extends Controller
 
     public function deleteSale($id)
     {
-        $id =Order::where('id', $id)->delete();
+        // return $id;
+        $checkID =  AllActivity::where(['order_id'=> $id])->first();
+        Order::where('id', $id)->delete();
+        if(!empty($checkID->swimming_id) || !empty($checkID->camping_id) || !empty($checkID->book_room_id) || !empty($checkID->rafting_id)) {
+            // return "test1";
+            AllActivity::where('order_id', $id)->update(['order_id' => null]);
+        }else{
+            // return 'test';
+            AllActivity::where('order_id', $id)->delete();
+        }
         return redirect()->back()->with('success_message', 'sale has been deleted successfully!');
     }
 
@@ -185,35 +195,49 @@ class SaleController extends Controller
     {
         CustomerTable::where('id',request('customer_id'))->delete();
         $data = CustomerTable::where([ 'table_id'=>request('table_id')])->get();
-        // get avilable seat 
+        // get avilable seat   ajaxFoodTable
         $seat_capacity = Table::where('id', request('table_id'))->first();
         $no_customer = CustomerTable::where(['table_id'=>request('table_id')])->sum('no_customer');
         $available_seat = $seat_capacity->seat_capacity - $no_customer;
         return response()->json(['data'=>$data, 'table_ids'=>request('table_id'), 'available_seat'=>$available_seat, 'no_customer'=> $no_customer], 200); 
     }
-    public function addTable()
+    public function addTable($url=null)
     {
-        request()->all();
-        if(empty(request('table_id')) && empty(request('room_id'))){
-            return redirect()->back();
+        if($url == 'no-table-room'){
+            $foodCategories = FoodCategory::get();
+            Cart::where('admin_id', auth('admin')->user()->id)->delete();
+            $carts =  array();
+            $foodMenus = FoodMenu::with('foodCategory')->get();
+            $waiter = Admin::where('role_id',6)->get();
+            $customer = Customer::get();
+            $order = Order::with('table', 'customer', 'room')->orderBy('id','Desc')->where('status', '!=', 'Cancel')->get();
+            Session::flash('page', 'sale');
+            return view('admin.sale.add_edit_sale', compact('order','foodCategories','foodMenus','carts','waiter','customer'));
+        }else{
+            if(empty(request('table_id')) && empty(request('room_id'))){
+                return redirect()->back()->with('error_message', 'Please select room or table');
+            }
+            if(!empty(request('table_id')) && !empty(request('room_id'))){
+                // return "first";
+                $table = Table::with('room')->where(['id'=>request('table_id'), 'room_id'=>request('room_id')])->first();
+            } else if (!empty(request('room_id'))) {   
+                $table = Room::where('id',request('room_id'))->first();
+            } else{
+                $table = Table::where('id',request('table_id'))->first();
+            }
+            $foodCategories = FoodCategory::get();
+            Cart::where('admin_id', auth('admin')->user()->id)->delete();
+            $carts =  array();
+            $foodMenus = FoodMenu::with('foodCategory')->get();
+            $waiter = Admin::where('role_id',6)->get();
+            $customer = Customer::get();
+            $order = Order::with('table', 'customer', 'room')->orderBy('id','Desc')->where('status', '!=', 'Cancel')->get();
+            Session::flash('page', 'sale');
+            return view('admin.sale.add_edit_sale', compact('order','foodCategories','foodMenus','carts','waiter','customer', 'table'));
+
         }
-        if(!empty(request('table_id')) && !empty(request('room_id'))){
-            // return "first";
-            $table = Table::with('room')->where(['id'=>request('table_id'), 'room_id'=>request('room_id')])->first();
-        } else if (!empty(request('room_id'))) {   
-            $table = Room::where('id',request('room_id'))->first();
-        } else{
-            $table = Table::where('id',request('table_id'))->first();
-        }
-        $foodCategories = FoodCategory::get();
-        Cart::where('admin_id', auth('admin')->user()->id)->delete();
-        $carts =  array();
-        $foodMenus = FoodMenu::with('foodCategory')->get();
-        $waiter = Admin::where('role_id',6)->get();
-        $customer = Customer::get();
-        $order = Order::with('table', 'customer', 'room')->orderBy('id','Desc')->where('status', '!=', 'Cancel')->get();
-        Session::flash('page', 'sale');
-        return view('admin.sale.add_edit_sale', compact('order','foodCategories','foodMenus','carts','waiter','customer', 'table'));
+
+       
     }
 
     public function addCustomer()
@@ -237,11 +261,17 @@ class SaleController extends Controller
     public function placeOrder()
     {
         $data = request()->all();
+        if(empty($data['table_id'])  && empty($data['room_id']) ){
+            Session::flash('error_message', 'Please! Select a table or room');
+            return redirect()->back();
+        }
+        // return $data;
         if(empty($data['waiter_id']) ){
             $data['waiter_id'] = 0;
         }
         if( empty($data['customer_id'])){
-            $data['customer_id'] = 0;
+            Session::flash('error_message', 'Please! Select a customer name');
+            return redirect()->back();
         }
         if( empty($data['discount'])){
             $data['discount'] = 0;
@@ -252,7 +282,16 @@ class SaleController extends Controller
         $no_customer = CustomerTable::where(['admin_id'=>auth('admin')->user()->id, 'table_id'=>request('table_id')])->sum('no_customer');
         $latestOder = Order::where('customer_id', $data['customer_id'])->latest()->first();
 
-        $carts = Cart::get();
+        $carts = Cart::where('admin_id',auth('admin')->user()->id)->get();
+        foreach( $carts as $cart){
+
+           $foodMenu = IngredientItem::getConsumptinStock($cart->item_id);
+            foreach($foodMenu as $food){   
+                //   echo $food->consumption_quantity;die; updateOrder
+                IngredientItem::reduceIngredientStock($food->ingredient_id, $food->consumption_quantity*$cart->quantity);
+            }
+            
+        }
         $orderCheck =  AllActivity::where('customer_id',$data['customer_id'])->latest()->first();
         if(empty($latestOder->status)  || $latestOder->status == "Paid" || $latestOder->status == "Cancel"){
             $new  = new Order();
@@ -297,9 +336,10 @@ class SaleController extends Controller
         }
         foreach($carts as $cart)
         {
-            // return $cart->is_kitchen;
+            // return $cart->is_kitchen; add_edit_sale
             $newOrder = new OrderDetail();
             $newOrder->order_id = $order_id;
+            $newOrder->item_id = $cart->item_id;
             $newOrder->item = $cart->item;
             $newOrder->price = $cart->price;
             $newOrder->quantity = $cart->quantity;
@@ -348,6 +388,7 @@ class SaleController extends Controller
                 Notification::send($bar_staff, new OrderNotification($bar));
             }
         }
+        Session::flash('success_message', 'Order has been placed successfully.');
         return redirect()->back();
     }
     public function ajaxGetModifyOrder()
@@ -359,11 +400,23 @@ class SaleController extends Controller
     public function updateOrder(Request $request)
     {
         $data = $request->all();
+        $cart = OrderDetail::where('id', $data['cart_id'])->first();
+        $foodMenu = IngredientItem::getConsumptinStock($cart->item_id);
+        
         if($data['qty']=="qtyMinus"){
             $cart =  OrderDetail::where([ 'id'=>$data['cart_id']])->decrement('quantity',1);
+            foreach($foodMenu as $food){   
+                //   echo $food->consumption_quantity;die; updateOrder
+                IngredientItem::increaseIngredientStock($food->ingredient_id, $food->consumption_quantity);
+            }
         }elseif($data['qty']=="qtyPlus")
         {
+           
             $cart =  OrderDetail::where([ 'id'=>$data['cart_id']])->increment('quantity',1);
+            foreach($foodMenu as $food){   
+                //   echo $food->consumption_quantity;die; updateOrder
+                IngredientItem::reduceIngredientStock($food->ingredient_id, $food->consumption_quantity);
+            }
         }
         $orderDetails  = Order::with('ordrDetails')->where('id', request('order_id'))->first();
         return view('admin.sale.ajaxOderModify', compact('orderDetails'));
@@ -407,8 +460,9 @@ class SaleController extends Controller
             AllActivity::where('order_id', $id)->update(['order_id' => null]);
         }else{
             // return 'test';
-            AllActivity::where('rafting_id', $id)->delete();
+            AllActivity::where('order_id', $id)->delete();
         }
+        Session::flash('success_message', 'Order has been canceled successfully.');
         return redirect()->back();
     
     }

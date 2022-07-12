@@ -267,6 +267,12 @@ $admin = Admin::first();
                           </td>
                         </tr>
                         <tr>
+                          <th>Vat:</th>
+                          <td>
+                            {{$activity->vat}}%
+                          </td>
+                        </tr>
+                        <tr>
                           <th>Discount:</th>
                           <td>
                             {{$activity->discount}}
@@ -280,7 +286,7 @@ $admin = Admin::first();
                         </tr>
                         <tr>
                           <th>Total:</th>
-                          <?php  $total = $subTotal+(($activity->tax*$subTotal)/100); 
+                          <?php  $total = $subTotal+(($activity->tax*$subTotal)/100)+(($activity->vat*$subTotal)/100); 
                           $total_amount = $total + $activity->service_charge -$activity->discount;
                           ?>
                           <td>{{$activity->total}}</td>

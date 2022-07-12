@@ -28,6 +28,8 @@
 <link rel="stylesheet" type="text/css" href="{{asset('front/css/responsive.css')}}" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+
 <style>
     .invoice-title h2, .invoice-title h3 {
         display: inline-block;
@@ -45,6 +47,7 @@
         border-top: 2px solid;
 }
 </style>
+
 <!------ Include the above in your HEAD tag ---------->
 
 
@@ -358,7 +361,8 @@
   </section>
   <!--//back to top scroll--> 
  
-<script type="text/javascript" src="{{asset('front/js/jquery-1.9.1.min.js')}}"></script> 
+  <script type="text/javascript" src="{{asset('front/js/jquery-1.9.1.min.js')}}"></script> 
+
 <script type="text/javascript" src="{{asset('front/js/owl.carouselv2.3.4.js')}}"></script> 
 <script type="text/javascript" src="{{asset('front/js/fixed-nav.js')}}"></script> 
 <script type="text/javascript" src="{{asset('front/js/jquery.js')}}"></script> 
@@ -366,6 +370,28 @@
 <script type="text/javascript" src="{{asset('front/js/Push_up_jquery.js')}}"></script> 
 <script type="text/javascript" src="{{asset('front/js/annimatable_jquery.js')}}"></script> 
 <script type='text/javascript' src="{{asset('front/js/isotope.min.js')}}"></script> 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+
+  @if(Session::has('success_message'))
+      toastr.options =
+      {
+          "closeButton" : true,
+          "progressBar" : true
+      }
+          toastr.success("{{ session('success_message') }}");
+  @endif
+  @if(Session::has('error_message'))
+      toastr.options =
+      {
+          "closeButton" : true,
+          "progressBar" : true
+      }
+              toastr.error("{{ session('error_message') }}");
+  @endif
+</script>
+
 <script type="text/javascript">
 	var $container = $('#isotope-container .image-content ul');
 	// Isotope initialize-

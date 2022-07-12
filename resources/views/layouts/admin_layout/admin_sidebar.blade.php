@@ -9,7 +9,7 @@
   <a href="{{route('admin.dashboard')}}" class="brand-link">
       {{-- <img src="{{asset('image/admin_image/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8"> --}}
-      {{-- <span class="brand-text font-weight-light">Admin | Dashboard</span> --}}
+      {{-- <span class="brand-text font-weight-light">Admin | Dashboard</span> --}} sale
 
       <span class="logo-text">RH</span>
 
@@ -456,7 +456,21 @@
                 </a>
               </li>
             @endif
-    
+            @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(44))
+              @if(Session::get('page')=="stock")
+                <?php $active = "active"; ?>
+                @else
+                <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.stock')}}" class="nav-link {{$active}} ">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                  <p>
+                    Stock
+                  </p>
+                </a>
+              </li>
+            @endif
             @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(47))
               @if(Session::get('page')=="waste")
                 <?php $active = "active"; ?>
@@ -757,11 +771,10 @@
         {{-- start report section  --}}
         @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(51))
     
-            @if(Session::get('page')=="pl_account" || Session::get('page')=="daily_sale_report" || Session::get('page')=="waste_report" || Session::get('page')=="purchase_report"
+            @if(Session::get('page')=="pl_account" || Session::get('page')=="daily_sale_report" ||Session::get('page')=="profit_loss_report" || Session::get('page')=="waste_report" || Session::get('page')=="purchase_report"
             || Session::get('page')=="attendance_report" || Session::get('page')=="sale_report" || Session::get('page')=="stock_report" || Session::get('page')=="consumption_report" || Session::get('page')=="low_inventory_report"
-            || Session::get('page')=="leave_report" || Session::get('page')=="salary_report" || Session::get('page')=="tax_report" || Session::get('page')=="salary_report" || Session::get('page')=="task_report")
-    
-    
+            || Session::get('page')=="leave_report" || Session::get('page')=="salary_report" || Session::get('page')=="tax_report" || Session::get('page')=="salary_report" || Session::get('page')=="task_report"
+            || Session::get('page')=="room_report" || Session::get('page')=="camping_report" || Session::get('page')=="rafting_report"|| Session::get('page')=="swimming_report")
             <?php $active = "active";
             $menuOpen="menu-open"; ?>
              @else
@@ -800,6 +813,71 @@
                 <a href="{{route('admin.daily.summary.report')}}" class="nav-link {{$active}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daily Summary Report</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="profit_loss_report")
+              <?php $active = "active"; ?>
+              @else
+              <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.profit.loss')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Profit and Loss</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="room_report")
+              <?php $active = "active"; ?>
+              @else
+              <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.room.report')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Room Report</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="rafting_report")
+              <?php $active = "active"; ?>
+              @else
+              <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.rafting.report')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Rafting Report</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="camping_report")
+              <?php $active = "active"; ?>
+              @else
+              <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.camping.report')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Camping Report</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              @if(Session::get('page')=="swimming_report")
+              <?php $active = "active"; ?>
+              @else
+              <?php $active = ""; ?>
+              @endif
+              <li class="nav-item">
+                <a href="{{route('admin.swimming.report')}}" class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Swimming Report</p>
                 </a>
               </li>
             </ul>

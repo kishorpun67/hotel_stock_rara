@@ -18,14 +18,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
+
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -40,6 +33,7 @@
                   <thead>
                   <tr>
                     <th>ID</th>
+                    <th>Staff Name</th>
                     <th>Total Work Hour</th>
                     <th>Salary</th>
                   </tr>
@@ -47,6 +41,11 @@
                   <tbody>
                  @forelse($attendance as $data)
                     <td>{{$data->id}}</td>
+                    <td>
+                      @if (!empty($data->staff->name))
+                          {{$data->staff->name}}
+                      @endif
+                    </td>
                     <td><?php 
                       // $totalDuration = $data->updated_at->diffForHumans($data->created_at);
                       $totalDuration =  $data->created_at->diff($data->updated_at)->format('%H:%I')." Minutes";

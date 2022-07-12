@@ -35,11 +35,15 @@ class AllScreenController extends Controller
     public function updateFoodStatus()
     {
         $data = request()->all();
-        OrderDetail::where('order_id', $data['order_id'])->update([
-            'status'=>$data['status']
-        ]);
+        if (empty($data['order_detail_id'])){
+            return redirect()->back()->with('error_message','Please select at least one item.');
+        }
+        foreach($data['order_detail_id'] as  $val) {
+            OrderDetail::where('id', $val)->update([
+                'status'=>$data['status']
+            ]);
+        }
         $oder=Order::where('id', $data['order_id'])->first();
-
         $waiter = Admin::where('role_id',6)->get();
         if(!empty($data['status'])){
             foreach($waiter as $waiter){
@@ -60,7 +64,7 @@ class AllScreenController extends Controller
     {
         $collectfood = OrderDetail::with('order')->where('status', 'Done')->where('collect',0)->get();
         Session::flash('page', 'waiter');
-        return view('admin.waiter.collectfood', compact('collectfood'));
+        return view('admin.allScreen.collectfood', compact('collectfood'));
     }
 
     public function collectFood()

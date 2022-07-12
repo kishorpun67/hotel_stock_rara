@@ -256,7 +256,7 @@ class RoomController extends Controller
                 }
             }else{
                 $book_room_id= DB::getPdo()->lastInsertId();
-                $checkID =  AllActivity::where(['book_room_id'=> $id])->first();
+                $checkID =  AllActivity::where(['book_room_id'=> $id])->latest()->first();
                 if(!empty($checkID->swimming_id) || !empty($checkID->rafting_id) || !empty($checkID->camping_id) || !empty($checkID->order_id)) {
                     AllActivity::where('book_room_id', $id)->update(['book_room_id' => null]);
                 }else{

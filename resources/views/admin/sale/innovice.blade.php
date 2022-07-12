@@ -25,12 +25,12 @@
 					
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					{{-- <div class="col-md-6">
 						<address>
 							<strong>Payment Method:</strong><br>
 							{{$orderDetails->payment}}
 						</address>
-					</div>
+					</div> --}}
 					<div class="col-md-6 text-right">
 						<address>
 							<strong>Order Date:</strong><br>

@@ -80,6 +80,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
             Route::get('billing-chekout/{id?}', 'BillingController@billingCheckout')->name('billing.checkout');
             Route::post('customer-all-inovice/{id?}', 'BillingController@customerAllInvoice')->name('customer.all.invoice');
             Route::get('customer-bill-print/{id?}', 'BillingController@customerBillingPrint')->name('customer.bill.print');
+            Route::get('delete-billing/{id?}', 'BillingController@deleteBilling')->name('delete-billing');
         });
         Route::group(['middleware'=>['ChekcRole:Room']], function(){
                   // route for rooms 
@@ -144,7 +145,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
       Route::match(['get', 'post'], 'update-admin-details', 'AdminController@updateAdminDetails')->name('update.admin.details');
       
       //   rotue for all screen 
-      //   Route for POS 
+      //   Route for POS purchase food
       Route::group(['middleware'=>['ChekcRole:POS']], function(){
          Route::match(['get', 'post'], 'sale-food/{id?}', 'SaleController@addEditSale')->name('add.edit.sale');
          Route::get('food/{url}', 'SaleController@table')->name('food');
@@ -154,7 +155,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
          Route::post('ajax-add-customer', 'SaleController@addCusomter');
          Route::post('ajax-delete-customer-table', 'SaleController@deleteCusomter');
          Route::post('ajax-search-food', 'SaleController@ajaxSearchFood');
-         Route::get('add-table}', 'SaleController@addTable')->name('add.table');
+         Route::get('add-table/{url?}', 'SaleController@addTable')->name('add.table');
          Route::get('delete-sale/{id?}', 'SaleController@deleteSale')->name('delete.sale');
          Route::post('add-customer', 'SaleController@addCustomer')->name('add.customer');
          Route::post('update-cart-item-quantity', 'SaleController@updateCart');
@@ -201,7 +202,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
       });
 
            
-      // Route for all screen
+      // Route for all screen purchase
 
       //routes for ingredientCategory
       Route::group(['middleware'=>['ChekcRole:IngredientCategory']], function(){
@@ -296,6 +297,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
           Route::post('delete-purchase-table','PurchaseController@deletePurchaseCart')->name('delete.purchase.table');
           Route::post('ajax-purchase-table', 'PurchaseController@ajaxPurchaseTable');
           Route::post('check-current-amount','PurchaseController@chkCurrentAmount');
+
+         //  stock 
+         Route::get('stock', 'PurchaseController@stock')->name('stock');
 
       });
 
@@ -418,6 +422,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
          Route::get('task-report','ReportController@taskReport')->name('task.report');
          Route::get('waste-report','WasteController@wasteReport')->name('waste.report');
          Route::get('customer-report','CustomerController@customerReport')->name('customer.report');
+         Route::get('profit-loss-report', 'ReportController@profitLoss')->name('profit.loss');
+         Route::get('ajax-get-monthly-report', 'ReportController@ajaxGetMonthlyReport')->name('ajax.getMonthlyReport');
+         Route::get('room-report', 'ReportController@roomReport')->name('room.report');
+         Route::get('camping-report', 'ReportController@campingReport')->name('camping.report');
+         Route::get('swimming-report', 'ReportController@swimmingReport')->name('swimming.report');
+         Route::get('rafting-report', 'ReportController@raftingReport')->name('rafting.report');
+
 
       });
       Route::group(['middleware'=>['ChekcRole:Miscellaneous']], function(){
@@ -435,7 +446,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
            Route::get('water', 'WaterController@water')->name('water');
            Route::match(['get', 'post'], 'add-edit-water/{id?}', 'WaterController@addEditWater')->name('add.edit.water');
            Route::get('delete-water/{id?}', 'WaterController@deleteWater')->name('delete.water');
-  
+   
          //routes for report of electricity
          Route::get('electricity-report','ElectricityController@electricityReport')->name('electricity.report');
                   
@@ -444,6 +455,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fun
          
          //routes for report of electricity
          Route::get('water-report','WaterController@waterReport')->name('water.report');
+
+
+         // report for profit and losss 
       });
       // routes for checkin and checkout kitchen
     

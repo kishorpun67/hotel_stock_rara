@@ -1,4 +1,4 @@
-// const { Toast } = require("bootstrap");
+// const { Toast } = require("bootstrap");purchaseCalculate
 // const { pad } = require("lodash"); totalSummingAmount totalCampingAmount getRoom
 
 $(document).ready(function() {
@@ -159,7 +159,7 @@ function getFoodType(item_type) {
 }
 
 function addFood(item_id, price, name, is_bar, is_caffe, is_kitchen) {
-    // console.log(item_id, price, name, is_bar, is_caffe, is_kitchen)
+    // console.log(item_id, price, name, is_bar, is_caffe, is_kitchen) quantityMinus
     $.ajax({
         type: 'post',
         url: '/admin/ajax-food-table',
@@ -270,6 +270,8 @@ function discountFunction(e) {
 }
 
 function quantityMinus(cart_id) {
+    // alert(cart_id)
+    // return;
     var qty = "qtyMinus"
     var order_id = $("#order_id").val()
     $.ajax({
@@ -646,14 +648,27 @@ $(document).ready(function() {
         // alert(value)
     })
     $(".checkAll").click(function() {
-        // alert('tst')
+        if (!$('input:checkbox.country').is('checked')) {
+            // alert("test")
 
-        if (!$('input:checkbox').is('checked')) {
             $('input:checkbox').attr('checked', 'checked');
         } else {
+            alert('test');
             $('input:checkbox').removeAttr('checked');
         }
+
     });
+
+    // function checkAll() { totalCheckoutBillAmount
+    //     // alert('tst')
+    //     if (!$('input:checkbox').is('checked')) {
+    //         a
+    //         $('input:checkbox').attr('checked', 'checked');
+    //     } else {
+    //         alert('test');
+    //         $('input:checkbox').removeAttr('checked');
+    //     }
+    // }
 
 
 });
@@ -661,7 +676,8 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#purchase_id").change(function() {
         var purchase_id = $("#purchase_id").val();
-        // alert(purchase_id)
+
+        // alert(purchase_id) addFood
         $.ajax({
             type: 'post',
             url: '/admin/ajax-purchase-table',
@@ -684,7 +700,7 @@ $(document).ready(function() {
     });
 
 });
-//Delete purchase cart
+//Delete purchase cart  purchase_id
 function deletePurchaseCart(ingredient_id) {
     // alert(ingredient_id)
     $.ajax({
@@ -704,32 +720,71 @@ function deletePurchaseCart(ingredient_id) {
     });
 }
 
-function purchaseCalculate(e, ingredientCart_id) {
-    var quantity = e.value;
+function purchaseCalculate(ingredientCart_id) {
+    // var quantity = e.value;
+
     // alert(ingredientCart_id);
-    console.log(ingredientCart_id);
+    var price = $(`#ingredient_unit_price-${ingredientCart_id}`).val()
+    var quantity = $(`#ingredient_quantity-${ingredientCart_id}`).val();
+
+    console.log(ingredientCart_id, price, quantity);
 
     $.ajax({
         type: 'post',
         url: '/admin/check-current-amount',
         data: {
             ingredientCart_id: ingredientCart_id,
+            price: price,
             quantity: quantity
+
         },
         success: function(response) {
-            console.log(response)
-            if (response.message == "exsist") {
-                alert('Item already exsist!')
-            } else {
-                $("#ajaxPurchase").html(response);
+            // console.log(response)
+            $(`#subTotal-${response.ingredient_id}`).text(response.subtotal);
+            $(`#total`).val(response.total);
+            $(`#deu_amount`).val(response.total);
+            $(`#subtotal`).val(response.total);
 
-            }
+            // if (response.message == "exsist") {
+            //     alert('Item already exsist!')
+            // } else {
+            //     $("#ajaxPurchase").html(response);
+            // }
 
         },
         error: function() {
             alert("Error");
         }
     });
+}
+
+function totalCalculationPurchase() {
+    // alert('test')
+    var subtotal = $("#subtotal").val();
+    var vat = $("#vat").val();
+    var tax = $("#tax").val();
+
+    // console.log(tax, vat, subtotal)
+    if (subtotal == "") {
+        subtotal = 0;
+    }
+    if (tax == "") {
+        tax = 0;
+    }
+    if (vat == "") {
+        vat = 0;
+    }
+    var total_tax = parseInt(subtotal) * parseInt(tax) / 100;
+    var total_vat = parseInt(subtotal) * parseInt(vat) / 100;
+    console.log(total_tax, total_vat)
+
+    var total = parseInt(subtotal) + total_tax + total_vat
+    console.log(total)
+    $("#total").val(total);
+    $("#deu_amount").val(total);
+
+
+
 }
 
 function purchasePaid(e) {
@@ -824,7 +879,7 @@ function deleteFoodMenTable(ingredient_id) {
         }
     });
 }
-
+// checkAll
 function electricityConsumption() {
     var electricity_uses = ($("#electricity_uses").val());
     var early_electricity_consumption = ($("#early_electricity_consumption").val());
@@ -1140,6 +1195,8 @@ $(".totalCheckoutBillAmount").change(function() {
     var paid = ($("#paid").val())
     var discount = ($("#discount").val())
     var tax = ($("#tax").val())
+    var vat = ($("#vat").val())
+        // alert(vat)
     var subtotal = ($("#subtotal").val())
     if (service_charge == "") {
         service_charge = 0;
@@ -1153,20 +1210,24 @@ $(".totalCheckoutBillAmount").change(function() {
     if (tax == "") {
         tax = 0;
     }
+    if (vat == "") {
+        vat = 0;
+    }
     if (subtotal == "") {
         subtotal = 0;
     }
     console.log(subtotal, tax)
 
     var subtotal = (parseInt(subtotal) + parseInt(service_charge) - parseInt(discount));
-    var total = subtotal + (subtotal * tax / 100);
+    var vat = +(subtotal * vat / 100);
+    var total = subtotal + vat + (subtotal * tax / 100);
     var due = total - parseInt(paid)
     $("#total").val(total)
     $("#due").val(due)
 
 })
 $(".totalCheckoutBillAmount").keyup(function() {
-    // alert('teseted')
+    // alert('teseted') totalCheckoutBillAmount
     var service_charge = ($("#service_charge").val())
     var paid = ($("#paid").val())
     var discount = ($("#discount").val())
@@ -1195,4 +1256,54 @@ $(".totalCheckoutBillAmount").keyup(function() {
     $("#total").val(total)
     $("#due").val(due)
 
+})
+
+$("#deu_pay_amount").keyup(function() {
+    var total = ($("#due_total").val())
+    var paid = ($("#deu_pay_amount").val());
+    if (paid == "") {
+        paid = 0;
+    }
+    if (total == "") {
+        total = 0;
+    }
+    var due = parseInt(total) - parseInt(paid);
+    $("#deu_amount").val(due)
+})
+$("#deu_pay_amount").change(function() {
+        var total = ($("#due_total").val())
+        var paid = ($("#deu_pay_amount").val());
+        if (paid == "") {
+            paid = 0;
+        }
+        if (total == "") {
+            total = 0;
+        }
+        var due = parseInt(total) - parseInt(paid);
+        $("#deu_amount").val(due)
+    })
+    // purchaseCalculate
+
+
+$(".getMonthlyProfitLoss").change(function() {
+    var month = $("#get_month").val();
+    $.ajax({
+        type: 'get',
+        url: `/admin/ajax-get-monthly-report`,
+        data: {
+            month: month
+        },
+        success: function(response) {
+            // console.table(response)
+            // alert(response)
+            console.log(response);
+            $("#ajaxProfitLoss").html(response.view)
+
+        },
+        error: function() {
+            alert("Error");
+        }
+    });
+
+    // alert(month)
 })

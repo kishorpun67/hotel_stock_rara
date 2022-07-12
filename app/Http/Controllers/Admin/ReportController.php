@@ -19,6 +19,14 @@ use App\Sale;
 use Carbon\Carbon;
 use App\Task;
 use App\PurchaseItem;
+use View;
+use App\Admin\BookRoom;
+use App\Admin\Rafting;
+use App\Admin\RentTent;
+use App\Admin\SwimmingPool;
+// use App\
+
+
 class ReportController extends Controller
 {
     public function plAccountReport()
@@ -114,6 +122,89 @@ class ReportController extends Controller
         $task = Task::whereDay('created_at','<=', Carbon::now()->subDay(1))->get();
         Session::flash('page', 'task_report');
         return view('admin.report.task_report',compact('task'));
+    }
+
+    public function profitLoss()
+    {
+        $order = OrderDetail::orderBy('id', 'desc')->with('order')->get();
+        Session::flash('page', 'profit_loss_report');
+        return view('admin.report.profit_loss_report', compact('order'));
+    }
+
+    public function ajaxGetMonthlyReport()
+    {
+        switch(request('month')) {
+            case  1: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->get();
+                break;
+            case 2: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(1))->get();
+                break;
+            case 3: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(2))->get();
+                break;
+            case 4: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(3))->get();
+                break;
+            case 5: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(4))->get();
+                break;
+            case 6: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(5))->get();
+                break;
+            case 7: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(6))->get();
+                break;
+            case 8: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(7))->get();
+                break;
+            case 9: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(8))->get();
+                break;
+            case 10: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(9))->get();
+                break;
+            case 11: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(10))->get();
+                break;
+            case 12: 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(11))->get();
+                break;
+            case "all": 
+                $order = OrderDetail::orderBy('id', 'desc')->with('order')->whereYear('created_at', Carbon::now()->year)->get();
+                break;               
+        }
+        return response()->json(['view'=>(String)View::make('admin.report.ajax_profit_loss')->with(compact('order'))]);
+
+        // return view('admin.report.ajax_profit_loss', compact('order'));
+
+    }
+    public function roomReport()
+    {
+        $bookRooms =BookRoom::orderBy('id', 'desc')->with('room', 'customer')->get();
+        Session::flash('page', 'room_report');
+        return view('admin.report.room_report', compact('bookRooms'));
+    }
+
+    public function campingReport()
+    {
+        $rentTent =RentTent::orderBy('id', 'desc')->with('customer', 'tent')->get();
+        Session::flash('page', 'camping_report');
+        return view('admin.report.camping_report', compact('rentTent'));
+    }
+
+    public function swimmingReport()
+    {
+        $swimmingPool =SwimmingPool::with('customer')->get();
+        Session::flash('page', 'swimming_report');
+        return view('admin.report.swimming_report', compact('swimmingPool'));
+    }
+
+    public function raftingReport()
+    {
+        $rafting =Rafting::with('customer')->get();
+        Session::flash('page', 'rafting_report');
+        return view('admin.report.rafting_report', compact('rafting'));
     }
 
     

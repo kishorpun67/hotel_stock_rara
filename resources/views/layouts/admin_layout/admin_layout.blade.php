@@ -112,7 +112,27 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="{{asset('plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
 
+  @if(Session::has('success_message'))
+      toastr.options =
+      {
+          "closeButton" : true,
+          "progressBar" : true
+      }
+          toastr.success("{{ session('success_message') }}");
+  @endif
+  @if(Session::has('error_message'))
+      toastr.options =
+      {
+          "closeButton" : true,
+          "progressBar" : true
+      }
+              toastr.error("{{ session('error_message') }}");
+  @endif
+</script>
 <!-- Custome Admin js -->
 <script src="{{asset('js/admin_js/admin_script.js')}}"></script>
 <script src="{{asset('js/admin_js/admin_validate.js')}}"></script>

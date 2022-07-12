@@ -39,6 +39,7 @@
                                     @foreach ($food['bar'] as $item)
                                     <li class="item">
                                     <div class="product-info">
+                                        <input type="checkbox" name="order_detail_id[]" id="" value="{{$item->id}}">
                                         <a href="javascript:void(0)" class="product-title">{{$item->item}}
                                         <span class="badge badge-warning float-right">{{$item->status}}</span></a>
                                         <span class="product-description">

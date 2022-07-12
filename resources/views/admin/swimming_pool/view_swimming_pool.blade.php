@@ -9,53 +9,13 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
-    <!-- Main content -->
-      @error('category_id')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror  
-      @error('name')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror 
-      @error('price')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror 
-      @error('url')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror   
+  
       <section class="content">
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">View Room</h3>
+              <h3 class="card-title">View Swimming Pool</h3>
               <a href="{{route('admin.add.edit.swimming.pool')}}" style="width: auto; float:right; display:inline-block;" class="btn btn-block btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add Swimming Pool</a>
             </div>
             <div class="card-body">

@@ -1,5 +1,9 @@
 @extends('layouts.admin_layout.admin_layout')
 @section('content')
+<?php 
+use App\TaxVat;
+$tax = TaxVat::first();
+?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -18,30 +22,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
-    @if(Session::has('error_message'))
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('error_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
-    @error('url')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror 
     <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -106,8 +86,7 @@
                 @endif
                 <?php $subTotal = $pos + $camping_total + $bookRoom_total  +$swimmingPool_total + $rafting_total;
                  $totals = intVal($subTotal  + $activity->service_charge  - $activity->discount);
-                 $tax =0;
-                 $total_amount = ($totals +$tax*$totals/100);
+                 $total_amount = ($totals +($subTotal*0/100));
                 //  $deu = $total_amount - $activity->deu;
                  ?>
                 <div class="form-group">
@@ -176,8 +155,15 @@
                 <div class="form-group">
                   <label for="address">Tax(%)</label>
                   <select name="tax" id="tax" class="form-control totalCheckoutBillAmount">
-                    <option value="0">None</option>
-                    <option value="10">10%</option>
+                    <option value="0" >None</option>
+                    <option value="{{$tax->tax}}">{{$tax->tax}}%</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="address">Vat(%)</label>
+                  <select name="vat" id="vat" class="form-control totalCheckoutBillAmount">
+                    <option value="0" >None</option>
+                    <option value="{{$tax->vat}}">{{$tax->vat}}%
                   </select>
                 </div>
                 <div class="form-group">

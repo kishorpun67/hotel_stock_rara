@@ -10,4 +10,8 @@ class Consumption extends Model
     {
         return $this->belongsTo('App\IngredientUnit', 'ingredientUnit_id');
     }
+    public function ingredient()
+    {
+        return $this->belongsTo('App\IngredientItem', 'ingredient_id'); 
+    }
 }

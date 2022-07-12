@@ -38,9 +38,11 @@
   use App\Table;
   use App\CustomerTable;
   use App\Admin\Room;
+  use App\Order;
   $tables = Table::orderBy('table_no','asc')->where('room_id', 0)->get();
   $roomBig = Room::where('room_size','Big')->get();
   $roomSmall = Room::orderBy('room_no','asc')->where('room_size','Small')->get();
+  
 
 ?>
 <style>
@@ -125,7 +127,7 @@
             @include('admin.sale.ajax_table_room')
           </div>
           <div class="table-outer" id="ajaxTableBigRoom">
-            @include('admin.sale.ajax_big_room_table')
+            {{-- @include('admin.sale.ajax_big_room_table') --}}
           </div>
         </div>
       </div>
@@ -157,7 +159,20 @@
               <tbody>
                 <tr>
                 @foreach ($item as $tables)
-                  <td  class="room-class" id="table-{{$tables->id}}">
+                 <?php
+                    $count = Order::where('table_id', $tables->id)->count();
+                    if($count >0){
+                      $order = Order::where('table_id', $tables->id)->first();
+                      if(!empty($order->status) && $order->status == 'Paid' || $order->status == 'Cancel'){
+                        $roomstatus = "";
+                      } else{
+                        $roomstatus = "marked";
+                      }
+                    }else{
+                      $roomstatus = "";
+                    }
+                  ?>
+                  <td  class="room-class {{$roomstatus}}" id="table-{{$tables->id}}">
                     <a href="javascript:"  onclick="ajaxTable(this.getAttribute('table_id'))" table_id={{$tables->id}}><i class="fas fa-table"> {{$tables->table_no}}</i></a>
                   </td>
                 @endforeach
@@ -251,6 +266,27 @@ $('.room-slider .owl-carousel').owlCarousel({
 <script type="text/javascript" src="{{asset('front/js/bootstrap.js')}}"></script> 
 <script type="text/javascript" src="{{asset('front/js/Push_up_jquery.js')}}"></script> 
 <script type="text/javascript" src="{{asset('front/js/annimatable_jquery.js')}}"></script> 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+
+  @if(Session::has('success_message'))
+      toastr.options =
+      {
+          "closeButton" : true,
+          "progressBar" : true
+      }
+          toastr.success("{{ session('success_message') }}");
+  @endif
+  @if(Session::has('error_message'))
+      toastr.options =
+      {
+          "closeButton" : true,
+          "progressBar" : true
+      }
+              toastr.error("{{ session('error_message') }}");
+  @endif
+</script>
 <script src="{{asset('js/admin_js/admin_script.js')}}"></script>
 </body>
 </html>

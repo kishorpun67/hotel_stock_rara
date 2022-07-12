@@ -17,30 +17,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
-    @if(Session::has('error_message'))
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('error_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
-    @error('url')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror
     <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -88,7 +64,7 @@
                       <option value="" >Select</option>
                       @forelse($ingredientUnit as $data)
                               <option value="{{$data->id}}"
-                                @if (!empty($ingredientItemsData['ingredient_id']) && $ingredientItemsData['ingredient_id'] == $data->id)
+                                @if (!empty($ingredientItemsData['ingredientUnit_id']) && $ingredientItemsData['ingredientUnit_id'] == $data->id)
                                     selected=""
                                 @endif
                                   >&nbsp;&raquo;&nbsp; {{$data->unit_name}}
@@ -99,14 +75,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-              <div class="form-group">
-                <label for="purchase_price">Purchase Price *</label>
-                <input type="text" class="form-control" name="purchase_price" id="purchase_price" placeholder="Enter purchase price"
-                @if(!empty($ingredientItemsData['purchase_price']))
-                value= "{{$ingredientItemsData['purchase_price']}}"
-                @else value="{{old('purchase_price')}}"
-                @endif>
-              </div>
+            
               <div class="form-group">
                 <label for="purchase_price">Alert Qty *</label>
                 <input type="text" class="form-control" name="alert_qty" id="alert_qty" placeholder="Enter purchase price"
@@ -117,10 +86,10 @@
               </div>
               <div class="form-group">
                 <label for="purchase_price">Code</label>
-                <input type="text" class="form-control" name="code" id="code" value="{{rand(111,9999)}}" placeholder="Enter purchase price"
+                <input type="text" class="form-control" name="code" id="code" placeholder="Enter purchase price"
                 @if(!empty($ingredientItemsData['code']))
                 value= "{{$ingredientItemsData['code']}}"
-                @else value="{{old('code')}}"
+                value="{{rand(111,9999)}}"                 
                 @endif>
               </div>
               

@@ -1,6 +1,10 @@
 @extends('layouts.admin_layout.admin_layout')
 @section('content')
-  <!-- Content Wrapper. Contains page content -->
+<?php 
+use App\PurchaseItem;
+?>
+
+  <!-- Content Wrapper. Contai<>ns page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -18,14 +22,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
+  
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -41,8 +38,8 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
-                  <th>Purchase Price</th>
                   <th>Category</th>
+                  <th>Quantiy</th>
                   <th>Alert Quantity</th>
                   <th>Ingredient Unit</th>
                   <th>Code</th>
@@ -53,11 +50,18 @@
                @forelse($ingredientItems as $data)
                   <td>{{$data->id}}</td>
                   <td>{{$data->name}}</td>
-                  <td>{{$data->purchase_price}}</td>
+                  {{-- <td>{{$data->purchase_price}}</td> --}}
                   <td>
                     @if (!empty($data->ingredientCategory->category))
                     {{$data->ingredientCategory->category}}
                     @endif</td>
+                    <td>
+                      <?php 
+                      $item_stock = PurchaseItem::where('ingredient_id', $data->id)->sum('quantity');
+                      // echo $item_stock;
+                      ?>
+                      {{$data->quantity}}
+                    </td>
                   <td>{{$data->alert_qty}}</td>
                   <td>
                     @if (!empty($data->ingredientUnit->unit_name))

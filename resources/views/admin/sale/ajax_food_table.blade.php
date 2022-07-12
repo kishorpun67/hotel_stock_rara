@@ -86,10 +86,10 @@
       <li><span>Total item:</span> <strong> {{$total_item}} </strong></li>
       <li> <span>Subtotal</span> <strong>{{$total_amount}}</strong> </li>
       <?php
-        $tax = $taxt->tax;
+        $tax = 0;
         $total_amount = $total_amount+($total_amount*$tax/100);
       ?>
-      <option value="{{$tax }}">{{$tax }}%</option>
+      {{-- <option value="{{$tax }}">{{$tax }}%</option> --}}
       <li> <span>Total Payable</span> <strong id="total_amount">{{$total_amount}}</strong> </li>
     </ul>
   </div>

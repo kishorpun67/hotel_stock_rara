@@ -9,7 +9,12 @@ class AttendenController extends Controller
 {
     public function attendance()
     {
-        $attendence = Attendance::with('staff')->get();
+        if (auth('admin')->user()->type =='Admin') {
+            $attendence = Attendance::with('staff')->get();
+        } else {
+            $attendence = Attendance::where('staff_id', auth('admin')->user()->id)->with('staff')->get();
+        }
+        
         return response()->json($attendence, 200);
     }
     public function singleAttendance($id=null)

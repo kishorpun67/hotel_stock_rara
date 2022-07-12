@@ -59,23 +59,23 @@
               {{$orderDetails->discount}}
             </p>
             <?php
-              $tax = $taxt->tax;
+              $tax = 0;
               $total_amount = $total_amount+($total_amount*$tax/100);
             ?>
-            <p>Tax:
+            {{-- <p>Tax:
               {{$tax }}%
-            </p> 
+            </p>  --}}
             <p>Total Payable: {{$total_amount}}</p> 
           </ul>
         </div>
         <div class="cart-overview flex-1">
-          <label>
+          {{-- <label>
           <h3 class="topborder"><span>Payment Method</span></h3>
           <p>
             @if (!empty($orderDetails->payment))
             {{$orderDetails->payment}}
             @endif
-          </p>
+          </p> --}}
         </div>
       </div>
     </div>

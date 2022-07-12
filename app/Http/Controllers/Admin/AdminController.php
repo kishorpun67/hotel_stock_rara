@@ -243,14 +243,14 @@ class AdminController extends Controller
             $button ="Submit";
             $newAdmin = new Admin;
             $adminData = array();
-            $message = "Ingredient units has been added sucessfully";
+            $message = "User  has been added sucessfully";
         }else{
-            $title = "Edit Ingredient Items";
+            $title = "Edit User";
             $button ="Update";
             $adminData = Admin::where('parent_id',auth('admin')->user()->id)->where('id',$id)->first();
             $adminData= json_decode(json_encode($adminData),true);
             $newAdmin = Admin::find($id);
-            $message = "Ingredient Items has been updated sucessfully";
+            $message = "User  has been updated sucessfully";
         }
         if(request()->isMethod('POST')){
             $data = request()->all();

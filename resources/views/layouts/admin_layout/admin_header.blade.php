@@ -34,6 +34,11 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li> --}}
       @if (auth('admin')->user()->type == 'Admin' || auth('admin')->user()->hasPermission(61))
+      <li class="nav-item d-none d-sm-inline-block">
+        <?php $tst = "no-table-room"; ?>
+        <a href="{{route('admin.add.table',$tst)}}" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i>
+          View Order</a>
+      </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="{{route('admin.add.edit.sale')}}" class="nav-link"><i class="fa fa-coffee" aria-hidden="true"></i>
             POS</a>

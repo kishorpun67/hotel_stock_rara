@@ -106,7 +106,7 @@ class RaftingController extends Controller
                 }
             }else{
                 $rafting_id= DB::getPdo()->lastInsertId();
-                $checkID =  AllActivity::where(['rafting_id'=> $id])->first();
+                $checkID =  AllActivity::where(['rafting_id'=> $id])->latest()->first();
                 if(!empty($checkID->book_room_id) || !empty($checkID->swimming_id) || !empty($checkID->camping_id) || !empty($checkID->order_id)) {
                     AllActivity::where('rafting_id', $id)->update(['rafting_id' => null]);
                 }else{
@@ -138,7 +138,7 @@ class RaftingController extends Controller
     public function deleteRafting($id=null)
     {
         Rafting::where('id', $id)->delete();
-        $checkID =  AllActivity::where(['rafting_id'=> $id])->first();
+        $checkID =  AllActivity::where(['book_room_id'=> $id])->latest()->first();
         // return 'test';
         if(!empty($checkID->swimming_id) || !empty($checkID->camping_id) || !empty($checkID->book_room_id) || !empty($checkID->order_id)) {
             AllActivity::where('rafting_id', $id)->update(['rafting_id' => null]);

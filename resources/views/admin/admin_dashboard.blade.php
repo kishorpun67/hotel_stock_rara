@@ -75,7 +75,7 @@ if(auth('admin')->user()->parent_id > 0){
                 <div class="info-box-content">
                   <span class="info-box-text">Food Menu</span>
                   <span class="info-box-number">
-                    {{ $foodMenuCount }}
+                    {{ number_format($foodMenuCount) }}
                   </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -88,7 +88,7 @@ if(auth('admin')->user()->parent_id > 0){
                 <div class="info-box-content">
                   <span class="info-box-text">Ingredient</span>
                   <span class="info-box-number">
-                    {{ $IngredientItemCount }}
+                    {{ number_format($IngredientItemCount) }}
                   </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -102,7 +102,7 @@ if(auth('admin')->user()->parent_id > 0){
                 <div class="info-box-content">
                   <span class="info-box-text">Customer</span>
                   <span class="info-box-number">
-                    {{ $customerCount }}
+                    {{ number_format($customerCount) }}
                   </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -116,7 +116,7 @@ if(auth('admin')->user()->parent_id > 0){
                 <div class="info-box-content">
                   <span class="info-box-text">Purchase</span>
                   <span class="info-box-number">
-                    {{ $purchase }}
+                    {{number_format($purchase) }}
                   </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -482,7 +482,8 @@ if(auth('admin')->user()->parent_id > 0){
         </div>
         <!-- /.container-fluid -->
       </div>
-    @els
+    </div>
+    @else
      <!-- Content Wrapper. Contains page content -->
   <!-- Content Header (Page header) -->
   <div class="content-header">

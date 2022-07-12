@@ -10,14 +10,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -55,6 +47,9 @@
                    <td>{{$data->status}}</td>
                    <td>
                     <a href="{{route('admin.billing.checkout', $data->id)}}"><i class="fa fa-file-invoice"></i></a>&nbsp;&nbsp;
+                    <a href="javascript:" class="delete_form" record="billing"  rel="{{$data->id}}" style="display:inline;">
+                      <i class="fa fa-trash fa-" aria-hidden="true" ></i>
+                    </a>
                    </td>
                 </tr>
                 @empty

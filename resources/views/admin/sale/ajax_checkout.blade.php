@@ -79,11 +79,11 @@
 									</tr>
 									<tr>
 										<?php
-										$tax = $taxt->tax;
+										$tax = 0;
 										$grand_total = ($subtotal+($subtotal*$tax/100))- $orderDetails->discount;
 										?>
-										<td class="thick-line text-right"  colspan="3"><strong>Tax</strong></td>
-										<td class="thick-line text-right">{{$tax}}%</td>
+										{{-- <td class="thick-line text-right"  colspan="3"><strong>Tax</strong></td>
+										<td class="thick-line text-right">{{$tax}}%</td> --}}
 									</tr>
 									<tr>  
 										

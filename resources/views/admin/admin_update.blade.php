@@ -26,15 +26,7 @@
                         <h3 class="card-title">Update Admin Details</h3>
                     </div>
                     <!-- /.card-header -->
-
-                    @if(Session::has('success_message'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-                        {{ Session::get('success_message') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    @endif
+                 
                     <!-- form start -->
                     <form role="form" method="POST" action="{{route('admin.update.admin.details')}}" name="updatePasswordForm" id="updatePasswordForm" enctype="multipart/form-data">
                     @csrf

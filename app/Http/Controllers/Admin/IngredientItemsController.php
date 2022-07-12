@@ -64,7 +64,7 @@ class IngredientItemsController extends Controller
            
             $ingredientItem->admin_id = auth('admin')->user()->id;
             $ingredientItem->name = $data['name'];
-            $ingredientItem->purchase_price = $data['purchase_price'];
+            // $ingredientItem->purchase_price = $data['purchase_price'];
             $ingredientItem->category_id = $data['category_id'];
             $ingredientItem->alert_qty = $data['alert_qty'];
             $ingredientItem->ingredientUnit_id = $data['unit_id'];

@@ -145,7 +145,6 @@ class RentTentController extends Controller
                 }else{
                     AllActivity::where('camping_id', $id)->delete();
                 }
-                $orderCheck = AllActivity::where(['customer_id'=>$data['customer_id']])->latest()->first();
                 if(empty($orderCheck->status) ){
                     $newActivity = new AllActivity();
                     $newActivity->camping_id = $id;

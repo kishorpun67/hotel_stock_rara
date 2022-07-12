@@ -37,13 +37,14 @@
                                 <ul class="products-list product-list-in-card pl-2 pr-2">
                                     @foreach ($food['kitchen'] as $item)
                                     <li class="item">
-                                    <div class="product-info">
-                                        <a href="javascript:void(0)" class="product-title">{{$item->item}}
-                                        <span class="badge badge-warning float-right">{{$item->status}}</span></a>
-                                        <span class="product-description">
-                                        Qty({{$item->quantity}})
-                                        </span>
-                                    </div>
+                                        <div class="product-info">
+                                        <input type="checkbox" name="order_detail_id[]" id="" value="{{$item->id}}"> <span class="">
+                                            <a href="javascript:void(0)" class="product-title">{{$item->item}}
+                                            <span class="badge badge-warning float-right">{{$item->status}}</span></a>
+                                            <span class="product-description">
+                                            Qty({{$item->quantity}})
+                                            </span>
+                                        </div>
                                     </li>
                                     <?php 
                                     $status = $item->status;

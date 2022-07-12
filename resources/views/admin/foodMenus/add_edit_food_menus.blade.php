@@ -18,30 +18,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
-    @if(Session::has('error_message'))
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('error_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
-    @error('url')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror 
+  
     <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -129,18 +106,18 @@
                       <tbody>
                         <tr>
                           @forelse($foodMenusData['consumption'] as $data)
-                          <input type="hidden" name="id[]" value="{{ $data['id']}}">
-                          <input type="hidden" name="ingredient_id[]" value="{{ $data['ingredient_id'] }}">
-                          <input type="hidden" name="ingredient_name[]" value="{{ $data['ingredient_name'] }}">
-                          <td>{{ $data['ingredient_name']}}</td>
-                          <td><input type="number"  name="consumption_quantity[]" value="{{ $data['consumption_quantity']}}">
-                          </td>
-                          <td>
-                            {{-- <a href="{{route('admin.add.edit', $data->id)}}"><i class="fa fa-edit">Edit</i></a>&nbsp;&nbsp; --}}
-                            <a href="javascript:" class="delete_foodMenu_table" ingredient_id="{{$data['id']}}" style="display:inline;">
-                              <i class="fa fa-trash fa-" aria-hidden="true" ></i>
-                            </a></td>
-                          </tr>
+                            <input type="hidden" name="id[]" value="{{ $data['id']}}">
+                            <input type="hidden" name="ingredient_id[]" value="{{ $data['ingredient_id'] }}">
+                            <input type="hidden" name="ingredient_name[]" value="{{ $data['ingredient_name'] }}">
+                            <td>{{ $data['ingredient_name']}}</td>
+                            <td><input type="text"  name="consumption_quantity[]" value="{{ $data['consumption_quantity']}}">
+                            </td>
+                            <td>
+                              {{-- <a href="{{route('admin.add.edit', $data->id)}}"><i class="fa fa-edit">Edit</i></a>&nbsp;&nbsp; --}}
+                              <a href="javascript:" class="delete_foodMenu_table" ingredient_id="{{$data['id']}}" style="display:inline;">
+                                <i class="fa fa-trash fa-" aria-hidden="true" ></i>
+                              </a></td>
+                            </tr>
                           @empty
                           <p>No Data</p>
                           @endforelse

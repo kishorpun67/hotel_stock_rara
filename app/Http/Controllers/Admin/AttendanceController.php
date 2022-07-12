@@ -73,7 +73,12 @@ class AttendanceController extends Controller
 
     public function viewSalary()
     {
-        $attendance = Attendance::with('staff')->where('out_date', "!=",'')->where('out_time', "!=",'')->get();
+        if (auth('admin')->user()->type == 'Admin') {
+            $attendance = Attendance::with('staff')->where('out_date', "!=",'')->where('out_time', "!=",'')->get();
+        } else {
+            $attendance = Attendance::where('staff_id', auth('admin')->user()->id)->with('staff')->where('out_date', "!=",'')->where('out_time', "!=",'')->get();
+        }
+        
         Session::flash('page', 'salary');
         return view('admin.salary.view_salary',compact('attendance'));
     }

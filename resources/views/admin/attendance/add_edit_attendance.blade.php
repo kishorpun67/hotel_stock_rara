@@ -1,3 +1,4 @@
+
 @extends('layouts.admin_layout.admin_layout')
 @section('content')
 
@@ -18,22 +19,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
-    @if(Session::has('error_message'))
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('error_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
     <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -53,19 +38,12 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="">Select Staff</label>
-                  <select name="staff_id" id="" class="form-control select2">
-                    <option value="">Select</option>
-                    @foreach ($staff as $item)
-                      <option value="{{$item->id}}" @if (!empty($attendanceData['staff_id']) && $attendanceData['staff_id'] == $item->id)
-                          selected=""
-                      @endif>{{$item->name}}</option>
-                    @endforeach
-                  </select>
+                  <label for=""> Staff Name</label>
+                  <input type="text" class="form-control" name="staff_id" readonly id="staff_id" placeholder="Enter your name" required  value="{{auth('admin')->user()->name}}">
                 </div>
                 <div class="form-group">
                   <label for="in_date">In Date</label>
-                    <input type="" class="form-control" name="in_date" id="in_date" placeholder=""
+                    <input type="" class="form-control" readonly name="in_date" id="in_date" placeholder=""
                     @if(!empty($attendanceData['in_date']))
                     value= "{{$attendanceData['in_date']}}"
                     @else value="<?php 
@@ -78,8 +56,7 @@
                     @endif>
                   </div> 
                 <div class="form-group">
-                    <label for="in_time">In Time</label>
-                      <input type="" class="form-control" name="in_time" id="in_time" placeholder=""
+                      <input type="" class="form-control" readonly name="in_time" id="in_time" placeholder=""
                       @if(!empty($attendanceData['in_time']))
                       value= "{{$attendanceData['in_time']}}"
                       @else value="<?php 
@@ -94,7 +71,7 @@
 
                     <div class="form-group">
                       <label for="out_date">Out Date</label>
-                        <input type="" class="form-control" name="out_date" id="out_date" placeholder=""
+                        <input type="" class="form-control" name="out_date" id="out_date" readonly placeholder=""
                         @if(!empty($attendanceData['in_date']) && !empty($attendanceData['in_time']))
                         value= "<?php 
                         if(date_default_timezone_set('Asia/Kathmandu'))
@@ -108,7 +85,7 @@
                       </div>  
                          <div class="form-group">
                     <label for="out_time">Out Time</label>
-                      <input type="" class="form-control" name="out_time" id="out_time" placeholder=""
+                      <input type="" class="form-control" name="out_time" readonly id="out_time" placeholder=""
                       @if(!empty($attendanceData['in_date']) && !empty($attendanceData['in_time']))
                       value= "<?php 
                       if(date_default_timezone_set('Asia/Kathmandu'))

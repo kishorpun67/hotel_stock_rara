@@ -1,5 +1,9 @@
 @extends('layouts.admin_layout.admin_layout')
 @section('content')
+<?php 
+  use App\PurchaseDue;
+
+?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -18,22 +22,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
-    @if(Session::has('error_message'))
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('error_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
+ 
     <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -82,7 +71,7 @@
                 </div>
                 <div class="form-group">
                   <label for="date">Date *</label>
-                  <input type="date" class="form-control" name="date" id="date"
+                  <input type="date" class="form-control" name="date" id="date" 
                   @if(!empty($purchasedata['date']))
                   value= "{{$purchasedata['date']}}"
                   @else value="{{old('date')}}"
@@ -103,11 +92,18 @@
                       @endforelse
                   </select>
                 </div>
+                @if(!empty($purchasedata['id']))
 
+                <div class="form-group">
+                  <label for="date">Deu Pay Date *</label>
+                  <input type="date" class="form-control" name="date_pay_date" id="date" 
+                  @if(!empty($purchasedata['date_pay_date']))
+                  value= "{{$purchasedata['date_pay_date']}}"
+                  @else value="{{old('date_pay_date')}}"
+                  @endif>
+                </div>
+                @endif
               </div>
-              
-    
-
                 <div class="col-md-6 ">
                   <a href="" data-toggle="modal" data-target="#myModal"style="max-width: 150px; margin-top:30px; float:left; display:inline-block;"  class="btn btn-primary ">Add</a>
                 </div>
@@ -139,18 +135,18 @@
                         <td>{{ $data['ingredient_id'] }}</td>
                         <td>{{ $data['ingredient']}}oiwetopewteiop</td>
                         <td>{{ $data['price']}}</td>
-                        <td><input class="ingredientCart_id" type="number" name="quantity[]" value="{{ $data['quantity']}}">
+                        <td><input class="ingredientCart_id " type="number" readonly name="quantity[]" value="{{ $data['quantity']}}">
                         </td>
                         <td>{{ $data['quantity'] * $data['price']}}</td>
                        
                         <td>
                           {{-- <a href="{{route('admin.add.edit', $data->id)}}"><i class="fa fa-edit">Edit</i></a>&nbsp;&nbsp; --}}
-                          <a href="javascript:" class="delete_cart_table" ingredient_id="{{$data['id']}}" style="display:inline;">
+                          {{-- <a href="javascript:" class="delete_cart_table" ingredient_id="{{$data['id']}}" style="display:inline;">
                             <i class="fa fa-trash fa-" aria-hidden="true" ></i>
-                          </a></td>
+                          </a> --}}
+                        </td>
                         </tr>
                         <?php $total = $total +($data['quantity']*$data['price'])?>
-                       
                         @empty
                         <p>No Data</p>
                         @endforelse
@@ -167,24 +163,78 @@
                   <p class="lead"></p>
                 
                   <div class="table-responsive">
-                    <table class="table">
-                      <tr>
-                        <th style="width:50%">G.Total</th>
-                        <td> <input type="text" name="total" class="total" value="{{ $total }}" readonly></td>
-                      </tr>
-                      <tr>
-                        <th>Paid</th>
-                        <td><input class="paid" type="number" onkeyup="purchasePaid(this)" name="paid" value="{{$purchasedata['paid']}}" ingredientCart_id="" ></td>
-                      </tr>
-                      <tr>
-                        <th>Due:</th>
-                        <td><input id="deu_amount" type="number" name="due" value="{{$purchasedata['due']}}" readonly></td>
-                      </tr>
-                    </table>
+
+                          @if(!empty($purchasedata['id']))
+                          <?php  $purchaseDue = PurchaseDue::where('purcahse_id', $purchasedata['id'])->get();  
+                            $totalDue = 0;
+                          ?>
+                          <p class="lead">Initial Paid <strong style="float: right;">{{$purchasedata['paid']}}</strong></p>
+
+                          @foreach ($purchaseDue as $item)
+                          <p class="lead">Amount Due {{$item->due_paid_date}} 		<strong style=" float:right"> {{$item->due_paid}}</strong></p>  
+                            <?php $totalDue += $item->due_paid; ?>
+                          @endforeach
+                            <table class="table">
+                              <tr>
+                                <th style="width:50%">Sub.Total</th>
+                                <td> <input type="text" name="subtotal" class="subtotal" value="{{ $total }}" readonly></td>
+                              </tr>
+                              <tr>
+                                <th style="width:50%">Tax(%)</th>
+                                <td> <input type="text" name="tax" class="tax" value="{{$purchasedata['tax'] }}%" readonly></td>
+                                <?php $tax = $total*$purchasedata['tax']/100; ?>
+                                <?php $vat = $total*$purchasedata['vat']/100; ?>
+
+
+                              </tr>
+                              </tr>
+                              <tr>
+                                <th style="width:50%">Vat(%)</th>
+                                <td> <input type="text" name="vat" class="vat" value="{{$purchasedata['vat']}}%" readonly></td>
+                              </tr>
+                              <tr>
+                                <th style="width:50%">G.Total</th>
+                                <td> <input type="text" name="total" class="total" value="{{ round($total + $vat + $tax) }}" readonly></td>
+                              </tr>
+                              <tr>
+                                <th>Paid Amount</th>
+                                <td><input class="paid" type="number" onkeyup="purchasePaid(this)" name="paid" readonly value="{{$purchasedata['paid']+$totalDue}}" ingredientCart_id="" 
+                                  ></td>
+                              </tr>
+                              <tr>
+                                <th>Due Payment:</th>
+                                <input type="hidden" name="" id="due_total" value="{{$purchasedata['due']}}">
+                                <td><input id="deu_pay_amount" type="number" name="deu_pay_amount" value="{{$purchasedata['due']}}" ></td>
+                              </tr>
+                              <tr>
+                                <th>Due:</th>
+                                <td><input id="deu_amount" type="number" name="due" value="" readonly></td>
+                              </tr>
+                            </table>
+                        @else 
+                          <table class="table">
+                            <tr>
+                              <th style="width:50%">Sub.Total</th>
+                              <td> <input type="text" name="subtotal" class="subtotal" value="{{ $total }}" readonly></td>
+                            </tr>
+                            <tr>
+                              <th style="width:50%">G.Total</th>
+                              <td> <input type="text" name="total" class="total" value="{{ $total }}" readonly></td>
+                            </tr>
+                            <tr>
+                              <th>Paid</th>
+                              <td><input class="paid" type="number" onkeyup="purchasePaid(this)" name="paid" value="" ingredientCart_id="" 
+                                ></td>
+                            </tr>
+                            <tr>
+                              <th>Due:</th>
+                              <td><input id="deu_amount" type="number" name="due" value="{{ $total }}" readonly></td>
+                            </tr>
+                          </table>
+                        @endif
+                    </div>
                   </div>
                 </div>
-                </div>
-                
                 @else
                 <div id="ajaxPurchase">
                   @include('admin.purchase.ajax_purchase_table')

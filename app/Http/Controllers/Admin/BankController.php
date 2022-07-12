@@ -23,17 +23,17 @@ class BankController extends Controller
             $button ="Submit";
             $bank = new Bank;
             $bankdata = array();
-            $message = "Bank into Deposit has been added sucessfully";
+            $message = "Bank Deposit has been added sucessfully";
         }else{
             $title = "Edit Bank";
             $button ="Update";
             $bankdata = Bank::where('admin_id',auth('admin')->user()->id)->where('id',$id)->first();
             $bankdata= json_decode(json_encode($bankdata),true);
             $bank = Bank::find($id);
-            $message = "Bank has been updated sucessfully";
+            $message = "Bank Deposit has been updated sucessfully";
         }
         if($request->isMethod('post')) {
-           return $data = $request->all();
+           $data = $request->all();
         //dd($data);
             if(empty($data['bank_name'])){
                 return redirect()->back()->with('error_message', 'Bank Name is required !');

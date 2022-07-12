@@ -119,7 +119,7 @@
             <div class="row">
                 <!-- accepted payments column -->
                 <div class="col-6">
-                    <p class="lead">Payment Methods: <strong>{{$orderbill->payment}}</strong></p>
+                    {{-- <p class="lead">Payment Methods: <strong>{{$orderbill->payment}}</strong></p> --}}
                 </div>
                 <!-- /.col -->
                 <div class="col-6">
@@ -131,11 +131,11 @@
                             </tr>
                             <tr>
                                 <?php
-                                $tax = $taxt->tax;
+                                $tax = 0;
                                 $grand_total = ($total+($total*$tax/100))- $orderbill->discount;
                                 ?>
-                                <td class="thick-line text-left"  ><strong>Tax:</strong></td>
-                                <td class="thick-line text-left">{{$tax}}%</td>
+                                {{-- <td class="thick-line text-left"  ><strong>Tax:</strong></td>
+                                <td class="thick-line text-left">{{$tax}}%</td> --}}
                             </tr>
                             <tr>  
                                 <td class=" text-left" ><strong>Total:</strong></td>

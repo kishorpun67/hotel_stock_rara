@@ -21,7 +21,7 @@
         <input type="hidden" name="price[]" value="{{ $data->price }}">
         <td>{{ $data->ingredient_id }}</td>
         <td>{{ $data->ingredient}}</td>
-        <td><input type="number"  name="consumption_quantity[]" value="{{ $data->cunsumption}}">
+        <td><input type="text"  name="consumption_quantity[]" value="{{ $data->cunsumption}}">
           @if (!empty($data->ingredientUnit->unit_name))
           {{$data->ingredientUnit->unit_name}}
           @endif

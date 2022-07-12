@@ -24,14 +24,7 @@ use App\Admin\AdminPermission;
         </div>
       </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('success_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ Session::get('success_message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    @endif
+
     {{-- @if(Session::has('error_message'))
       <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
         {{ Session::get('error_message') }}
@@ -40,14 +33,7 @@ use App\Admin\AdminPermission;
         </button>
       </div>
     @endif --}}
-    @error('url')
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{$message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-      @enderror 
+   
     <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -143,7 +129,7 @@ use App\Admin\AdminPermission;
 
               <div class="col-md-6">
                 <div class="form-group">
-                    <input type="checkbox"  class="checkAll" /> <label>Select All</label><br/>
+                    <input type="checkbox"  class="checkAll" id="checkAll" value="1" /> <label>Select All</label><br/>
                     <?php 
                     if(!empty($adminData['id'])){
                         $checkPermession = AdminPermission::where('admin_id', $adminData['id'])->get();
@@ -155,7 +141,7 @@ use App\Admin\AdminPermission;
                     }
                     ?>
                     @foreach ($permissions as $item)
-                    <input type="checkbox" name="checkbox[]"  id="" value="{{$item->id}}" @if (in_array($item->id, $permission_ids ?? []))
+                    <input type="checkbox" class="country" name="checkbox[]"  id="" value="{{$item->id}}" @if (in_array($item->id, $permission_ids ?? []))
                     checked
                     @endif
                     >&nbsp;<label for="" > {{$item->permission}} </label><br>

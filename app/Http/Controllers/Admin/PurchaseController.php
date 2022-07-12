@@ -13,6 +13,8 @@ use App\IngredientCategory;
 use Session;
 use App\PurchaseItem;
 use DB;
+use App\PurchaseDue;
+
 class PurchaseController extends Controller
 {
     public function purchase()
@@ -34,23 +36,28 @@ class PurchaseController extends Controller
             $title = "Edit Purchase";
             $button ="Update";
             $purchasedata = Purchase::with('purchase_item')->where('id',$id)->first();
-            
             $purchasedata= json_decode(json_encode($purchasedata),true);
             // return $purchasedata['purchase_item'];
             $purchase = Purchase::find($id);
-            $message = "purchase has been updated sucessfully";
+            $message = "Purchase has been updated sucessfully";
         }
         if($request->isMethod('post')) {
-           $data = $request->all();
-        //dd($data);
+            $data = $request->all();
+            // return ($data);
             if(empty($data['supplier_id'])){
                 return redirect()->back()->with('error_message', 'Supplier id is required !');
             }
-
-            
-            if(empty($data['date']))
+            if(!empty($id) && !empty($data['deu_pay_amount']) && empty($data['date_pay_date'])){
+                // return 'tst';
+                return redirect()->back()->with('error_message', 'Due paid date is required');
+            }
+            if(empty($data['deu_pay_amount']))
             {
-                $data['date'] = "";
+                $data['deu_pay_amount'] = "";
+            }
+            if(empty($id) && empty($data['date']))
+            {
+                return redirect()->back()->with('error_message', 'Date is required!');
             }
 
             if(empty($data['total']))
@@ -77,6 +84,8 @@ class PurchaseController extends Controller
             $purchase->total = $data['total'];
             $purchase->paid = $data['paid'];
             $purchase->due = $data['due'];
+            $purchase->tax = $data['tax'];
+            $purchase->vat = $data['vat'];
 
             $purchase->save();
             if(empty($id)){
@@ -95,8 +104,19 @@ class PurchaseController extends Controller
                     IngredientItem::where('id',$data['ingredient_id'][$key])->increment('quantity',$data['quantity'][$key]);
                     IngredientCart::where('id', $val)->delete();
                 }
-                
+
             }else{
+                // return $id;
+                if(!empty($data['deu_pay_amount']))
+                {
+                    $newDeuPaid = new PurchaseDue();
+                    $newDeuPaid->purcahse_id = $id;
+                    $newDeuPaid->due_paid_date=  $data['date_pay_date'];
+                    $newDeuPaid->due_paid =  $data['deu_pay_amount'];
+                    $newDeuPaid->save();                
+                }
+                
+               
                 foreach($data['id'] as $key=> $val)
                 {
                     $newPurchaseItem =  PurchaseItem::find($val);
@@ -104,7 +124,6 @@ class PurchaseController extends Controller
                     $newPurchaseItem->total = $data['price'][$key] *$data['quantity'][$key];
                     $newPurchaseItem->save();
                 }
-
             }
             Session::flash('success_message', $message);
             return redirect('admin/purchase');
@@ -113,7 +132,7 @@ class PurchaseController extends Controller
         $ingredientCategory = IngredientCategory::get();
         $ingredientItem = IngredientItem::get();
         $ingredientUnit = IngredientUnit::get();
-        $ingredientcart = IngredientCart::get();
+        $ingredientcart = IngredientCart::where('admin_id', auth('admin')->user()->id)->get();
         Session::flash('page', 'purchase');
         return view('admin.purchase.add_edit_purchase', compact('title','button','purchasedata','ingredientCategory','ingredientItem','ingredientUnit','supplier','ingredientcart'));
     }
@@ -130,8 +149,8 @@ class PurchaseController extends Controller
             $ingredientcart->ingredient_id =  $ingredientItem->id;
             $ingredientcart->ingredientUnit_id =  $ingredientItem->ingredientUnit_id;
             $ingredientcart->name =  $ingredientItem->name;
-            $ingredientcart->price =$ingredientItem->purchase_price;
-            $ingredientcart->quantity =$ingredientItem->alert_qty;
+            // $ingredientcart->price =$ingredientItem->purchase_price;
+            // $ingredientcart->quantity =$ingredientItem->alert_qty;
             $ingredientcart->save();
             $ingredientcart  = IngredientCart::get();
             return view('admin.purchase.ajax_purchase_table',compact('ingredientcart'));
@@ -155,9 +174,17 @@ class PurchaseController extends Controller
     //ajax check current amount
     public function chkCurrentAmount(Request $request){
         $data= $request->all();
-        IngredientCart::where('id', $data['ingredientCart_id'])->update(['quantity'=>$data['quantity']]);
-        $ingredientcart  = IngredientCart::get();
-        return view('admin.purchase.ajax_purchase_table',compact('ingredientcart'));
+        IngredientCart::where('id', $data['ingredientCart_id'])->update(['quantity'=>$data['quantity'], 'price'=>$data['price']]);
+        $quantity  = IngredientCart::where('id', $data['ingredientCart_id'])->sum('quantity');
+        $price  = IngredientCart::where('id', $data['ingredientCart_id'])->sum('price');
+        $subTotal = $quantity * $price;
+        $total = 0;
+        $ingredientCart  = IngredientCart::get();
+        foreach($ingredientCart as  $ingredient)
+        {
+            $total += $ingredient->price * $ingredient->quantity;
+        } 
+        return response(['subtotal'=> $subTotal,'total' => $total, 'ingredient_id' => $data['ingredientCart_id']], 200);
     }
 
 
@@ -174,5 +201,12 @@ class PurchaseController extends Controller
       $id->delete();
       return redirect()->back()->with('success_message', 'Purchase has been deleted successfully!');
 
+    }
+
+    public function stock()
+    {
+        $stock = IngredientItem::with('ingredientCategory','ingredientUnit')->get();
+        Session::flash('page', 'stock');
+        return view('admin.purchase.stock', compact('stock'));
     }
 }
