@@ -85,25 +85,36 @@ $tax = TaxVat::first();
                     <?php $rafting_total = 0 ?>
                 @endif
                 <?php $subTotal = $pos + $camping_total + $bookRoom_total  +$swimmingPool_total + $rafting_total;
-                 $totals = intVal($subTotal  + $activity->service_charge  - $activity->discount);
-                 $total_amount = ($totals +($subTotal*0/100));
-                //  $deu = $total_amount - $activity->deu;
-                 ?>
+                    $total_service = $subTotal +(($subTotal * $activity->service_charge)/100);
+                    $total_tax = $total_service +(($total_service * $activity->tax)/100) ;
+                    $total_vat = $total_tax +(($total_tax * $activity->vat)/100) ;
+                    $total = $total_vat - $activity->discount;
+                    $due = $total - $activity->paid;
+                  ?>
+            
                 <div class="form-group">
                     <label for="subTotal">Sub Total</label>
                     <input type="text" name="subtotal" id="subtotal" class="form-control" readonly placeholder=""" value="{{$subTotal}}">
                 </div>
                 <div class="form-group">
-                  <label for="total">Service Charge</label>
-                  <input type="number" class="form-control totalCheckoutBillAmount" value="{{$activity->service_charge}}" name="service_charge" id="service_charge"  placeholder="Total">
+                  <label for="total">Service Charge(%)</label>
+                  <select name="service_charge" id="service_charge" class="form-control totalCheckoutBillAmount">
+                    <option value="0" >None</option>
+                    <option value="{{$tax->service}}"
+                      @if (!empty($activity->service_charge) && $activity->service_charge == $tax->service)
+                      selected
+                    @endif
+                      >{{$tax->service}}%</option>
+                  </select>
+                  {{-- <input type="number" class="form-control totalCheckoutBillAmount" value="{{$activity->service_charge}}" name="service_charge" id="service_charge"  placeholder="Total"> --}}
                 </div>
                 <div class="form-group">
                   <label for="address">Paid</label>
-                  <input type="number" class="form-control totalCheckoutBillAmount" name="paid" id="paid" min="1"  placeholder="Paid" value="{{$activity->paid}}">
-              </div>
-              <div class="form-group">
+                  <input type="text" class="form-control totalCheckoutBillAmount" name="paid" id="paid" min="1"  placeholder="Paid" value="{{$activity->paid}}">
+                </div>
+                <div class="form-group">
                     <label for="total">Due</label>
-                    <input type="number" class="form-control" name="due" id="due" readonly placeholder="Due" value="{{$activity->due}}">
+                    <input type="text" class="form-control" name="due" id="due" readonly placeholder="Due" value="{{$due}}">
                 </div>
               </div>
               <div class="col-md-6">
@@ -116,7 +127,7 @@ $tax = TaxVat::first();
                 @if (!empty($activity->rafting_id))
                     <div class="form-group">
                         <label for="category">Rafting Charge</label>
-                        <input type="text" class="form-control" readonly name="pos" id="category" placeholder=""" value="{{$rafting->total}}">
+                        <input type="text" class="form-control" readonly name="pos" id="category" placeholder=""" value="{{($rafting->total)}}">
                     </div>
                 @endif
                 <div class="form-group">
@@ -125,11 +136,11 @@ $tax = TaxVat::first();
                     <option value="New" @if ( $activity->status == "New" )
                     selected=""
                     @endif>New</option>
-                    <option value="Cancel"@if ( $activity == "Cancel" )
+                    <option value="Cancel"@if ( $activity->status  == "Cancel" )
                     selected=""
                     @endif>Cancel</option>
                     <option value="Paid"
-                    @if ( $activity == "Paid" )
+                    @if ( $activity->status  == "Paid" )
                     selected=""
                     @endif>Paid</option>
                   </select>
@@ -148,27 +159,43 @@ $tax = TaxVat::first();
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="address">Discount</label>
-                    <input type="number" class="form-control totalCheckoutBillAmount" name="discount" id="discount"  placeholder="Discount" value="{{$activity->discount}}">
-                </div>
+
                 <div class="form-group">
                   <label for="address">Tax(%)</label>
-                  <select name="tax" id="tax" class="form-control totalCheckoutBillAmount">
+                  <select name="tax" id="tax" class="form-control totalCheckoutBillAmount"  >
                     <option value="0" >None</option>
-                    <option value="{{$tax->tax}}">{{$tax->tax}}%</option>
+                    <option value="{{$tax->tax}}"
+                      @if (!empty($activity->tax) && $activity->tax == $tax->tax)
+                      selected
+                    @endif
+                      >{{$tax->tax}}%</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="address">Vat(%)</label>
-                  <select name="vat" id="vat" class="form-control totalCheckoutBillAmount">
+                  <select name="vat" id="vat" class="form-control totalCheckoutBillAmount" onchange="showVatInfo()">
                     <option value="0" >None</option>
-                    <option value="{{$tax->vat}}">{{$tax->vat}}%
+                    <option value="{{$tax->vat}}" @if (!empty($activity->vat) && $activity->vat == $tax->vat)
+                      selected
+                    @endif>{{$tax->vat}}%
                   </select>
                 </div>
+                <div id="vat_no_show" class="form-group"  @if (empty($activity->vat_no)) style="display: none" @endif >
+                  <label for="vat_no">Vat No</label>
+                  <input type="text" name="vat_no" id="vat_no" placeholder="Vat No" value="{{$activity->vat_no}}"  class="form-control"/>
+                </div>
+                <div id="company_name_show" class="form-group" @if (empty($activity->company_name)) style="display: none" @endif >
+                  <label for="company_name">Company Name</label>
+                  <input type="text" name="company_name" id="company_name" placeholder="Company Name" class="form-control" value="{{$activity->company_name}}" />
+                </div>
                 <div class="form-group">
+                  <label for="address">Discount</label>
+                  <input type="text" class="form-control totalCheckoutBillAmount" name="discount" id="discount"  placeholder="Discount" value="{{$activity->discount}}">
+              </div>
+                <div class="form-group">
+                  
                   <label for="total">Total</label>
-                  <input type="number" class="form-control" name="total" id="total" readonly placeholder="Total" value="{{round($total_amount)}}">
+                  <input type="text" class="form-control" name="total" id="total" readonly placeholder="Total" value="{{($total)}}">
                </div>
               
             </div>

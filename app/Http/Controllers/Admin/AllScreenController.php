@@ -38,11 +38,15 @@ class AllScreenController extends Controller
         if (empty($data['order_detail_id'])){
             return redirect()->back()->with('error_message','Please select at least one item.');
         }
+        Order::where('id',$data['order_id'])->update([
+            'status' => $data['status'],
+        ]);
         foreach($data['order_detail_id'] as  $val) {
             OrderDetail::where('id', $val)->update([
                 'status'=>$data['status']
             ]);
         }
+
         $oder=Order::where('id', $data['order_id'])->first();
         $waiter = Admin::where('role_id',6)->get();
         if(!empty($data['status'])){

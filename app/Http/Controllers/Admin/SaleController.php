@@ -210,7 +210,7 @@ class SaleController extends Controller
             $foodMenus = FoodMenu::with('foodCategory')->get();
             $waiter = Admin::where('role_id',6)->get();
             $customer = Customer::get();
-            $order = Order::with('table', 'customer', 'room')->orderBy('id','Desc')->where('status', '!=', 'Cancel')->get();
+            $order = Order::with('table', 'customer', 'room')->orderBy('id','Desc')->where('status', 'New')->get();
             Session::flash('page', 'sale');
             return view('admin.sale.add_edit_sale', compact('order','foodCategories','foodMenus','carts','waiter','customer'));
         }else{
@@ -231,7 +231,7 @@ class SaleController extends Controller
             $foodMenus = FoodMenu::with('foodCategory')->get();
             $waiter = Admin::where('role_id',6)->get();
             $customer = Customer::get();
-            $order = Order::with('table', 'customer', 'room')->orderBy('id','Desc')->where('status', '!=', 'Cancel')->get();
+            $order = Order::with('table', 'customer', 'room')->orderBy('id','Desc')->where('status', 'New')->get();
             Session::flash('page', 'sale');
             return view('admin.sale.add_edit_sale', compact('order','foodCategories','foodMenus','carts','waiter','customer', 'table'));
 
@@ -265,12 +265,17 @@ class SaleController extends Controller
             Session::flash('error_message', 'Please! Select a table or room');
             return redirect()->back();
         }
-        // return $data;
+        // return $data; add_edit_sale
         if(empty($data['waiter_id']) ){
             $data['waiter_id'] = 0;
         }
         if( empty($data['customer_id'])){
             Session::flash('error_message', 'Please! Select a customer name');
+            return redirect()->back();
+        }
+        $count = Cart::where('admin_id', auth('admin')->user()->id)->count();
+        if($count < 1){
+            Session::flash('error_message', 'Please! Item is not available in cart');
             return redirect()->back();
         }
         if( empty($data['discount'])){

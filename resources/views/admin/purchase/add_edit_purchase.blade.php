@@ -163,13 +163,11 @@
                   <p class="lead"></p>
                 
                   <div class="table-responsive">
-
                           @if(!empty($purchasedata['id']))
                           <?php  $purchaseDue = PurchaseDue::where('purcahse_id', $purchasedata['id'])->get();  
                             $totalDue = 0;
                           ?>
                           <p class="lead">Initial Paid <strong style="float: right;">{{$purchasedata['paid']}}</strong></p>
-
                           @foreach ($purchaseDue as $item)
                           <p class="lead">Amount Due {{$item->due_paid_date}} 		<strong style=" float:right"> {{$item->due_paid}}</strong></p>  
                             <?php $totalDue += $item->due_paid; ?>
@@ -184,8 +182,6 @@
                                 <td> <input type="text" name="tax" class="tax" value="{{$purchasedata['tax'] }}%" readonly></td>
                                 <?php $tax = $total*$purchasedata['tax']/100; ?>
                                 <?php $vat = $total*$purchasedata['vat']/100; ?>
-
-
                               </tr>
                               </tr>
                               <tr>

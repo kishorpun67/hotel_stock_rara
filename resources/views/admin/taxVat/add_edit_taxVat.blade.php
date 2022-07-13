@@ -38,10 +38,10 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                    <label for="vat_type">Vat Type</label>
+                    <label for="vat_type"> Type</label>
                     <select name="vat_type" id="" class="form-control form-control-sm">
-                        <option  value="percent" >percent</option>
-                        <option  value="fixed" >fixed</option>
+                        <option  value="Percent" >Percent</option>
+                        {{-- <option  value="fixed" >fixed</option> --}}
                 
                     </select>
                   </div>

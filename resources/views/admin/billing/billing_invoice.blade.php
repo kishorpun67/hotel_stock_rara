@@ -53,7 +53,9 @@ $admin = Admin::first();
                     {{$admin->hotel_address}}<br>
                     Phone: (+977) {{$admin->hotel_address}}<br>
                     Lane Line: (+977) {{$admin->lane_line}}<br>
-                    Email: {{$admin->hotel_email}}
+                    Email: {{$admin->hotel_email}} <br>
+                    Vat No: {{$admin->vat_no}} <br>
+
                   </address>
                 </div>
                 <!-- /.col -->
@@ -64,6 +66,14 @@ $admin = Admin::first();
                     {{$customer->address}}<br>
                     Phone: (+977) {{$customer->phone}}<br>
                     Email: {{$customer->email}}
+                    <br>
+                    @if(!empty($activity->company_name))
+                      Company: {{$activity->company_name}}
+                    @endif
+                    <br>
+                    @if(!empty($activity->vat_no))
+                      Vat No: {{$activity->vat_no}}
+                    @endif
                   </address>
                 </div>
                 <!-- /.col -->
@@ -129,7 +139,7 @@ $admin = Admin::first();
                         <td>{{$swimmingPool->duration}}</td>
                         <td>{{$swimmingPool->price}}</td>
                         <td>{{$swimmingPool->price *$swimmingPool->duration}}</td>
-                        <?php $subTotal +=  $swimmingPool->price *$swimmingPool->duration;?>
+                        <?php $subTotal +=  $swimmingPool->price *$swimmingPool->duration * $swimmingPool->number_of_customer;?>
                       </tr>
 
                     </tbody>
@@ -153,7 +163,7 @@ $admin = Admin::first();
                           <td>{{$rafting->number_of_customer}}</td>
                           <td>{{$rafting->duration}}</td>
                           <td>{{$rafting->price}}</td>
-                          <td>{{$rafting->price *$rafting->duration}}</td>
+                          <td>{{$rafting->price *$rafting->duration * $rafting->number_of_customer}}</td>
                           <?php $subTotal +=  $rafting->price *$rafting->duration;?>
 
                         </tr>
@@ -182,7 +192,7 @@ $admin = Admin::first();
                             <td>{{$camping->duration}}</td>
                             <td>{{$camping->price}}</td>
                             <td>{{$camping->price *$camping->duration}}</td>
-                          <?php $subTotal +=  $camping->price *$camping->duration;?>
+                          <?php $subTotal +=  $camping->price *$camping->duration * $camping->number_of_customer;?>
 
                           </tr>
     
@@ -196,7 +206,7 @@ $admin = Admin::first();
                             <th>Room</th>
                             <th>Room Type</th>
                             <th>Room Charge</th>
-                            <th>Additional Charge</th>
+                            <th>( Charge + Discount + Advance+)</th>
                             <th>Subtotal</th>
                           </tr>
                           </thead>
@@ -215,20 +225,21 @@ $admin = Admin::first();
                                     @endforeach
                                   @else
                                   @endif
-                                </td>
+                              </td>
                               <td>
                                 @if (!empty($bookRoom->room_id))
                                    @foreach ($rooms as $item)
                                     @if (!empty($item->roomType->room_type))
                                         {{$item->roomType->room_type}} <br>
                                     @endif
-                                    @endforeach
-                              @else
-                              @endif</td>
+                                      @endforeach
+                                @else
+                                @endif
+                              </td>
                               <td>{{$bookRoom->room_charge}}</td>
-                              <td>{{$bookRoom->aditional_charge}}</td>
-                              <td>{{$bookRoom->room_charge + $bookRoom->aditional_charge}}</td>
-                          <?php $subTotal +=  $bookRoom->room_charge + $bookRoom->aditional_charge; ?>
+                              <td>({{$bookRoom->aditional_charge}}, {{$bookRoom->discount}} ,{{$bookRoom->advance}})</td>
+                              <td>{{$bookRoom->room_charge + $bookRoom->aditional_charge - $bookRoom->discount-$bookRoom->advance}}</td>
+                          <?php $subTotal +=  $bookRoom->room_charge + $bookRoom->aditional_charge- $bookRoom->discount-$bookRoom->advance; ?>
 
                             </tr>
       
@@ -267,6 +278,12 @@ $admin = Admin::first();
                         <td>{{$activity->sub_total}}</td>
                       </tr>
                       <tr>
+                        <th>Service Charge:</th>
+                        <td>
+                          {{$activity->service_charge}}%
+                        </td>
+                      </tr>
+                      <tr>
                         <th>Tax:</th>
                         <td>
                           {{$activity->tax}}%
@@ -285,12 +302,7 @@ $admin = Admin::first();
                           {{$activity->discount}}
                         </td>
                       </tr>
-                      <tr>
-                        <th>Service Charge:</th>
-                        <td>
-                          {{$activity->service_charge}}
-                        </td>
-                      </tr>
+                  
                       <tr>
                         <th>Total:</th>
                         <?php  $total = $subTotal+(($activity->tax*$subTotal)/100)+(($activity->vat*$subTotal)/100); 

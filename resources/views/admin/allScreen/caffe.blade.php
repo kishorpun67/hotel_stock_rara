@@ -72,16 +72,18 @@
                                     box-shadow: inset 0 0 0 transparent;
                                     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
                                 ">
-                                <option value="New" @if ( $status == "New" )
-                                selected=""
-                                @endif>New</option>
-                                <option value="Cooking"@if ( $status == "Cooking" )
-                                selected=""
-                                @endif>Cooking</option>
-                                <option value="Done"
-                                @if ( $status == "Done" )
-                                selected=""
-                                @endif>Done</option>
+                                <option value="New" @if ( !empty($food->status) && $food->status == 'New' )
+                                    selected=""
+                                    @endif>New</option>
+                                    <option value="Cooking"
+                                     @if ( !empty($food->status) && $food->status == 'Cooking' )
+                                        selected=""
+                                        @endif>Cooking</option>
+                                    <option value="Done"
+                                    @if ( !empty($food->status) && $food->status == 'Done' )
+                                    selected=""
+                                    @endif>Done</option>
+    
                                 </select>
                                 <button class="btn btn-primary mx-5">Update</button>
                             </div>

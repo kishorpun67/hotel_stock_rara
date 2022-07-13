@@ -55,10 +55,21 @@ class BillingController extends Controller
         }if(empty($data['discount']))
         {
             $data['discount'] = "";
-        }if(empty($data['paid']))
+        }
+        if(empty($data['paid']))
         {
             $data['paid'] = "";
         }
+        if(empty($data['vat_no']))
+        {
+            $data['vat_no'] = "";
+        }
+        if(empty($data['company_name']))
+        {
+            $data['company_name'] = "";
+        }
+       
+       
        
         $updateActivity = AllActivity::find($id);
         Order::where('id', $updateActivity->order_id)->update(['status' => $data['status']]);
@@ -70,10 +81,11 @@ class BillingController extends Controller
         $updateActivity->discount = $data['discount'];
         $updateActivity->tax = $data['tax'];
         $updateActivity->vat = $data['vat'];
-        $updateActivity->paid = $data['paid'];
         $updateActivity->total = $data['total'];
         $updateActivity->sub_total = $data['subtotal'];
         $updateActivity->paid = $data['paid'];
+        $updateActivity->vat_no = $data['vat_no'];
+        $updateActivity->company_name = $data['company_name'];
         $updateActivity->payment_id = $data['payment_id'];
         $updateActivity->status = $data['status'];
         $updateActivity->save();

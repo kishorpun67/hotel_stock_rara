@@ -1,6 +1,9 @@
 <?php 
   use App\TaxVat;
+  use App\IngredientUnit;
   $taxVat = TaxVat::first();
+  $ingredientUnit = IngredientUnit::get();
+
 ?>
 <div class="col-md-12">
   <table class="table table-bordered table-striped  text-center">
@@ -35,15 +38,18 @@
          >
         <td>
         <input class="" 
-       
            onkeyup="purchaseCalculate(this.getAttribute('ingredientCart_id')) ;totalCalculationPurchase(); "  
            onchange=" purchaseCalculate(this.getAttribute('ingredientCart_id')) ;totalCalculationPurchase();" type="text" id="ingredient_quantity-{{$data->id}}" 
            value="{{$data->quantity}}"   name="quantity[]" 
           ingredientCart_id="{{ $data->id }}" 
           >
-          @if (!empty($data->ingredientUnit->unit_name))
-          {{$data->ingredientUnit->unit_name}}
-          @endif
+         <select name="unit_name" id="">
+            @foreach ($ingredientUnit as $ingredient_id)
+              <option value="{{$ingredient_id->id}}" @if (!empty($data->ingredient_id) && $data->ingredient_id == $ingredient_id->id)
+                  selected
+              @endif>{{$ingredient_id->unit_name}}</option>
+           @endforeach
+         </select>
         </td>
         <td id="subTotal-{{$data->id}}">{{ $data->quantity * $data->price}}</td>
         <td>
@@ -84,17 +90,15 @@
     </select>
   </div>
   <p class="lead"></p>
-
   <div class="table-responsive">
     <table class="table">
-      
       <tr>
         <th style="width:50%">G.Total</th>
         <td> <input type="text" name="total" id="total" class="total" value="{{ $total }}" readonly></td>
       </tr>
       <tr>
         <th>Paid</th>
-        <td><input class="paid" type=" " onkeyup="purchasePaid(this)" name="paid" value="" ingredientCart_id="" ></td>
+        <td><input class="paid" type=" " id="paid" onkeyup="totalCalculationPurchase(this)" name="paid" value="" ingredientCart_id="" ></td>
       </tr>
       <tr>
         <th>Due:</th>

@@ -763,8 +763,10 @@ function totalCalculationPurchase() {
     var subtotal = $("#subtotal").val();
     var vat = $("#vat").val();
     var tax = $("#tax").val();
+    var paid = $("#paid").val();
 
-    // console.log(tax, vat, subtotal)
+
+    console.log(tax, vat, subtotal)
     if (subtotal == "") {
         subtotal = 0;
     }
@@ -774,14 +776,17 @@ function totalCalculationPurchase() {
     if (vat == "") {
         vat = 0;
     }
-    var total_tax = parseInt(subtotal) * parseInt(tax) / 100;
-    var total_vat = parseInt(subtotal) * parseInt(vat) / 100;
-    console.log(total_tax, total_vat)
+    if (paid == "") {
+        paid = 0;
+    }
+    var total_tax = parseFloat(subtotal) + parseFloat(subtotal) * parseFloat(tax) / 100;
+    // var total =  + total_tax + total_vat  totalCheckoutBillAmount
+    var total_vat = total_tax + parseFloat(total_tax) * parseFloat(vat) / 100;
 
-    var total = parseInt(subtotal) + total_tax + total_vat
-    console.log(total)
-    $("#total").val(total);
-    $("#deu_amount").val(total);
+    // console.log(total_vat)
+    $("#total").val(total_vat);
+    var due = total_vat - parseFloat(paid);
+    $("#deu_amount").val(due);
 
 
 
@@ -789,9 +794,9 @@ function totalCalculationPurchase() {
 
 function purchasePaid(e) {
     var paid = e.value;
-    var total = $(".total").val();
+    var total = $("#total").val();
     //alert(total);
-    //console.log(paid,total);
+    console.log(paid, total);
     var paidamount = total - paid;
     console.log(paidamount)
     $("#deu_amount").val(paidamount)
@@ -885,7 +890,7 @@ function electricityConsumption() {
     var early_electricity_consumption = ($("#early_electricity_consumption").val());
     var electricity_unit = ($("#electricity_unit").val());
     var electricity_paid = ($("#electricity_paid").val());
-    var electricity_last_month_due = parseInt($("#electricity_last_month_due").val());
+    var electricity_last_month_due = parseFloat($("#electricity_last_month_due").val());
     console.log(electricity_last_month_due)
         // if (!electricity_last_month_due == "NaN") {
         //     electricity_last_month_due = 0;
@@ -1021,8 +1026,8 @@ $(".totalAmountRoom").keyup(function() {
     // }
 
 
-    var subTotal = parseInt(room_charge) + parseInt(additional_charge);
-    var total = (parseInt(subTotal) - parseInt(advance)) - parseInt(discount);
+    var subTotal = parseFloat(room_charge) + parseFloat(additional_charge);
+    var total = (parseFloat(subTotal) - parseFloat(advance)) - parseFloat(discount);
     var due = total;
 
     $("#total").val(total)
@@ -1057,8 +1062,8 @@ $(".totalAmountRoom").change(function() {
     // }
 
 
-    var subTotal = parseInt(room_charge) + parseInt(additional_charge);
-    var total = (parseInt(subTotal) - parseInt(advance)) - parseInt(discount);
+    var subTotal = parseFloat(room_charge) + parseFloat(additional_charge);
+    var total = (parseFloat(subTotal) - parseFloat(advance)) - parseFloat(discount);
     var due = total;
 
     $("#total").val(total)
@@ -1091,8 +1096,8 @@ $(".totalSummingAmount").change(function() {
     if (number_of_customer == "") {
         number_of_customer = 0;
     }
-    var total = (parseInt(price) * parseInt(duration) * parseInt(number_of_customer));
-    var due = total - parseInt(paid);
+    var total = (parseFloat(price) * parseFloat(duration) * parseFloat(number_of_customer));
+    var due = total - parseFloat(paid);
 
     $("#total").val(total)
     $("#due").val(total)
@@ -1118,8 +1123,8 @@ $(".totalSummingAmount").keyup(function() {
     if (number_of_customer == "") {
         number_of_customer = 0;
     }
-    var total = (parseInt(price) * parseInt(duration) * parseInt(number_of_customer));
-    var due = total - parseInt(paid);
+    var total = (parseFloat(price) * parseFloat(duration) * parseFloat(number_of_customer));
+    var due = total - parseFloat(paid);
 
     $("#total").val(total)
     $("#due").val(total)
@@ -1164,7 +1169,7 @@ $(".totalCampingAmount").keyup(function() {
     if (duration == "") {
         duration = 0;
     }
-    var total = (parseInt(price) * parseInt(duration) * parseInt(number_of_customer));
+    var total = (parseFloat(price) * parseFloat(duration) * parseFloat(number_of_customer));
     $("#total").val(total)
     $("#due").val(total)
 
@@ -1184,19 +1189,17 @@ $(".totalCampingAmount").click(function() {
     if (duration == "") {
         duration = 0;
     }
-    var total = (parseInt(price) * parseInt(duration) * parseInt(number_of_customer));
+    var total = (parseFloat(price) * parseFloat(duration) * parseFloat(number_of_customer));
     $("#total").val(total)
     $("#due").val(total)
 
 })
-$(".totalCheckoutBillAmount").change(function() {
-    // alert('teseted') totalAmountRoom
+$(".totalCheckoutBillAmount").keyup(function() {
     var service_charge = ($("#service_charge").val())
     var paid = ($("#paid").val())
     var discount = ($("#discount").val())
     var tax = ($("#tax").val())
     var vat = ($("#vat").val())
-        // alert(vat)
     var subtotal = ($("#subtotal").val())
     if (service_charge == "") {
         service_charge = 0;
@@ -1216,22 +1219,27 @@ $(".totalCheckoutBillAmount").change(function() {
     if (subtotal == "") {
         subtotal = 0;
     }
-    console.log(subtotal, tax)
+    var total_service = parseFloat(subtotal) + (parseFloat(subtotal) * parseFloat(service_charge)) / 100;
 
-    var subtotal = (parseInt(subtotal) + parseInt(service_charge) - parseInt(discount));
-    var vat = +(subtotal * vat / 100);
-    var total = subtotal + vat + (subtotal * tax / 100);
-    var due = total - parseInt(paid)
-    $("#total").val(total)
-    $("#due").val(due)
+    var total_tax = total_service + (total_service * tax / 100);
+    var total_vat = total_tax + (total_tax * vat / 100);
+
+    var total = total_vat - discount
+
+
+    console.log(total, parseFloat(paid))
+    var due = total - parseFloat(paid)
+    $("#total").val(total.toFixed(2))
+    $("#due").val(due.toFixed(2))
 
 })
-$(".totalCheckoutBillAmount").keyup(function() {
-    // alert('teseted') totalCheckoutBillAmount
+$(".totalCheckoutBillAmount").change(function() {
+    // alert('teseted') totalCalculationPurchase
     var service_charge = ($("#service_charge").val())
     var paid = ($("#paid").val())
     var discount = ($("#discount").val())
     var tax = ($("#tax").val())
+    var vat = ($("#vat").val())
     var subtotal = ($("#subtotal").val())
     if (service_charge == "") {
         service_charge = 0;
@@ -1245,16 +1253,26 @@ $(".totalCheckoutBillAmount").keyup(function() {
     if (tax == "") {
         tax = 0;
     }
+    if (vat == "") {
+        vat = 0;
+    }
     if (subtotal == "") {
         subtotal = 0;
     }
-    console.log(subtotal, tax)
+    // console.log(subtotal, tax)
 
-    var subtotal = (parseInt(subtotal) + parseInt(service_charge) - parseInt(discount));
-    var total = subtotal + (subtotal * tax / 100);
-    var due = total - parseInt(paid)
-    $("#total").val(total)
-    $("#due").val(due)
+    var total_service = parseFloat(subtotal) + (parseFloat(subtotal) * parseFloat(service_charge)) / 100;
+
+    var total_tax = total_service + (total_service * tax / 100);
+    var total_vat = total_tax + (total_tax * vat / 100);
+
+    var total = total_vat - discount
+
+
+    console.log(total, paid)
+    var due = total - parseFloat(paid)
+    $("#total").val(total.toFixed(2))
+    $("#due").val(due.toFixed(2))
 
 })
 
@@ -1267,7 +1285,7 @@ $("#deu_pay_amount").keyup(function() {
     if (total == "") {
         total = 0;
     }
-    var due = parseInt(total) - parseInt(paid);
+    var due = parseFloat(total) - parseFloat(paid);
     $("#deu_amount").val(due)
 })
 $("#deu_pay_amount").change(function() {
@@ -1279,10 +1297,10 @@ $("#deu_pay_amount").change(function() {
         if (total == "") {
             total = 0;
         }
-        var due = parseInt(total) - parseInt(paid);
+        var due = parseFloat(total) - parseFloat(paid);
         $("#deu_amount").val(due)
     })
-    // purchaseCalculate
+    // purchaseCalculate purchasePaid
 
 
 $(".getMonthlyProfitLoss").change(function() {
@@ -1305,5 +1323,24 @@ $(".getMonthlyProfitLoss").change(function() {
         }
     });
 
-    // alert(month)
+    // $(".showVatInfo").change(function() {
+    //     alert("Show Vat Info");
+    // })
+
+
+    // alert(month) totalCalculationPurchase
 })
+
+function showVatInfo() {
+    var vat = parseFloat($("#vat").val());
+    if (vat > 0) {
+        $("#vat_no_show").css('display', 'block')
+        $("#company_name_show").css('display', 'block')
+
+    } else {
+        $("#vat_no_show").css('display', 'none')
+        $("#company_name_show").css('display', 'none')
+
+
+    }
+}

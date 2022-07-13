@@ -7,10 +7,10 @@
   <div class="d-flex justify-content-between flex-wrap align-items-center mb-3 waiter_customer">
     <div class="select_dropdown w-50">
         <select class="form-control select2" name="waiter_id">
-          <option value="0" selected>Waiter</option>
-          @foreach ($waiter as $waiter)
+          <option value="{{auth('admin')->user()->id}}">{{auth('admin')->user()->name}}</option>
+          {{-- @foreach ($waiter as $waiter)
           <option value="{{$waiter->id}}">{{$waiter->name}}</option>
-          @endforeach
+          @endforeach --}}
         </select>
     </div>
     <div class="select_dropdown w-50">
@@ -18,7 +18,6 @@
         <option value="">Select Customer   </option>
         @foreach ($customer as $item)
           <option value="{{$item->id}}">{{$item->customer_name}}</option>
-            
         @endforeach
       </select>
     </div> 
